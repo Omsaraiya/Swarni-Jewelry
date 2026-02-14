@@ -3,39 +3,112 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Swarni | Minimal Handcrafted Jewelry</title>
-    
+    <title>Swarni | Culture Worn With Pride</title>
     <link rel="stylesheet" href="style.css">
-    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
 
     <nav class="navbar">
         <div class="logo">स्वर्णी<span class="dot">.</span></div>
-        
         <ul class="nav-links">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Collections</a></li>
-            <li><a href="#">About</a></li>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#collection">Collection</a></li>
+            <li><a href="#about">Our Story</a></li>
         </ul>
-
         <div class="icons">
             <i class="fa-solid fa-magnifying-glass"></i>
-            <i class="fa-solid fa-bag-shopping"></i>
+            <div class="cart-box">
+                <i class="fa-solid fa-bag-shopping"></i>
+                <span class="cart-count">0</span>
+            </div>
         </div>
     </nav>
 
-    <header class="hero">
+    <header id="home" class="hero">
+        <div class="hero-overlay"></div>
         <div class="hero-text">
-            <p class="subtitle">FROM OUR HANDS TO YOUR GLOW</p>
-            <h1>Minimal. Dreamy. <br> Timeless.</h1>
-            <a href="#" class="btn">Shop Collection</a>
+            <p class="subtitle">MINIMAL | DREAMY | HANDCRAFTED</p>
+            <h1>Culture Worn <br> With Pride.</h1>
+            <p class="tagline">"A tribute to golden roots and timeless grace."</p>
+            <a href="#collection" class="btn">Shop The Collection</a>
         </div>
     </header>
+
+    <section id="about" class="brand-story">
+        <div class="container">
+            <h2>The Swarni Story</h2>
+            <p>"Born from the love of sisters and inspired by Maharashtrian heritage, Svarni reflects tradition, culture, and quiet luxury."</p>
+        </div>
+    </section>
+
+    <section id="collection" class="products">
+        <div class="section-title">
+            <h2>New Arrivals</h2>
+            <div class="line"></div>
+        </div>
+        
+        <div class="product-grid">
+            
+            <div class="card">
+                <div class="card-image">
+                    <img src="images/mangalsutra-gold.jpg" alt="Heer Moti">
+                    <span class="badge">Bestseller</span>
+                </div>
+                <h3>Heer - Moti Invisible</h3>
+                <p class="desc">Diamond-studded forms with a modern floating finish.</p>
+                <div class="price-row">
+                    <span class="price">₹169</span>
+                    <button class="btn-add"><i class="fa-solid fa-plus"></i></button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-image">
+                    <img src="images/mangalsutra-teardrop.jpg" alt="Padma Naad">
+                    <span class="badge">Trending</span>
+                </div>
+                <h3>Padma Naad</h3>
+                <p class="desc">Three lotus motifs with soft jhunguru details.</p>
+                <div class="price-row">
+                    <span class="price">₹149</span>
+                    <button class="btn-add"><i class="fa-solid fa-plus"></i></button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-image">
+                    <img src="images/mangalsutra-simple.jpg" alt="Panch Moti">
+                </div>
+                <h3>Panch Moti</h3>
+                <p class="desc">Five lustrous pearls on a transparent base.</p>
+                <div class="price-row">
+                    <span class="price">₹59</span>
+                    <button class="btn-add"><i class="fa-solid fa-plus"></i></button>
+                </div>
+            </div>
+
+             <div class="card">
+                <div class="card-image">
+                    <img src="images/mangalsutra-diamond.jpg" alt="Diamond Invisible">
+                    <span class="badge">New</span>
+                </div>
+                <h3>Diamond Invisible</h3>
+                <p class="desc">Single diamond solitaire on invisible wire.</p>
+                <div class="price-row">
+                    <span class="price">₹119</span>
+                    <button class="btn-add"><i class="fa-solid fa-plus"></i></button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 Swarni. Made with ❤️ in India.</p>
+    </footer>
 
 </body>
 </html>

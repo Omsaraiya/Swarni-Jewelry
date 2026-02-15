@@ -114,12 +114,41 @@ h1, h2, h3, .subtitle, .tagline {
 .section-title { text-align: center; margin-bottom: 50px; color: var(--cocoa-brown); }
 .line { width: 60px; height: 3px; background-color: var(--cocoa-brown); margin: 15px auto; }
 
+/* --- NEW CATEGORY FILTER STYLES --- */
+.category-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.cat-btn {
+    background-color: transparent;
+    border: 1px solid var(--cocoa-brown);
+    color: var(--cocoa-brown);
+    padding: 8px 20px;
+    border-radius: 25px; /* Pill shape */
+    cursor: pointer;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: 0.3s;
+    text-transform: capitalize;
+}
+
+.cat-btn:hover, .cat-btn.active {
+    background-color: var(--cocoa-brown);
+    color: var(--white);
+}
+
 .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; }
 
 .card {
     background: white; padding: 15px; text-align: center;
     border: 1px solid #f2ecec; 
     transition: 0.3s;
+    display: block; /* Ensures they are visible by default */
 }
 .card:hover { transform: translateY(-5px); border-color: var(--rose-gold); box-shadow: 0 10px 20px rgba(62, 39, 35, 0.08); }
 
@@ -154,4 +183,23 @@ footer { background-color: var(--cocoa-brown); color: var(--primary-bg); text-al
     .hero h1 { font-size: 3rem; }
     .product-grid { grid-template-columns: 1fr; } 
     .btn-buy { padding: 12px 25px; } 
+
+    /* Mobile Scroll for Categories */
+    .category-container {
+        justify-content: flex-start;
+        overflow-x: auto; /* Enable horizontal scrolling */
+        padding-bottom: 10px;
+        white-space: nowrap;
+        /* Hide scrollbar for neatness */
+        -ms-overflow-style: none;  
+        scrollbar-width: none;  
+        padding-left: 5%; /* Align with content */
+    }
+    .category-container::-webkit-scrollbar {
+        display: none;
+    }
+    
+    .cat-btn {
+        flex: 0 0 auto; /* Stop buttons from shrinking */
+    }
 }

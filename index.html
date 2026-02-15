@@ -47,9 +47,18 @@
     <section id="collection" class="products">
         <h2 class="section-title">New Arrivals <div class="line"></div></h2>
         
+        <div class="category-container">
+            <button class="cat-btn active" onclick="filterSelection('all')">All</button>
+            <button class="cat-btn" onclick="filterSelection('invisible')">Invisible Necklace</button>
+            <button class="cat-btn" onclick="filterSelection('mangalsutra')">Mangalsutra</button>
+            <button class="cat-btn" onclick="filterSelection('earcuffs')">Earcuffs</button>
+            <button class="cat-btn" onclick="filterSelection('nath')">Nath</button>
+            <button class="cat-btn" onclick="filterSelection('bugdi')">Bugdi</button>
+        </div>
+
         <div class="product-grid">
 
-            <div class="card">
+            <div class="card filter-item invisible">
                 <div class="card-image">
                     <span class="badge">Bestseller</span>
                     <img src="images/mangalsutra-diamond.jpg" alt="Heer - Moti Invisible">
@@ -62,7 +71,7 @@
                 </div>
             </div>
 
-            <div class="card">
+            <div class="card filter-item mangalsutra">
                 <div class="card-image">
                     <span class="badge">Festive</span>
                     <img src="images/mangalsutra-gold.jpg" alt="Padma Naad">
@@ -75,7 +84,7 @@
                 </div>
             </div>
 
-            <div class="card">
+            <div class="card filter-item mangalsutra">
                 <div class="card-image">
                     <span class="badge">Royal</span>
                     <img src="images/mangalsutra-pink.jpg" alt="Manjarii">
@@ -88,7 +97,7 @@
                 </div>
             </div>
 
-            <div class="card">
+            <div class="card filter-item invisible">
                 <div class="card-image">
                     <span class="badge">Classic</span>
                     <img src="images/mangalsutra-simple.jpg" alt="Panch Moti">
@@ -101,7 +110,7 @@
                 </div>
             </div>
 
-            <div class="card">
+            <div class="card filter-item mangalsutra">
                 <div class="card-image">
                     <span class="badge">New</span>
                     <img src="images/mangalsutra-teardrop.jpg" alt="Kamal Jhankar">
@@ -122,18 +131,40 @@
     </footer>
 
     <script>
+        // WhatsApp Function
         function buy(productName, price) {
-            // Your Phone Number
-            let phoneNumber = "919821921453";
-            
-            // The Message
+            let phoneNumber = "919821921453"; // YOUR NUMBER
             let message = `Hello Svarni! ✨\n\nI saw this on your website and would like to order:\n*${productName}*\nPrice: ₹${price}\n\nIs this available?`;
-            
-            // Create the Link
             let url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-            
-            // Open WhatsApp
             window.open(url, '_blank');
+        }
+
+        // Filter Function
+        function filterSelection(c) {
+            var x, i;
+            x = document.getElementsByClassName("filter-item");
+            
+            // Buttons visual update
+            var btns = document.getElementsByClassName("cat-btn");
+            for (var j = 0; j < btns.length; j++) {
+                btns[j].classList.remove("active");
+                if(btns[j].innerText.toLowerCase().includes(c) || (c === 'all' && btns[j].innerText === 'All')) {
+                    btns[j].classList.add("active");
+                }
+            }
+            // Add specific logic to highlight the clicked button accurately
+            if (event && event.target) {
+                 for (var j = 0; j < btns.length; j++) { btns[j].classList.remove("active"); }
+                 event.target.classList.add("active");
+            }
+
+            if (c == "all") c = "";
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none"; // Hide all first
+                if (x[i].className.indexOf(c) > -1) {
+                    x[i].style.display = "block"; // Show match
+                }
+            }
         }
     </script>
 

@@ -1,12 +1,11 @@
-/* --- 1. The Royal Paithani Palette (Maharashtrian Vibe) --- */
+/* --- 1. The "Wedding Morning" Palette (Bright & Royal) --- */
 :root {
-    --primary-bg: #FFFAF0;       /* Floral Ivory (Warm & Rich) */
-    --royal-green: #0F281E;      /* PAITHANI GREEN (Deep & Royal) */
-    --royal-green-light: #1a4231;/* Slightly lighter for hover */
-    --antique-gold: #C5A059;     /* Antique Gold (Not yellow) */
-    --gold-glow: #e6c885;        /* Brighter gold for hover */
-    --text-main: #2b1b17;        /* Deep Coffee (Softer than black) */
-    --white: #ffffff;
+    --primary-bg: #fffbf2;       /* Warm Cream (Like Haldi milk) */
+    --card-bg: #ffffff;          /* Pure White for products */
+    --royal-maroon: #800020;     /* DEEP KUMKUM (Royal Maharashtrian Red) */
+    --antique-gold: #d4af37;     /* True Gold */
+    --text-main: #2c1e1a;        /* Dark Coffee Brown (Softer than black) */
+    --hover-glow: #fff0c7;       /* Light gold glow */
 }
 
 * {
@@ -19,40 +18,36 @@ body {
     background-color: var(--primary-bg);
     color: var(--text-main);
     font-family: 'Lato', sans-serif;
-    overflow-x: hidden; /* Prevents side scrolling */
+    background-image: radial-gradient(var(--antique-gold) 0.5px, transparent 0.5px);
+    background-size: 30px 30px; /* Tiny gold dots in background */
 }
 
-/* Typography that feels like "Heritage" */
-h1, h2, h3, .logo-text, .subtitle, .tagline {
+/* Typography - The "Royal Wedding Card" Look */
+h1, h2, h3, .subtitle, .tagline {
     font-family: 'Playfair Display', serif;
 }
 
-/* --- 2. Navbar (Royal Green Header) --- */
+/* --- 2. Navbar (Bright & Elegant) --- */
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 50px;
-    background-color: var(--royal-green); /* Dark Green Bar */
+    padding: 15px 50px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 20px rgba(128, 0, 32, 0.05); /* Very subtle red shadow */
     position: sticky;
     top: 0;
     z-index: 1000;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    border-bottom: 2px solid var(--antique-gold); /* Gold Line at bottom */
+    border-top: 4px solid var(--royal-maroon); /* The "Kumkum" Line */
 }
 
-/* Logo Fix - We invert the colors or keep it bright */
 .logo-container {
     display: flex;
     align-items: center;
-    background-color: rgba(255, 255, 255, 0.9); /* Small oval behind logo to make it pop */
-    padding: 5px 15px;
-    border-radius: 50px;
-    border: 1px solid var(--antique-gold);
 }
 
 .logo-img {
-    height: 60px;
+    height: 75px; 
     width: auto;
     display: block;
 }
@@ -65,28 +60,45 @@ h1, h2, h3, .logo-text, .subtitle, .tagline {
 
 .nav-links a {
     text-decoration: none;
-    color: var(--antique-gold); /* Gold Text on Green */
-    font-weight: 500;
+    color: var(--text-main);
+    font-weight: 600;
     text-transform: uppercase;
     font-size: 0.85rem;
     letter-spacing: 1.5px;
-    transition: 0.4s;
+    transition: 0.3s;
+    position: relative;
 }
 
-.nav-links a:hover {
-    color: var(--white);
-    text-shadow: 0 0 10px var(--gold-glow); /* Glowing Text Effect */
+/* Hover Effect: A Gold Line appears under the text */
+.nav-links a::after {
+    content: '';
+    width: 0%;
+    height: 2px;
+    background: var(--royal-maroon);
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    transition: 0.3s;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
 }
 
 .icons {
     display: flex;
     gap: 25px;
-    color: var(--antique-gold);
+    color: var(--royal-maroon); /* Red Icons look very traditional */
     cursor: pointer;
     font-size: 1.2rem;
+    transition: 0.3s;
 }
 
-/* --- 3. Hero Section (Dramatic) --- */
+.icons:hover {
+    color: var(--antique-gold);
+}
+
+/* --- 3. Hero Section (Grand Entrance) --- */
 .hero {
     height: 85vh;
     background: url('images/hero-bg.jpg') no-repeat center center/cover;
@@ -101,84 +113,85 @@ h1, h2, h3, .logo-text, .subtitle, .tagline {
 .hero-overlay {
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
-    /* Gradient Overlay: Dark Green to Transparent */
-    background: linear-gradient(rgba(15, 40, 30, 0.7), rgba(15, 40, 30, 0.3));
+    background: rgba(44, 30, 26, 0.3); /* Warm brown overlay */
 }
 
 .hero-text {
     position: relative;
     z-index: 1;
-    border: 1px solid rgba(255, 255, 255, 0.3); /* Subtle frame */
-    padding: 40px;
-    backdrop-filter: blur(2px);
 }
 
 .hero h1 {
     font-size: 5rem;
-    margin: 10px 0;
-    color: var(--white);
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    margin: 15px 0;
+    color: #ffffff;
+    text-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
 
 .subtitle {
-    letter-spacing: 6px;
-    font-size: 1rem;
+    letter-spacing: 5px;
+    font-size: 0.9rem;
     text-transform: uppercase;
-    color: var(--antique-gold);
-    font-weight: bold;
+    color: var(--antique-gold); /* Gold Subtitle */
+    background: rgba(0,0,0,0.5);
+    padding: 5px 15px;
+    display: inline-block;
+    backdrop-filter: blur(5px);
+}
+
+.tagline {
+    font-style: italic;
+    margin-bottom: 35px;
+    font-size: 1.3rem;
+    font-weight: 300;
+    color: #f0f0f0;
 }
 
 .btn {
     padding: 15px 45px;
-    background-color: var(--antique-gold);
-    color: var(--royal-green);
+    background-color: var(--white);
+    color: var(--royal-maroon);
     text-decoration: none;
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 2px;
-    transition: 0.4s;
-    border: 2px solid var(--antique-gold);
-    box-shadow: 0 0 15px rgba(197, 160, 89, 0.4);
+    transition: 0.3s;
+    border: 1px solid white;
 }
 
 .btn:hover {
-    background-color: transparent;
-    color: var(--white);
-    border-color: var(--white);
-    transform: scale(1.05); /* Slight grow effect */
+    background-color: var(--royal-maroon);
+    color: white;
+    border-color: var(--royal-maroon);
 }
 
 /* --- 4. Brand Story --- */
 .brand-story {
-    padding: 80px 20px;
+    padding: 90px 20px;
     text-align: center;
-    background-color: var(--white);
-    background-image: radial-gradient(#C5A059 0.5px, transparent 0.5px); /* Tiny Gold Dots pattern */
-    background-size: 20px 20px;
+    background-color: white;
+    border-bottom: 1px solid #eee;
 }
 
 .section-heading {
     font-size: 3rem;
-    color: var(--royal-green);
-    margin-bottom: 20px;
+    color: var(--royal-maroon); /* Maroon Heading */
+    margin-bottom: 25px;
 }
 
 .brand-story p {
     max-width: 750px;
     margin: 0 auto;
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     line-height: 1.8;
-    color: var(--text-main);
+    color: #555;
     font-style: italic;
-    background: white; /* Text sits on white box */
-    padding: 20px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
 }
 
-/* --- 5. Product Collection (Interactive) --- */
+/* --- 5. Product Collection --- */
 .products {
     padding: 80px 5%;
-    background-color: var(--primary-bg);
+    /* Keep background transparent to see the tiny gold dots from body */
 }
 
 .section-title {
@@ -187,11 +200,10 @@ h1, h2, h3, .logo-text, .subtitle, .tagline {
 }
 
 .line {
-    width: 100px;
-    height: 4px;
-    background-color: var(--antique-gold);
+    width: 80px;
+    height: 3px;
+    background-color: var(--royal-maroon); /* Maroon Line */
     margin: 15px auto;
-    border-radius: 2px;
 }
 
 .product-grid {
@@ -204,24 +216,22 @@ h1, h2, h3, .logo-text, .subtitle, .tagline {
     background: white;
     padding: 15px;
     text-align: center;
-    transition: 0.4s ease-in-out;
-    border: 1px solid #eee;
-    position: relative;
-    overflow: hidden;
+    transition: 0.4s;
+    border: 1px solid rgba(0,0,0,0.05);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.03);
 }
 
-/* THE HOVER EFFECT - This makes it attractive */
+/* The "Lift" Effect */
 .card:hover {
-    transform: translateY(-10px); /* Floats up */
-    border-color: var(--antique-gold); /* Gold Border appears */
-    box-shadow: 0 15px 30px rgba(197, 160, 89, 0.2); /* Gold Glow Shadow */
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(128, 0, 32, 0.1); /* Subtle reddish glow */
+    border-color: var(--antique-gold);
 }
 
 .card-image {
     position: relative;
     overflow: hidden;
     margin-bottom: 20px;
-    border-radius: 2px;
 }
 
 .card img {
@@ -232,33 +242,30 @@ h1, h2, h3, .logo-text, .subtitle, .tagline {
 }
 
 .card:hover img {
-    transform: scale(1.1); /* Smooth Zoom */
+    transform: scale(1.08);
 }
 
 .badge {
     position: absolute;
     top: 15px; left: 15px;
-    background-color: var(--royal-green);
-    color: var(--antique-gold); /* Gold Text on Green Badge */
-    padding: 5px 15px;
-    font-size: 0.75rem;
+    background-color: var(--royal-maroon);
+    color: white;
+    padding: 6px 14px;
+    font-size: 0.7rem;
     text-transform: uppercase;
     letter-spacing: 1px;
-    z-index: 2;
 }
 
 .card h3 {
     margin: 10px 0;
-    font-size: 1.4rem;
-    color: var(--royal-green);
-    font-weight: 700;
+    font-size: 1.3rem;
+    color: var(--text-main);
 }
 
 .desc {
-    font-size: 0.95rem;
-    color: #666;
+    font-size: 0.9rem;
+    color: #888;
     margin-bottom: 20px;
-    font-style: italic;
 }
 
 .price-row {
@@ -266,52 +273,42 @@ h1, h2, h3, .logo-text, .subtitle, .tagline {
     justify-content: space-between;
     align-items: center;
     padding-top: 15px;
-    border-top: 1px dashed #ddd; /* Dotted line looks like receipt */
+    border-top: 1px solid #f5f5f5;
 }
 
 .price {
     font-weight: 700;
     font-size: 1.2rem;
-    color: var(--text-main);
+    color: var(--royal-maroon);
 }
 
-/* Buy Button - High Contrast */
+/* Buy Button - Gold for Prosperity */
 .btn-buy {
-    background-color: var(--royal-green);
-    color: var(--white);
+    background-color: var(--antique-gold);
+    color: white;
     border: none;
     padding: 10px 25px;
     cursor: pointer;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 1px;
     transition: 0.3s;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-}
-
-.btn-buy:hover {
-    background-color: var(--antique-gold);
-    color: var(--royal-green);
     font-weight: bold;
 }
 
-/* --- 6. Footer (Grand Finale) --- */
-footer {
-    background-color: var(--royal-green);
-    color: var(--antique-gold);
-    text-align: center;
-    padding: 60px 20px;
-    margin-top: 50px;
-    border-top: 4px solid var(--antique-gold);
+.btn-buy:hover {
+    background-color: var(--royal-maroon); /* Changes to Red on Hover */
+    color: white;
 }
 
-footer p {
-    font-size: 1rem;
-    letter-spacing: 1px;
-    opacity: 0.9;
+/* --- 6. Footer --- */
+footer {
+    background-color: var(--text-main); /* Dark Coffee Footer */
+    color: var(--antique-gold);
+    text-align: center;
+    padding: 50px 20px;
+    margin-top: 80px;
+    border-top: 5px solid var(--antique-gold);
 }
 
 /* --- 7. Mobile Responsive --- */
@@ -327,5 +324,5 @@ footer p {
     }
     
     .hero h1 { font-size: 3rem; }
-    .hero { height: 70vh; }
+    .hero { height: 75vh; }
 }

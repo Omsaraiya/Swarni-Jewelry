@@ -1,12 +1,10 @@
-/* --- 1. Variables & Global Reset (The "Color Palette") --- */
+/* --- 1. Variables (The Original Royal Theme) --- */
 :root {
-    /* New Palette based on Svarni Logo */
-    --primary-bg: #FCFCFA;       /* Creamy Off-White (Matches logo background) */
-    --primary-text: #4A3B2A;     /* Deep Walnut Brown (Matches logo text) */
-    --accent-gold: #C5A059;      /* Muted Gold (Matches logo details) */
-    --royal-green: #0f281e;      /* The Contrast Color for Buttons */
-    --white: #ffffff;
-    --light-gray: #f4f4f4;
+    --primary-bg: #ffffff;       /* Pure White (Clean) */
+    --primary-text: #222222;     /* Sharp Black */
+    --royal-green: #0f281e;      /* The Brand Color (Deep Emerald) */
+    --accent-gold: #D4AF37;      /* The Luxury Accent */
+    --light-gray: #f9f9f9;
 }
 
 * {
@@ -21,45 +19,50 @@ body {
     color: var(--primary-text);
 }
 
-/* --- 2. Navbar (The "Cream" Header) --- */
+/* --- 2. Navbar (White & Clean) --- */
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px 50px;
-    background-color: var(--white); /* White bar to make logo blend in */
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05); /* Soft shadow */
+    background-color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05); /* Soft premium shadow */
     position: sticky;
     top: 0;
     z-index: 1000;
 }
 
-/* Logo Image Styling */
+/* Logo Styling */
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
 .logo-img {
-    height: 70px; /* Big enough to see details */
+    height: 70px; /* Nice and big */
     width: auto;
     display: block;
-    mix-blend-mode: multiply; /* TRICK: Makes the logo background transparent! */
+    /* No blend mode needed for PNG! */
 }
 
 .nav-links {
     list-style: none;
     display: flex;
-    gap: 30px;
+    gap: 35px;
 }
 
 .nav-links a {
     text-decoration: none;
-    color: var(--primary-text); /* Dark Brown text now */
-    font-weight: 700;
+    color: var(--primary-text);
+    font-weight: 600;
     text-transform: uppercase;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     letter-spacing: 1px;
     transition: 0.3s;
 }
 
 .nav-links a:hover {
-    color: var(--accent-gold);
+    color: var(--accent-gold); /* Gold hover effect */
 }
 
 .icons {
@@ -67,24 +70,29 @@ body {
     gap: 20px;
     color: var(--primary-text);
     cursor: pointer;
+    transition: 0.3s;
 }
 
-/* --- 3. Hero Section (The "Banner") --- */
+.icons:hover {
+    color: var(--accent-gold);
+}
+
+/* --- 3. Hero Section --- */
 .hero {
-    height: 80vh;
+    height: 85vh;
     background: url('images/hero-bg.jpg') no-repeat center center/cover;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    color: white; /* Text stays white on image */
+    color: white;
 }
 
 .hero-overlay {
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.4); /* Darkens image so text pops */
+    background: rgba(0, 0, 0, 0.35); /* Perfect tint to make text readable */
 }
 
 .hero-text {
@@ -94,134 +102,148 @@ body {
 
 .hero h1 {
     font-family: 'Playfair Display', serif;
-    font-size: 4rem;
-    margin: 10px 0;
-    line-height: 1.2;
+    font-size: 4.5rem;
+    margin: 15px 0;
+    line-height: 1.1;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.3);
 }
 
 .subtitle {
-    letter-spacing: 3px;
+    letter-spacing: 4px;
     font-size: 0.9rem;
     text-transform: uppercase;
+    opacity: 0.9;
 }
 
 .tagline {
     font-style: italic;
-    margin-bottom: 30px;
-    font-size: 1.1rem;
+    margin-bottom: 35px;
+    font-size: 1.2rem;
+    font-weight: 300;
 }
 
 .btn {
-    padding: 12px 30px;
-    background-color: var(--royal-green);
-    color: white;
+    padding: 14px 40px;
+    background-color: white; 
+    color: var(--primary-text);
     text-decoration: none;
     font-weight: bold;
-    border: 1px solid var(--royal-green);
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
     transition: 0.3s;
 }
 
 .btn:hover {
-    background-color: transparent;
-    border-color: white;
+    background-color: var(--accent-gold);
+    color: white;
 }
 
 /* --- 4. Brand Story --- */
 .brand-story {
-    padding: 80px 20px;
+    padding: 100px 20px;
     text-align: center;
-    background-color: var(--primary-bg);
+    background-color: white;
 }
 
-.brand-story h2 {
+.section-heading {
     font-family: 'Playfair Display', serif;
-    color: var(--accent-gold);
-    font-size: 2.5rem;
+    color: var(--primary-text);
+    font-size: 2.8rem;
     margin-bottom: 20px;
+}
+
+/* Highlight word in Gold if you use <span> in HTML */
+.text-gold {
+    color: var(--accent-gold);
 }
 
 .brand-story p {
     max-width: 700px;
     margin: 0 auto;
-    font-size: 1.2rem;
-    line-height: 1.6;
-    color: #666;
+    font-size: 1.3rem;
+    line-height: 1.8;
+    color: #555;
+    font-weight: 300;
 }
 
 /* --- 5. Product Collection --- */
 .products {
-    padding: 50px 5%;
+    padding: 60px 5%;
+    background-color: var(--light-gray); /* Subtle contrast */
 }
 
 .section-title {
     text-align: center;
-    margin-bottom: 40px;
-}
-
-.section-title h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 2rem;
-    color: var(--primary-text);
+    margin-bottom: 50px;
 }
 
 .line {
     width: 60px;
     height: 3px;
     background-color: var(--accent-gold);
-    margin: 10px auto;
+    margin: 15px auto;
 }
 
 .product-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 30px;
 }
 
 .card {
     background: white;
     padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
     transition: 0.3s;
     text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    border-radius: 5px; /* Subtle curve */
 }
 
 .card:hover {
     transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
 }
 
 .card-image {
     position: relative;
     overflow: hidden;
-    border-radius: 5px;
+    margin-bottom: 15px;
+    border-radius: 3px;
 }
 
 .card img {
     width: 100%;
     height: auto;
     display: block;
+    transition: 0.5s;
 }
 
+.card:hover img {
+    transform: scale(1.05);
+}
+
+/* Badges - Royal Green */
 .badge {
     position: absolute;
     top: 10px; left: 10px;
     background-color: var(--royal-green);
     color: white;
-    padding: 5px 10px;
+    padding: 5px 12px;
     font-size: 0.7rem;
     text-transform: uppercase;
-    border-radius: 3px;
+    letter-spacing: 1px;
 }
 
 .card h3 {
-    margin: 15px 0 5px;
-    font-size: 1.1rem;
+    margin: 10px 0;
+    font-size: 1.2rem;
     color: var(--primary-text);
     font-family: 'Playfair Display', serif;
 }
 
 .desc {
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     color: #777;
     margin-bottom: 15px;
 }
@@ -230,61 +252,66 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-top: 10px;
-    border-top: 1px solid #eee;
+    padding-top: 15px;
+    border-top: 1px solid #f0f0f0;
 }
 
 .price {
-    font-weight: bold;
+    font-weight: 700;
     font-size: 1.1rem;
     color: var(--primary-text);
 }
 
-/* Buy Button - Updated for WhatsApp */
+/* The "Buy" Button - THE ROYAL GREEN TOUCH */
 .btn-buy {
     background-color: var(--royal-green);
     color: white;
     border: none;
-    padding: 8px 15px;
-    border-radius: 5px;
+    padding: 10px 20px;
     cursor: pointer;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
     transition: 0.3s;
-    display: flex;
-    align-items: center;
-    gap: 5px;
+    border-radius: 3px;
 }
 
 .btn-buy:hover {
     background-color: var(--accent-gold);
-    color: var(--primary-text);
+    color: white;
 }
 
 /* --- 6. Footer --- */
 footer {
-    background-color: var(--primary-text); /* Dark Brown Footer */
-    color: var(--accent-gold);
+    background-color: var(--royal-green); /* Deep Green Footer */
+    color: white;
     text-align: center;
-    padding: 20px;
-    margin-top: 50px;
+    padding: 40px;
+    margin-top: 0;
+}
+
+footer p {
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    opacity: 0.8;
 }
 
 /* --- 7. Mobile Responsive --- */
 @media (max-width: 768px) {
     .navbar {
         flex-direction: column;
-        padding: 15px;
+        padding: 20px;
+        gap: 15px;
     }
     
     .logo-img {
         height: 60px;
-        margin-bottom: 10px;
     }
     
     .nav-links {
-        gap: 15px;
-        margin-bottom: 15px;
+        gap: 20px;
     }
 
-    .hero h1 { font-size: 2.5rem; }
+    .hero h1 { font-size: 3rem; }
+    .hero { height: 75vh; }
 }

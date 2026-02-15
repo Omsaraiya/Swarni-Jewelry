@@ -170,3 +170,22 @@ body {
 .btn-add:hover { background: var(--gold); }
 
 footer { text-align: center; padding: 40px; background: var(--dark-green); color: white; margin-top: 50px; }
+
+.btn-buy {
+    background-color: #0f281e;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: 0.3s;
+}
+
+.btn-buy:hover {
+    background-color: #D4AF37;
+}
+
+.btn-buy i {
+    margin-right: 5px;
+}

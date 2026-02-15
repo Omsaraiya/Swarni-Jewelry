@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
+
 <body>
 
     <nav class="navbar">
@@ -49,9 +51,9 @@
             <h2>New Arrivals</h2>
             <div class="line"></div>
         </div>
-        
+
         <div class="product-grid">
-            
+
             <div class="card">
                 <div class="card-image">
                     <img src="images/mangalsutra-gold.jpg" alt="Heer Moti">
@@ -61,7 +63,9 @@
                 <p class="desc">Diamond-studded forms with a modern floating finish.</p>
                 <div class="price-row">
                     <span class="price">₹169</span>
-                    <button class="btn-add"><i class="fa-solid fa-plus"></i></button>
+                    <button class="btn-buy" onclick="sendOrder('Heer - Moti Invisible', '169')">
+                        <i class="fa-brands fa-whatsapp"></i> Buy
+                    </button>
                 </div>
             </div>
 
@@ -74,7 +78,9 @@
                 <p class="desc">Three lotus motifs with soft jhunguru details.</p>
                 <div class="price-row">
                     <span class="price">₹149</span>
-                    <button class="btn-add"><i class="fa-solid fa-plus"></i></button>
+                    <button class="btn-buy" onclick="sendOrder('Padma Naad', '149')">
+                        <i class="fa-brands fa-whatsapp"></i> Buy
+                    </button>
                 </div>
             </div>
 
@@ -86,11 +92,13 @@
                 <p class="desc">Five lustrous pearls on a transparent base.</p>
                 <div class="price-row">
                     <span class="price">₹59</span>
-                    <button class="btn-add"><i class="fa-solid fa-plus"></i></button>
+                    <button class="btn-buy" onclick="sendOrder('Panch Moti', '59')">
+                        <i class="fa-brands fa-whatsapp"></i> Buy
+                    </button>
                 </div>
             </div>
 
-             <div class="card">
+            <div class="card">
                 <div class="card-image">
                     <img src="images/mangalsutra-diamond.jpg" alt="Diamond Invisible">
                     <span class="badge">New</span>
@@ -99,7 +107,9 @@
                 <p class="desc">Single diamond solitaire on invisible wire.</p>
                 <div class="price-row">
                     <span class="price">₹119</span>
-                    <button class="btn-add"><i class="fa-solid fa-plus"></i></button>
+                    <button class="btn-buy" onclick="sendOrder('Diamond Invisible', '119')">
+                        <i class="fa-brands fa-whatsapp"></i> Buy
+                    </button>
                 </div>
             </div>
 
@@ -109,6 +119,19 @@
     <footer>
         <p>© 2026 Svarni. Made with ❤️ in India.</p>
     </footer>
+
+    <script>
+        function sendOrder(productName, price) {
+            // Updated to her provided WhatsApp number format
+            const phone = "919322148XXX"; 
+
+            const message = `Hello Svarni! 🌸%0a%0aI saw this on your website and would like to order:%0a*${productName}*%0aPrice: ₹${price}%0a%0aIs this available?`;
+
+            const whatsappURL = `https://wa.me/${phone}?text=${message}`;
+
+            window.open(whatsappURL, '_blank');
+        }
+    </script>
 
 </body>
 </html>

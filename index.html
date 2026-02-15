@@ -7,14 +7,19 @@
     <title>Svarni | Culture Worn With Pride</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Playfair+Display:wght@700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 
 <body>
 
     <nav class="navbar">
-        <div class="logo">Svarni</div>
+        <div class="logo-container">
+            <img src="images/logo.jpg" alt="Svarni Logo" class="logo-img">
+        </div>
+
         <ul class="nav-links">
             <li><a href="#home">Home</a></li>
             <li><a href="#collection">Collection</a></li>
@@ -41,14 +46,15 @@
 
     <section id="about" class="brand-story">
         <div class="container">
-            <h2>The Svarni Story</h2>
-            <p>"Born from the love of sisters and inspired by Maharashtrian heritage, Svarni reflects tradition, culture, and quiet luxury."</p>
+            <h2 class="section-heading">The Svarni Story</h2>
+            <p>"Born from the love of sisters and inspired by Maharashtrian heritage, Svarni reflects tradition,
+                culture, and quiet luxury."</p>
         </div>
     </section>
 
     <section id="collection" class="products">
         <div class="section-title">
-            <h2>New Arrivals</h2>
+            <h2 class="section-heading">New Arrivals</h2>
             <div class="line"></div>
         </div>
 
@@ -122,16 +128,13 @@
 
     <script>
         function sendOrder(productName, price) {
-            // Your Number
-            const phone = "919821921453"; 
-
+            const phone = "919821921453";
             const message = `Hello Svarni! 🌸%0a%0aI saw this on your website and would like to order:%0a*${productName}*%0aPrice: ₹${price}%0a%0aIs this available?`;
-
             const whatsappURL = `https://wa.me/${phone}?text=${message}`;
-
             window.open(whatsappURL, '_blank');
         }
     </script>
 
 </body>
+
 </html>

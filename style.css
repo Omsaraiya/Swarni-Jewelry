@@ -1,9 +1,11 @@
-/* --- 1. Variables (The White, Cream & Gold Palette) --- */
+/* --- 1. The Royal Paithani Palette (Maharashtrian Vibe) --- */
 :root {
-    --primary-bg: #ffffff;       /* PURE WHITE (Clean Luxury) */
-    --secondary-bg: #f7f5f0;     /* SOFT CREAM (For sections/footer) */
-    --primary-text: #2c2c2c;     /* Soft Black (High contrast but not harsh) */
-    --accent-gold: #cfa156;      /* RICH GOLD (Not too yellow, very premium) */
+    --primary-bg: #FFFAF0;       /* Floral Ivory (Warm & Rich) */
+    --royal-green: #0F281E;      /* PAITHANI GREEN (Deep & Royal) */
+    --royal-green-light: #1a4231;/* Slightly lighter for hover */
+    --antique-gold: #C5A059;     /* Antique Gold (Not yellow) */
+    --gold-glow: #e6c885;        /* Brighter gold for hover */
+    --text-main: #2b1b17;        /* Deep Coffee (Softer than black) */
     --white: #ffffff;
 }
 
@@ -15,35 +17,42 @@
 
 body {
     background-color: var(--primary-bg);
-    color: var(--primary-text);
-    font-family: 'Lato', sans-serif; /* Clean Sans-Serif for body text */
+    color: var(--text-main);
+    font-family: 'Lato', sans-serif;
+    overflow-x: hidden; /* Prevents side scrolling */
 }
 
-/* --- 2. Typography Setup --- */
-h1, h2, h3, .logo, .subtitle {
-    font-family: 'Playfair Display', serif; /* Expensive Serif for Headings */
+/* Typography that feels like "Heritage" */
+h1, h2, h3, .logo-text, .subtitle, .tagline {
+    font-family: 'Playfair Display', serif;
 }
 
-/* --- 3. Navbar (Minimalist White) --- */
+/* --- 2. Navbar (Royal Green Header) --- */
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 50px;
-    background-color: var(--white);
+    padding: 10px 50px;
+    background-color: var(--royal-green); /* Dark Green Bar */
     position: sticky;
     top: 0;
     z-index: 1000;
-    border-bottom: 1px solid rgba(0,0,0,0.05); /* Very subtle separator */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    border-bottom: 2px solid var(--antique-gold); /* Gold Line at bottom */
 }
 
+/* Logo Fix - We invert the colors or keep it bright */
 .logo-container {
     display: flex;
     align-items: center;
+    background-color: rgba(255, 255, 255, 0.9); /* Small oval behind logo to make it pop */
+    padding: 5px 15px;
+    border-radius: 50px;
+    border: 1px solid var(--antique-gold);
 }
 
 .logo-img {
-    height: 70px; /* Adjust size as needed */
+    height: 60px;
     width: auto;
     display: block;
 }
@@ -56,33 +65,28 @@ h1, h2, h3, .logo, .subtitle {
 
 .nav-links a {
     text-decoration: none;
-    color: var(--primary-text);
-    font-family: 'Lato', sans-serif;
-    font-weight: 400;
+    color: var(--antique-gold); /* Gold Text on Green */
+    font-weight: 500;
     text-transform: uppercase;
-    font-size: 0.8rem;
-    letter-spacing: 2px; /* Wide spacing looks expensive */
-    transition: 0.3s;
+    font-size: 0.85rem;
+    letter-spacing: 1.5px;
+    transition: 0.4s;
 }
 
 .nav-links a:hover {
-    color: var(--accent-gold);
+    color: var(--white);
+    text-shadow: 0 0 10px var(--gold-glow); /* Glowing Text Effect */
 }
 
 .icons {
     display: flex;
     gap: 25px;
-    color: var(--primary-text);
+    color: var(--antique-gold);
     cursor: pointer;
-    font-size: 1.1rem;
-    transition: 0.3s;
+    font-size: 1.2rem;
 }
 
-.icons:hover {
-    color: var(--accent-gold);
-}
-
-/* --- 4. Hero Section --- */
+/* --- 3. Hero Section (Dramatic) --- */
 .hero {
     height: 85vh;
     background: url('images/hero-bg.jpg') no-repeat center center/cover;
@@ -97,79 +101,81 @@ h1, h2, h3, .logo, .subtitle {
 .hero-overlay {
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.3); /* Dark overlay to make text pop */
+    /* Gradient Overlay: Dark Green to Transparent */
+    background: linear-gradient(rgba(15, 40, 30, 0.7), rgba(15, 40, 30, 0.3));
 }
 
 .hero-text {
     position: relative;
     z-index: 1;
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Subtle frame */
+    padding: 40px;
+    backdrop-filter: blur(2px);
 }
 
 .hero h1 {
-    font-size: 4.5rem;
+    font-size: 5rem;
     margin: 10px 0;
-    line-height: 1.1;
-    font-weight: 400; /* Lighter weight looks more elegant */
+    color: var(--white);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
 }
 
 .subtitle {
-    letter-spacing: 5px;
-    font-size: 0.85rem;
+    letter-spacing: 6px;
+    font-size: 1rem;
     text-transform: uppercase;
-    color: #f0f0f0;
-    font-family: 'Lato', sans-serif; /* Exception: Subtitles often look good sans-serif */
-}
-
-.tagline {
-    font-style: italic;
-    margin-bottom: 35px;
-    font-size: 1.3rem;
-    font-weight: 300;
-    font-family: 'Playfair Display', serif;
+    color: var(--antique-gold);
+    font-weight: bold;
 }
 
 .btn {
-    padding: 15px 40px;
-    background-color: var(--white);
-    color: var(--primary-text);
+    padding: 15px 45px;
+    background-color: var(--antique-gold);
+    color: var(--royal-green);
     text-decoration: none;
+    font-weight: bold;
     text-transform: uppercase;
-    font-size: 0.8rem;
     letter-spacing: 2px;
-    transition: 0.3s;
-    border: 1px solid var(--white);
+    transition: 0.4s;
+    border: 2px solid var(--antique-gold);
+    box-shadow: 0 0 15px rgba(197, 160, 89, 0.4);
 }
 
 .btn:hover {
     background-color: transparent;
     color: var(--white);
+    border-color: var(--white);
+    transform: scale(1.05); /* Slight grow effect */
 }
 
-/* --- 5. Brand Story (Cream Background) --- */
+/* --- 4. Brand Story --- */
 .brand-story {
-    padding: 100px 20px;
+    padding: 80px 20px;
     text-align: center;
-    background-color: var(--secondary-bg); /* Soft Cream background */
+    background-color: var(--white);
+    background-image: radial-gradient(#C5A059 0.5px, transparent 0.5px); /* Tiny Gold Dots pattern */
+    background-size: 20px 20px;
 }
 
 .section-heading {
     font-size: 3rem;
-    color: var(--primary-text);
-    margin-bottom: 25px;
-    font-weight: 400;
+    color: var(--royal-green);
+    margin-bottom: 20px;
 }
 
 .brand-story p {
-    max-width: 700px;
+    max-width: 750px;
     margin: 0 auto;
-    font-size: 1.25rem;
+    font-size: 1.4rem;
     line-height: 1.8;
-    color: #555;
-    font-family: 'Playfair Display', serif; /* Serif body text for "Story" section looks like a book */
+    color: var(--text-main);
     font-style: italic;
+    background: white; /* Text sits on white box */
+    padding: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
 }
 
-/* --- 6. Product Collection (White Background) --- */
+/* --- 5. Product Collection (Interactive) --- */
 .products {
     padding: 80px 5%;
     background-color: var(--primary-bg);
@@ -181,33 +187,41 @@ h1, h2, h3, .logo, .subtitle {
 }
 
 .line {
-    width: 60px;
-    height: 2px;
-    background-color: var(--accent-gold); /* Gold Line */
-    margin: 20px auto;
+    width: 100px;
+    height: 4px;
+    background-color: var(--antique-gold);
+    margin: 15px auto;
+    border-radius: 2px;
 }
 
 .product-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 40px; /* More space between products */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 40px;
 }
 
 .card {
     background: white;
+    padding: 15px;
     text-align: center;
-    transition: 0.3s;
+    transition: 0.4s ease-in-out;
+    border: 1px solid #eee;
+    position: relative;
+    overflow: hidden;
 }
 
-/* Removing shadow/border for a "Clean" look */
+/* THE HOVER EFFECT - This makes it attractive */
 .card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-10px); /* Floats up */
+    border-color: var(--antique-gold); /* Gold Border appears */
+    box-shadow: 0 15px 30px rgba(197, 160, 89, 0.2); /* Gold Glow Shadow */
 }
 
 .card-image {
     position: relative;
     overflow: hidden;
     margin-bottom: 20px;
+    border-radius: 2px;
 }
 
 .card img {
@@ -218,102 +232,100 @@ h1, h2, h3, .logo, .subtitle {
 }
 
 .card:hover img {
-    transform: scale(1.05); /* Slow zoom */
+    transform: scale(1.1); /* Smooth Zoom */
 }
 
-/* Badges - Gold */
 .badge {
     position: absolute;
     top: 15px; left: 15px;
-    background-color: white;
-    color: var(--primary-text);
-    padding: 8px 15px;
-    font-size: 0.7rem;
+    background-color: var(--royal-green);
+    color: var(--antique-gold); /* Gold Text on Green Badge */
+    padding: 5px 15px;
+    font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 1px;
-    font-family: 'Lato', sans-serif;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    z-index: 2;
 }
 
 .card h3 {
     margin: 10px 0;
-    font-size: 1.3rem;
-    color: var(--primary-text);
-    font-weight: 400;
+    font-size: 1.4rem;
+    color: var(--royal-green);
+    font-weight: 700;
 }
 
 .desc {
-    font-size: 0.9rem;
-    color: #888;
+    font-size: 0.95rem;
+    color: #666;
     margin-bottom: 20px;
-    font-family: 'Lato', sans-serif;
+    font-style: italic;
 }
 
 .price-row {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    gap: 20px;
+    padding-top: 15px;
+    border-top: 1px dashed #ddd; /* Dotted line looks like receipt */
 }
 
 .price {
-    font-weight: 400;
-    font-size: 1.1rem;
-    color: var(--primary-text);
-    font-family: 'Lato', sans-serif;
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--text-main);
 }
 
-/* Buy Button - Gold & Elegant */
+/* Buy Button - High Contrast */
 .btn-buy {
-    background-color: var(--accent-gold);
-    color: white;
+    background-color: var(--royal-green);
+    color: var(--white);
     border: none;
     padding: 10px 25px;
     cursor: pointer;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     text-transform: uppercase;
     letter-spacing: 1px;
     transition: 0.3s;
-    border-radius: 0; /* Square buttons are more "fashion" */
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
 .btn-buy:hover {
-    background-color: #b58b44; /* Darker Gold */
+    background-color: var(--antique-gold);
+    color: var(--royal-green);
+    font-weight: bold;
 }
 
-/* --- 7. Footer (Cream) --- */
+/* --- 6. Footer (Grand Finale) --- */
 footer {
-    background-color: var(--secondary-bg); /* Cream Footer */
-    color: var(--primary-text);
+    background-color: var(--royal-green);
+    color: var(--antique-gold);
     text-align: center;
     padding: 60px 20px;
     margin-top: 50px;
-    border-top: 1px solid rgba(0,0,0,0.05);
+    border-top: 4px solid var(--antique-gold);
 }
 
 footer p {
-    font-family: 'Lato', sans-serif;
-    font-size: 0.85rem;
+    font-size: 1rem;
     letter-spacing: 1px;
-    opacity: 0.7;
+    opacity: 0.9;
 }
 
-/* --- 8. Mobile Responsive --- */
+/* --- 7. Mobile Responsive --- */
 @media (max-width: 768px) {
     .navbar {
         flex-direction: column;
-        padding: 20px;
-        gap: 15px;
-    }
-    
-    .logo-img {
-        height: 60px;
+        padding: 15px;
     }
     
     .nav-links {
         gap: 20px;
+        margin-top: 15px;
     }
-
+    
     .hero h1 { font-size: 3rem; }
-    .hero { height: 75vh; }
+    .hero { height: 70vh; }
 }

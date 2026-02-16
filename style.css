@@ -9,6 +9,9 @@
     /* Accent: Soft Rose Gold */
     --rose-gold: #bcaaa4;
 
+    /* Hero & Card Background: Clean Off-White/Plain */
+    --plain-bg: #fdfaf7;
+
     --card-bg: #ffffff;
     --white: #ffffff;
 }
@@ -27,18 +30,14 @@ body {
     background-color: var(--primary-bg);
     color: var(--cocoa-brown);
     font-family: 'Lato', sans-serif;
-    /* Very subtle elegant texture */
+    /* Very subtle elegant texture for the body */
     background-image: radial-gradient(#e0dcd9 0.5px, transparent 0.5px);
     background-size: 30px 30px;
     overflow-x: hidden;
 }
 
 /* Typography - Elegant & Royal */
-h1,
-h2,
-h3,
-.subtitle,
-.tagline {
+h1, h2, h3, .subtitle, .tagline {
     font-family: 'Playfair Display', serif;
 }
 
@@ -61,7 +60,6 @@ h3,
     align-items: center;
 }
 
-/* Ensures logo fits well */
 .logo-img {
     height: 75px;
     width: auto;
@@ -107,26 +105,22 @@ h3,
     font-size: 1.2rem;
 }
 
-/* --- Hero Section --- */
+/* --- Hero Section (UPDATED: PLAIN BACKGROUND) --- */
 .hero {
-    height: 85vh;
-    background: url('images/hero-bg.jpg') no-repeat center center/cover;
-    position: relative;
+    height: 70vh;
+    background-color: var(--plain-bg); /* Clean, solid background */
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    color: white;
+    color: var(--cocoa-brown); /* Darker text for plain background */
+    position: relative;
+    border-bottom: 1px solid #eee;
 }
 
+/* Overlay removed because background is now solid */
 .hero-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    /* Cocoa Gradient Overlay */
-    background: linear-gradient(rgba(62, 39, 35, 0.5), rgba(62, 39, 35, 0.2));
+    display: none;
 }
 
 .hero-text {
@@ -136,10 +130,11 @@ h3,
 }
 
 .hero h1 {
-    font-size: 5rem;
+    font-size: 4.5rem;
     margin: 10px 0;
-    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    color: var(--cocoa-brown);
     line-height: 1.1;
+    text-shadow: none; /* Removed shadow for clean look */
 }
 
 .subtitle {
@@ -155,29 +150,28 @@ h3,
 
 .tagline {
     margin-top: 15px;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-style: italic;
-    color: #f0f0f0;
+    color: #5d4037; /* Softer brown for tagline */
 }
 
 .btn {
     padding: 15px 40px;
-    margin-top: 20px;
+    margin-top: 25px;
     display: inline-block;
-    background-color: var(--primary-bg);
-    color: var(--cocoa-brown);
+    background-color: var(--cocoa-brown);
+    color: var(--white);
     text-decoration: none;
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 2px;
     transition: 0.3s;
-    border: 1px solid var(--primary-bg);
+    border: 1px solid var(--cocoa-brown);
 }
 
 .btn:hover {
     background-color: transparent;
-    color: white;
-    border-color: white;
+    color: var(--cocoa-brown);
 }
 
 /* --- Brand Story --- */
@@ -221,7 +215,7 @@ h3,
     margin: 15px auto;
 }
 
-/* --- NEW CATEGORY FILTER STYLES --- */
+/* --- CATEGORY FILTER STYLES --- */
 .category-container {
     display: flex;
     justify-content: center;
@@ -236,7 +230,6 @@ h3,
     color: var(--cocoa-brown);
     padding: 8px 20px;
     border-radius: 25px;
-    /* Pill shape */
     cursor: pointer;
     font-family: 'Lato', sans-serif;
     font-size: 0.9rem;
@@ -245,8 +238,7 @@ h3,
     text-transform: capitalize;
 }
 
-.cat-btn:hover,
-.cat-btn.active {
+.cat-btn:hover, .cat-btn.active {
     background-color: var(--cocoa-brown);
     color: var(--white);
 }
@@ -264,7 +256,6 @@ h3,
     border: 1px solid #f2ecec;
     transition: 0.3s;
     display: block;
-
     width: 100%;
     max-width: 320px;
 }
@@ -275,11 +266,13 @@ h3,
     box-shadow: 0 10px 20px rgba(62, 39, 35, 0.08);
 }
 
+/* Card Images Updated for Clean Background */
 .card-image {
     position: relative;
     overflow: hidden;
     margin-bottom: 15px;
     aspect-ratio: 1/1;
+    background-color: var(--plain-bg);
 }
 
 .card img {
@@ -298,6 +291,7 @@ h3,
     font-size: 0.7rem;
     text-transform: uppercase;
     letter-spacing: 1px;
+    z-index: 2;
 }
 
 .card h3 {
@@ -349,7 +343,6 @@ footer {
     color: var(--primary-bg);
     text-align: center;
     padding: 50px 20px;
-    margin-top: 0;
 }
 
 /* --- Mobile Optimization --- */
@@ -361,29 +354,21 @@ footer {
     }
 
     .hero h1 {
-        font-size: 3rem;
+        font-size: 2.8rem;
     }
 
     .product-grid {
         grid-template-columns: 1fr;
     }
 
-    .btn-buy {
-        padding: 12px 25px;
-    }
-
-    /* Mobile Scroll for Categories */
     .category-container {
         justify-content: flex-start;
         overflow-x: auto;
-        /* Enable horizontal scrolling */
         padding-bottom: 10px;
         white-space: nowrap;
-        /* Hide scrollbar for neatness */
         -ms-overflow-style: none;
         scrollbar-width: none;
         padding-left: 5%;
-        /* Align with content */
     }
 
     .category-container::-webkit-scrollbar {
@@ -392,6 +377,5 @@ footer {
 
     .cat-btn {
         flex: 0 0 auto;
-        /* Stop buttons from shrinking */
     }
 }

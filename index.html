@@ -152,14 +152,15 @@
             window.open(url, '_blank');
         }
 
-        // Filter Function (Fixed: Hides 'coming-soon' from 'All')
+        // Filter Function
         function filterSelection(c) {
             var x, i;
             x = document.getElementsByClassName("filter-item");
             
-            // Buttons visual update
-            var btns = document.getElementsByClassName("cat-btn");
-            if (event && event.target) {
+            // Button Highlight Logic (Safety Check Added)
+            // We check if 'event' exists so it doesn't crash on page load
+            if (typeof event !== 'undefined' && event && event.target && event.target.classList.contains('cat-btn')) {
+                 var btns = document.getElementsByClassName("cat-btn");
                  for (var j = 0; j < btns.length; j++) { btns[j].classList.remove("active"); }
                  event.target.classList.add("active");
             }
@@ -181,6 +182,10 @@
                 }
             }
         }
+
+        // --- RUN THIS AUTOMATICALLY ---
+        // This makes sure the "Coming Soon" card is HIDDEN when the page first opens
+        filterSelection("all");
     </script>
 
 </body>

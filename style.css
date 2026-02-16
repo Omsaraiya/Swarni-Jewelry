@@ -35,10 +35,15 @@ body {
     font-family: 'Lato', sans-serif;
     background-image: radial-gradient(#e0dcd9 0.5px, transparent 0.5px);
     background-size: 30px 30px;
+    
     /* FIX 1 CONTINUED: Ensure body doesn't overflow */
     position: relative;
     max-width: 100%;
     overflow-x: hidden;
+
+    /* FIX FOR FIXED NAVBAR: Push content down so it doesn't hide behind nav */
+    /* This value matches the height of the navbar + some breathing room */
+    padding-top: 110px; 
 }
 
 /* Typography */
@@ -46,18 +51,23 @@ h1, h2, h3, .subtitle, .tagline {
     font-family: 'Playfair Display', serif;
 }
 
-/* --- Navbar --- */
+/* --- Navbar (UPDATED: FIXED TO TOP) --- */
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 15px 50px;
     background-color: var(--primary-bg);
-    position: sticky;
+    
+    /* FIXED POSITION LOGIC */
+    position: fixed;
     top: 0;
+    left: 0;
+    width: 100%;
     z-index: 1000;
+    
     border-bottom: 1px solid rgba(62, 39, 35, 0.1);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Slightly stronger shadow for visibility */
 }
 
 .logo-container {
@@ -110,16 +120,16 @@ h1, h2, h3, .subtitle, .tagline {
     font-size: 1.2rem;
 }
 
-/* --- Hero Section (UPDATED: DARK CHOCOLATE THEME) --- */
+/* --- Hero Section (Dark Chocolate Theme) --- */
 .hero {
     height: 70vh;
-    /* CHANGE 1: Dark Chocolate Background */
+    /* Dark Chocolate Background */
     background-color: var(--cocoa-brown); 
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    color: var(--primary-bg); /* CHANGE 2: Light text for contrast */
+    color: var(--primary-bg); /* Light text for contrast */
     position: relative;
     width: 100%;
 }
@@ -137,7 +147,6 @@ h1, h2, h3, .subtitle, .tagline {
 .hero h1 {
     font-size: 4.5rem;
     margin: 10px 0;
-    /* CHANGE 3: Light Title */
     color: var(--primary-bg); 
     line-height: 1.1;
 }
@@ -146,7 +155,6 @@ h1, h2, h3, .subtitle, .tagline {
     letter-spacing: 4px;
     font-size: 0.9rem;
     text-transform: uppercase;
-    /* CHANGE 4: Inverted colors (Light Box, Dark Text) */
     background-color: var(--primary-bg);
     color: var(--cocoa-brown); 
     padding: 8px 18px;
@@ -158,16 +166,14 @@ h1, h2, h3, .subtitle, .tagline {
     margin-top: 15px;
     font-size: 1.1rem;
     font-style: italic;
-    /* CHANGE 5: Light Gold Tagline */
     color: var(--rose-gold); 
 }
 
-/* Hero Button (Updated for Dark Background) */
+/* Hero Button */
 .btn {
     padding: 15px 40px;
     margin-top: 25px;
     display: inline-block;
-    /* Light button so it pops on dark bg */
     background-color: transparent;
     color: var(--primary-bg);
     border: 1px solid var(--primary-bg);
@@ -188,6 +194,9 @@ h1, h2, h3, .subtitle, .tagline {
     padding: 90px 20px;
     text-align: center;
     background-color: var(--primary-bg);
+    
+    /* ADDED SCROLL MARGIN: Ensures title isn't hidden behind fixed nav when clicked */
+    scroll-margin-top: 120px; 
 }
 
 .section-heading {
@@ -210,6 +219,9 @@ h1, h2, h3, .subtitle, .tagline {
     padding: 60px 5%;
     background-color: var(--white);
     width: 100%; /* iOS Fix */
+    
+    /* ADDED SCROLL MARGIN: Ensures title isn't hidden behind fixed nav when clicked */
+    scroll-margin-top: 120px;
 }
 
 .section-title {
@@ -358,10 +370,17 @@ footer {
 
 /* --- Mobile Optimization (iOS Fixed) --- */
 @media (max-width: 768px) {
+    /* Navbar stack for mobile */
     .navbar {
         flex-direction: column;
         padding: 15px;
         gap: 15px;
+        /* Mobile height is larger due to stacking, so padding-top needs adjusting in JS or manually */
+    }
+    
+    /* Increase body padding for mobile because navbar is taller */
+    body {
+        padding-top: 180px; 
     }
 
     .hero h1 {
@@ -371,6 +390,12 @@ footer {
     .products {
         padding: 60px 20px;
         overflow-x: hidden;
+        /* Adjust scroll margin for mobile header height */
+        scroll-margin-top: 180px; 
+    }
+    
+    .brand-story {
+        scroll-margin-top: 180px;
     }
 
     .product-grid {

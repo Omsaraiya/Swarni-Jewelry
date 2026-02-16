@@ -123,7 +123,7 @@
                 </div>
             </div>
             
-            <div class="card filter-item nath bugdi earcuffs">
+            <div class="card filter-item coming-soon nath bugdi earcuffs">
                 <div class="card-image">
                     <span class="badge" style="background-color: #888;">Coming Soon</span>
                     <img src="images/logo.png" alt="Coming Soon" style="object-fit: contain; padding: 20px;">
@@ -152,30 +152,32 @@
             window.open(url, '_blank');
         }
 
-        // Filter Function
+        // Filter Function (Fixed: Hides 'coming-soon' from 'All')
         function filterSelection(c) {
             var x, i;
             x = document.getElementsByClassName("filter-item");
             
             // Buttons visual update
             var btns = document.getElementsByClassName("cat-btn");
-            for (var j = 0; j < btns.length; j++) {
-                btns[j].classList.remove("active");
-                if(btns[j].innerText.toLowerCase().includes(c) || (c === 'all' && btns[j].innerText === 'All')) {
-                    btns[j].classList.add("active");
-                }
-            }
-            // Add specific logic to highlight the clicked button accurately
             if (event && event.target) {
                  for (var j = 0; j < btns.length; j++) { btns[j].classList.remove("active"); }
                  event.target.classList.add("active");
             }
 
             if (c == "all") c = "";
+            
             for (i = 0; i < x.length; i++) {
-                x[i].style.display = "none"; // Hide all first
-                if (x[i].className.indexOf(c) > -1) {
-                    x[i].style.display = "block"; // Show match
+                x[i].style.display = "none"; // Hide everything first
+                
+                // LOGIC 1: If "All" is selected, show everything EXCEPT 'coming-soon'
+                if (c == "") {
+                    if (x[i].className.indexOf("coming-soon") == -1) {
+                        x[i].style.display = "block";
+                    }
+                }
+                // LOGIC 2: If a specific category is selected, show matches (including coming-soon)
+                else if (x[i].className.indexOf(c) > -1) {
+                    x[i].style.display = "block";
                 }
             }
         }

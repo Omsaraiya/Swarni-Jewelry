@@ -1,15 +1,15 @@
 /* --- THE SIGNATURE SVARNI THEME (Rose-Beige & Cocoa) --- */
 :root {
-    /* Background: Pale Rose-Beige (From PDF Catalog) */
+    /* Background: Pale Rose-Beige */
     --primary-bg: #fff5f0;
 
-    /* Text/Logo: Deep Cocoa (From Logo Text) */
+    /* Text/Logo: Deep Cocoa (Dark Chocolate) */
     --cocoa-brown: #3e2723;
 
     /* Accent: Soft Rose Gold */
     --rose-gold: #bcaaa4;
 
-    /* Hero & Card Background: Clean Off-White/Plain */
+    /* Card Background: Clean White */
     --plain-bg: #fdfaf7;
 
     --card-bg: #ffffff;
@@ -24,7 +24,7 @@
 
 html {
     scroll-behavior: smooth;
-    /* FIX 1: Prevent horizontal scroll globally */
+    /* FIX 1: Prevent horizontal scroll globally (iOS Fix) */
     max-width: 100%;
     overflow-x: hidden;
 }
@@ -41,7 +41,7 @@ body {
     overflow-x: hidden;
 }
 
-/* Typography - Elegant & Royal */
+/* Typography */
 h1, h2, h3, .subtitle, .tagline {
     font-family: 'Playfair Display', serif;
 }
@@ -110,18 +110,18 @@ h1, h2, h3, .subtitle, .tagline {
     font-size: 1.2rem;
 }
 
-/* --- Hero Section (PLAIN BACKGROUND) --- */
+/* --- Hero Section (UPDATED: DARK CHOCOLATE THEME) --- */
 .hero {
     height: 70vh;
-    background-color: var(--plain-bg);
+    /* CHANGE 1: Dark Chocolate Background */
+    background-color: var(--cocoa-brown); 
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    color: var(--cocoa-brown);
+    color: var(--primary-bg); /* CHANGE 2: Light text for contrast */
     position: relative;
-    border-bottom: 1px solid #eee;
-    width: 100%; /* Ensure it fits screen */
+    width: 100%;
 }
 
 .hero-overlay {
@@ -137,17 +137,18 @@ h1, h2, h3, .subtitle, .tagline {
 .hero h1 {
     font-size: 4.5rem;
     margin: 10px 0;
-    color: var(--cocoa-brown);
+    /* CHANGE 3: Light Title */
+    color: var(--primary-bg); 
     line-height: 1.1;
-    text-shadow: none;
 }
 
 .subtitle {
     letter-spacing: 4px;
     font-size: 0.9rem;
     text-transform: uppercase;
-    background-color: var(--cocoa-brown);
-    color: var(--primary-bg);
+    /* CHANGE 4: Inverted colors (Light Box, Dark Text) */
+    background-color: var(--primary-bg);
+    color: var(--cocoa-brown); 
     padding: 8px 18px;
     display: inline-block;
     border-radius: 2px;
@@ -157,25 +158,28 @@ h1, h2, h3, .subtitle, .tagline {
     margin-top: 15px;
     font-size: 1.1rem;
     font-style: italic;
-    color: #5d4037;
+    /* CHANGE 5: Light Gold Tagline */
+    color: var(--rose-gold); 
 }
 
+/* Hero Button (Updated for Dark Background) */
 .btn {
     padding: 15px 40px;
     margin-top: 25px;
     display: inline-block;
-    background-color: var(--cocoa-brown);
-    color: var(--white);
+    /* Light button so it pops on dark bg */
+    background-color: transparent;
+    color: var(--primary-bg);
+    border: 1px solid var(--primary-bg);
     text-decoration: none;
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 2px;
     transition: 0.3s;
-    border: 1px solid var(--cocoa-brown);
 }
 
 .btn:hover {
-    background-color: transparent;
+    background-color: var(--primary-bg);
     color: var(--cocoa-brown);
 }
 
@@ -205,7 +209,7 @@ h1, h2, h3, .subtitle, .tagline {
 .products {
     padding: 60px 5%;
     background-color: var(--white);
-    width: 100%; /* Fix 2: Constrain width */
+    width: 100%; /* iOS Fix */
 }
 
 .section-title {
@@ -253,7 +257,7 @@ h1, h2, h3, .subtitle, .tagline {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 40px;
-    width: 100%; /* Ensure grid doesn't push width */
+    width: 100%; /* iOS Fix */
 }
 
 .card {
@@ -265,8 +269,7 @@ h1, h2, h3, .subtitle, .tagline {
     display: block;
     width: 100%;
     max-width: 320px;
-    /* Fix 3: Center the cards */
-    margin: 0 auto; 
+    margin: 0 auto; /* iOS Fix */
 }
 
 .card:hover {
@@ -353,7 +356,7 @@ footer {
     padding: 50px 20px;
 }
 
-/* --- Mobile Optimization (UPDATED FOR IOS FIX) --- */
+/* --- Mobile Optimization (iOS Fixed) --- */
 @media (max-width: 768px) {
     .navbar {
         flex-direction: column;
@@ -365,13 +368,11 @@ footer {
         font-size: 2.8rem;
     }
 
-    /* iOS FIX: Strict control over product container */
     .products {
         padding: 60px 20px;
         overflow-x: hidden;
     }
 
-    /* iOS FIX: Force single column and centering */
     .product-grid {
         display: flex;
         flex-direction: column;
@@ -380,7 +381,6 @@ footer {
         width: 100%;
     }
 
-    /* iOS FIX: Percentage width prevents edge collision */
     .card {
         width: 90%; 
         max-width: 320px;

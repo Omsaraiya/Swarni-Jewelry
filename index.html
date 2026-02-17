@@ -6,9 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Svarni | Culture Worn With Pride</title>
     <link rel="stylesheet" href="style.css">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@400;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@400;700&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 
@@ -76,7 +74,7 @@
         <div class="product-grid">
 
             <div class="card filter-item invisible">
-                <div class="card-image">
+                <div class="card-image" onclick="openModal(this)" style="cursor: pointer;">
                     <span class="badge">Bestseller</span>
                     <img src="images/mangalsutra-diamond.jpg" alt="Heer - Moti Invisible">
                 </div>
@@ -89,7 +87,7 @@
             </div>
 
             <div class="card filter-item mangalsutra">
-                <div class="card-image">
+                <div class="card-image" onclick="openModal(this)" style="cursor: pointer;">
                     <span class="badge">Festive</span>
                     <img src="images/mangalsutra-gold.jpg" alt="Padma Naad">
                 </div>
@@ -102,7 +100,7 @@
             </div>
 
             <div class="card filter-item mangalsutra">
-                <div class="card-image">
+                <div class="card-image" onclick="openModal(this)" style="cursor: pointer;">
                     <span class="badge">Royal</span>
                     <img src="images/mangalsutra-pink.jpg" alt="Manjarii">
                 </div>
@@ -115,7 +113,7 @@
             </div>
 
             <div class="card filter-item invisible">
-                <div class="card-image">
+                <div class="card-image" onclick="openModal(this)" style="cursor: pointer;">
                     <span class="badge">Classic</span>
                     <img src="images/mangalsutra-simple.jpg" alt="Panch Moti">
                 </div>
@@ -128,7 +126,7 @@
             </div>
 
             <div class="card filter-item mangalsutra">
-                <div class="card-image">
+                <div class="card-image" onclick="openModal(this)" style="cursor: pointer;">
                     <span class="badge">New</span>
                     <img src="images/mangalsutra-teardrop.jpg" alt="Kamal Jhankar">
                 </div>
@@ -158,56 +156,100 @@
         </div>
     </section>
 
+    <div id="productModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            
+            <div class="modal-image-container">
+                <img id="modalImg" src="" alt="Product Detail">
+            </div>
+            
+            <div class="modal-details">
+                <h2 id="modalTitle" class="modal-title">Product Name</h2>
+                <p id="modalPrice" class="modal-price">₹0</p>
+                <p id="modalDesc" class="modal-desc">Product description goes here.</p>
+                
+                <button id="modalBuyBtn" class="btn-buy" style="width: 100%; padding: 15px;">
+                    Buy On WhatsApp
+                </button>
+            </div>
+        </div>
+    </div>
+
     <footer>
         <p>&copy; 2026 Svarni. Made with <i class="fas fa-heart" style="color: #bcaaa4;"></i> in India.</p>
     </footer>
 
     <script>
-        // WhatsApp Function
+        // WhatsApp Function (Direct Buy)
         function buy(productName, price) {
-            // UPDATED PHONE NUMBER HERE
             let phoneNumber = "919322148369";
             let message = `Hello Svarni! ✨\n\nI saw this on your website and would like to order:\n*${productName}*\nPrice: ₹${price}\n\nIs this available?`;
             let url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
             window.open(url, '_blank');
         }
 
+        // --- MODAL LOGIC ---
+        
+        // 1. Open Modal and Fill Data
+        function openModal(element) {
+            let card = element.closest('.card');
+            
+            let imgSrc = card.querySelector('img').src;
+            let title = card.querySelector('h3').innerText;
+            let priceText = card.querySelector('.price').innerText;
+            let rawPrice = priceText.replace('₹', '').trim(); 
+            let desc = card.querySelector('.desc').innerText;
+            
+            document.getElementById('modalImg').src = imgSrc;
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalPrice').innerText = priceText;
+            document.getElementById('modalDesc').innerText = desc;
+            
+            let modalBtn = document.getElementById('modalBuyBtn');
+            modalBtn.onclick = function() {
+                buy(title, rawPrice);
+            };
+
+            let modal = document.getElementById('productModal');
+            modal.classList.add('show');
+        }
+
+        // 2. Close Modal
+        function closeModal() {
+            let modal = document.getElementById('productModal');
+            modal.classList.remove('show');
+        }
+
+        // 3. Close if user clicks outside
+        window.onclick = function(event) {
+            let modal = document.getElementById('productModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
         // Filter Function
         function filterSelection(c) {
             var x, i;
             x = document.getElementsByClassName("filter-item");
-
-            // Button Highlight Logic (Safety Check Added)
-            // We check if 'event' exists so it doesn't crash on page load
             if (typeof event !== 'undefined' && event && event.target && event.target.classList.contains('cat-btn')) {
                 var btns = document.getElementsByClassName("cat-btn");
                 for (var j = 0; j < btns.length; j++) { btns[j].classList.remove("active"); }
                 event.target.classList.add("active");
             }
-
             if (c == "all") c = "";
-
             for (i = 0; i < x.length; i++) {
-                x[i].style.display = "none"; // Hide everything first
-
-                // LOGIC 1: If "All" is selected, show everything EXCEPT 'coming-soon'
+                x[i].style.display = "none"; 
                 if (c == "") {
-                    if (x[i].className.indexOf("coming-soon") == -1) {
-                        x[i].style.display = "block";
-                    }
-                }
-                // LOGIC 2: If a specific category is selected, show matches (including coming-soon)
-                else if (x[i].className.indexOf(c) > -1) {
+                    if (x[i].className.indexOf("coming-soon") == -1) x[i].style.display = "block";
+                } else if (x[i].className.indexOf(c) > -1) {
                     x[i].style.display = "block";
                 }
             }
         }
-
-        // --- RUN THIS AUTOMATICALLY ---
-        // This makes sure the "Coming Soon" card is HIDDEN when the page first opens
         filterSelection("all");
     </script>
 
 </body>
-
 </html>

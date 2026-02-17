@@ -42,7 +42,6 @@ body {
     overflow-x: hidden;
 
     /* FIX FOR FIXED NAVBAR: Push content down so it doesn't hide behind nav */
-    /* This value matches the height of the navbar + some breathing room */
     padding-top: 110px; 
 }
 
@@ -51,7 +50,7 @@ h1, h2, h3, .subtitle, .tagline {
     font-family: 'Playfair Display', serif;
 }
 
-/* --- Navbar (UPDATED: FIXED TO TOP) --- */
+/* --- Navbar (FIXED TO TOP) --- */
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -67,7 +66,7 @@ h1, h2, h3, .subtitle, .tagline {
     z-index: 1000;
     
     border-bottom: 1px solid rgba(62, 39, 35, 0.1);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Slightly stronger shadow for visibility */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
 
 .logo-container {
@@ -123,13 +122,12 @@ h1, h2, h3, .subtitle, .tagline {
 /* --- Hero Section (Dark Chocolate Theme) --- */
 .hero {
     height: 70vh;
-    /* Dark Chocolate Background */
     background-color: var(--cocoa-brown); 
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    color: var(--primary-bg); /* Light text for contrast */
+    color: var(--primary-bg); 
     position: relative;
     width: 100%;
 }
@@ -194,8 +192,6 @@ h1, h2, h3, .subtitle, .tagline {
     padding: 90px 20px;
     text-align: center;
     background-color: var(--primary-bg);
-    
-    /* ADDED SCROLL MARGIN: Ensures title isn't hidden behind fixed nav when clicked */
     scroll-margin-top: 120px; 
 }
 
@@ -219,8 +215,6 @@ h1, h2, h3, .subtitle, .tagline {
     padding: 60px 5%;
     background-color: var(--white);
     width: 100%; /* iOS Fix */
-    
-    /* ADDED SCROLL MARGIN: Ensures title isn't hidden behind fixed nav when clicked */
     scroll-margin-top: 120px;
 }
 
@@ -368,17 +362,14 @@ footer {
     padding: 50px 20px;
 }
 
-/* --- Mobile Optimization (iOS Fixed) --- */
+/* --- Mobile Optimization --- */
 @media (max-width: 768px) {
-    /* Navbar stack for mobile */
     .navbar {
         flex-direction: column;
         padding: 15px;
         gap: 15px;
-        /* Mobile height is larger due to stacking, so padding-top needs adjusting in JS or manually */
     }
     
-    /* Increase body padding for mobile because navbar is taller */
     body {
         padding-top: 180px; 
     }
@@ -390,7 +381,6 @@ footer {
     .products {
         padding: 60px 20px;
         overflow-x: hidden;
-        /* Adjust scroll margin for mobile header height */
         scroll-margin-top: 180px; 
     }
     
@@ -428,5 +418,129 @@ footer {
 
     .cat-btn {
         flex: 0 0 auto;
+    }
+}
+
+/* --- PRODUCT MODAL (POPUP) STYLES --- */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(62, 39, 35, 0.6);
+    backdrop-filter: blur(5px);
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modal.show {
+    display: flex;
+    opacity: 1;
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: auto;
+    width: 90%;
+    max-width: 800px;
+    border-radius: 8px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    animation: slideUp 0.4s ease;
+}
+
+@keyframes slideUp {
+    from { transform: translateY(50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.modal-image-container {
+    flex: 1;
+    background-color: var(--plain-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.modal-image-container img {
+    width: 100%;
+    max-height: 400px;
+    object-fit: contain;
+}
+
+.modal-details {
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 10;
+    transition: 0.2s;
+}
+
+.close-btn:hover {
+    color: var(--cocoa-brown);
+}
+
+.modal-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: var(--cocoa-brown);
+    margin-bottom: 10px;
+}
+
+.modal-price {
+    font-size: 1.5rem;
+    color: #795548;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.modal-desc {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 30px;
+}
+
+@media (max-width: 768px) {
+    .modal-content {
+        flex-direction: column;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+    
+    .modal-image-container {
+        padding: 10px;
+        height: 250px;
+    }
+    
+    .modal-details {
+        padding: 25px;
+    }
+    
+    .modal-title {
+        font-size: 1.5rem;
     }
 }

@@ -181,7 +181,7 @@
     </footer>
 
     <script>
-        // WhatsApp Function (Direct Buy)
+        // WhatsApp Function
         function buy(productName, price) {
             let phoneNumber = "919322148369";
             let message = `Hello Svarni! ✨\n\nI saw this on your website and would like to order:\n*${productName}*\nPrice: ₹${price}\n\nIs this available?`;
@@ -189,39 +189,53 @@
             window.open(url, '_blank');
         }
 
-        // --- MODAL LOGIC ---
-        
-        // 1. Open Modal and Fill Data
+        // --- DEBUG MODAL LOGIC ---
         function openModal(element) {
-            let card = element.closest('.card');
-            
-            let imgSrc = card.querySelector('img').src;
-            let title = card.querySelector('h3').innerText;
-            let priceText = card.querySelector('.price').innerText;
-            let rawPrice = priceText.replace('₹', '').trim(); 
-            let desc = card.querySelector('.desc').innerText;
-            
-            document.getElementById('modalImg').src = imgSrc;
-            document.getElementById('modalTitle').innerText = title;
-            document.getElementById('modalPrice').innerText = priceText;
-            document.getElementById('modalDesc').innerText = desc;
-            
-            let modalBtn = document.getElementById('modalBuyBtn');
-            modalBtn.onclick = function() {
-                buy(title, rawPrice);
-            };
+            // TEST 1: Check if click is working
+            console.log("Click detected on image!"); 
 
-            let modal = document.getElementById('productModal');
-            modal.classList.add('show');
+            try {
+                let card = element.closest('.card');
+                
+                // Get data
+                let imgSrc = card.querySelector('img').src;
+                let title = card.querySelector('h3').innerText;
+                let priceText = card.querySelector('.price').innerText;
+                let rawPrice = priceText.replace('₹', '').trim(); 
+                let desc = card.querySelector('.desc').innerText;
+
+                // Set data
+                document.getElementById('modalImg').src = imgSrc;
+                document.getElementById('modalTitle').innerText = title;
+                document.getElementById('modalPrice').innerText = priceText;
+                document.getElementById('modalDesc').innerText = desc;
+                
+                // Set button
+                let modalBtn = document.getElementById('modalBuyBtn');
+                modalBtn.onclick = function() {
+                    buy(title, rawPrice);
+                };
+
+                // Show Modal
+                let modal = document.getElementById('productModal');
+                modal.style.display = "flex"; // FORCE SHOW using inline style
+                setTimeout(() => {
+                    modal.classList.add('show');
+                }, 10);
+                
+            } catch (error) {
+                alert("Error: " + error.message); // This will tell us if code is broken
+            }
         }
 
-        // 2. Close Modal
         function closeModal() {
             let modal = document.getElementById('productModal');
             modal.classList.remove('show');
+            setTimeout(() => {
+                modal.style.display = "none";
+            }, 300); // Wait for fade out
         }
 
-        // 3. Close if user clicks outside
         window.onclick = function(event) {
             let modal = document.getElementById('productModal');
             if (event.target == modal) {
@@ -229,7 +243,7 @@
             }
         }
 
-        // Filter Function
+        // Filter Function (Keep as is)
         function filterSelection(c) {
             var x, i;
             x = document.getElementsByClassName("filter-item");

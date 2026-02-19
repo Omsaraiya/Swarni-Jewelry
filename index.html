@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Svarni | Culture Worn With Pride</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@400;700&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@400;700&family=Poppins:wght@400;500&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
@@ -57,7 +59,8 @@
     </section>
 
     <section id="collection" class="products">
-        <h2 class="section-title">New Arrivals <div class="line"></div></h2>
+        <h2 class="section-title">New Arrivals <div class="line"></div>
+        </h2>
 
         <div class="category-container">
             <button class="cat-btn active" onclick="filterSelection('all')">All</button>
@@ -113,11 +116,17 @@
                 if (response.ok) {
                     let data = await response.json();
                     let products = data.items || [];
-                    
+
                     products.forEach(p => {
                         let badgeHTML = p.badge ? `<span class="badge">${p.badge}</span>` : '';
-                        let imgPath = p.image.startsWith('/') ? p.image.substring(1) : p.image;
-                        
+                        let imgPath = "images/logo.png"; // Default fallback
+                        if (p.image) {
+                            imgPath = p.image.startsWith('/') ? p.image.substring(1) : p.image;
+                            // Fix the path if the admin panel forgets the 'images/' folder
+                            if (!imgPath.startsWith('images/') && !imgPath.startsWith('http')) {
+                                imgPath = 'images/' + imgPath;
+                            }
+                        }
                         let card = `
                         <div class="card filter-item ${p.category}">
                             <div class="card-image" onclick="openModal(this)" style="cursor: pointer;">
@@ -150,19 +159,19 @@
             let imgSrc = card.querySelector('img').src;
             let title = card.querySelector('h3').innerText;
             let priceText = card.querySelector('.price').innerText;
-            let rawPrice = priceText.replace('₹', '').trim(); 
+            let rawPrice = priceText.replace('₹', '').trim();
             let desc = card.querySelector('.desc').innerText;
 
             document.getElementById('modalImg').src = imgSrc;
             document.getElementById('modalTitle').innerText = title;
             document.getElementById('modalPrice').innerText = priceText;
             document.getElementById('modalDesc').innerText = desc;
-            
+
             let modalBtn = document.getElementById('modalBuyBtn');
-            modalBtn.onclick = function() { buy(title, rawPrice); };
+            modalBtn.onclick = function () { buy(title, rawPrice); };
 
             let modal = document.getElementById('productModal');
-            modal.style.display = "flex"; 
+            modal.style.display = "flex";
             setTimeout(() => { modal.classList.add('show'); }, 10);
         }
 
@@ -172,7 +181,7 @@
             setTimeout(() => { modal.style.display = "none"; }, 300);
         }
 
-        window.onclick = function(event) {
+        window.onclick = function (event) {
             let modal = document.getElementById('productModal');
             if (event.target == modal) { closeModal(); }
         }
@@ -180,18 +189,18 @@
         // --- SIMPLE FILTER LOGIC ---
         function filterSelection(c) {
             var x = document.getElementsByClassName("filter-item");
-            
+
             if (typeof event !== 'undefined' && event && event.target && event.target.classList.contains('cat-btn')) {
                 var btns = document.getElementsByClassName("cat-btn");
                 for (var j = 0; j < btns.length; j++) { btns[j].classList.remove("active"); }
                 event.target.classList.add("active");
             }
-            
+
             if (c == "all") c = "";
-            
+
             for (var i = 0; i < x.length; i++) {
                 x[i].style.display = "none"; // Hide everything
-                
+
                 if (c == "" || x[i].className.indexOf(c) > -1) {
                     x[i].style.display = "block"; // Show matched real products
                 }
@@ -210,4 +219,5 @@
         }
     </script>
 </body>
+
 </html>

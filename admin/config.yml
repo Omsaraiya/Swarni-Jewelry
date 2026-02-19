@@ -1,0 +1,24 @@
+backend:
+  name: git-gateway
+  branch: main # Change this to 'master' if your GitHub branch is called master
+
+media_folder: "images" # Where her photos will be saved
+public_folder: "images"
+
+site_url: https://svarni-jewelry.netlify.app
+display_url: https://svarni-jewelry.netlify.app
+logo_url: https://svarni-jewelry.netlify.app/images/logo.png
+
+collections:
+  - name: "products"
+    label: "Products"
+    folder: "data/products" # This is where the product details will be saved
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Product Name", name: "title", widget: "string"}
+      - {label: "Price (₹)", name: "price", widget: "number"}
+      - {label: "Category", name: "category", widget: "select", options: ["mangalsutra", "invisible", "earcuffs", "nath", "bugdi"]}
+      - {label: "Description", name: "description", widget: "text"}
+      - {label: "Product Image", name: "image", widget: "image"}
+      - {label: "Badge (Optional)", name: "badge", widget: "string", required: false, hint: "e.g. Bestseller, New, Royal"}

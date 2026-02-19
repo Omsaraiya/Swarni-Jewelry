@@ -40,16 +40,13 @@
 
     <section id="story" class="brand-story">
         <h2 class="section-heading">The Svarni Story</h2>
-
         <p style="font-weight: 500; color: #4a3728; margin-bottom: 20px; font-family: 'Poppins', sans-serif;">
             "स्वर्णी ही केवळ दागिन्यांची ओळख नाही, तर आपल्या परंपरेचा सन्मान आहे.
             बहिणींच्या प्रेमातून आणि महाराष्ट्रीयन संस्कृतीच्या प्रेरणेतून जन्मलेली स्वर्णी,
             आपली मुळे जपत आधुनिक सौंदर्य मांडते. प्रत्येक दागिना आपल्या परंपरेची
             कथा सांगतो अभिमानाने, सौंदर्याने आणि आत्म्याने."
         </p>
-
         <div style="font-size: 1.5rem; color: #bcaaa4; margin: 15px 0;">❖</div>
-
         <p>
             "Svarni is a tribute to golden roots and timeless grace. Born from the love of sisters
             and inspired by Maharashtrian heritage, our jewellery reflects tradition, culture,
@@ -60,8 +57,7 @@
     </section>
 
     <section id="collection" class="products">
-        <h2 class="section-title">New Arrivals <div class="line"></div>
-        </h2>
+        <h2 class="section-title">New Arrivals <div class="line"></div></h2>
 
         <div class="category-container">
             <button class="cat-btn active" onclick="filterSelection('all')">All</button>
@@ -72,104 +68,21 @@
             <button class="cat-btn" onclick="filterSelection('bugdi')">Bugdi</button>
         </div>
 
-        <div class="product-grid">
-
-            <div class="card filter-item invisible">
-                <div class="card-image" onclick="openModal(this)" style="cursor: pointer;">
-                    <span class="badge">Bestseller</span>
-                    <img src="images/mangalsutra-diamond.jpg" alt="Heer - Moti Invisible">
-                </div>
-                <h3>Heer - Moti Invisible</h3>
-                <p class="desc">Diamond-studded element with a modern floating finish.</p>
-                <div class="price-row">
-                    <span class="price">₹169</span>
-                    <button class="btn-buy" onclick="buy('Heer - Moti Invisible', '169')">Buy Now</button>
-                </div>
-            </div>
-
-            <div class="card filter-item mangalsutra">
-                <div class="card-image" onclick="openModal(this)" style="cursor: pointer;">
-                    <span class="badge">Festive</span>
-                    <img src="images/mangalsutra-gold.jpg" alt="Padma Naad">
-                </div>
-                <h3>Padma Naad</h3>
-                <p class="desc">Three lotus motifs accented with golden moti & jhunguru.</p>
-                <div class="price-row">
-                    <span class="price">₹149</span>
-                    <button class="btn-buy" onclick="buy('Padma Naad', '149')">Buy Now</button>
-                </div>
-            </div>
-
-            <div class="card filter-item mangalsutra">
-                <div class="card-image" onclick="openModal(this)" style="cursor: pointer;">
-                    <span class="badge">Royal</span>
-                    <img src="images/mangalsutra-pink.jpg" alt="Manjarii">
-                </div>
-                <h3>Manjarii</h3>
-                <p class="desc">Graceful lotus motifs with a rich pink stone center.</p>
-                <div class="price-row">
-                    <span class="price">₹99</span>
-                    <button class="btn-buy" onclick="buy('Manjarii', '99')">Buy Now</button>
-                </div>
-            </div>
-
-            <div class="card filter-item invisible">
-                <div class="card-image" onclick="openModal(this)" style="cursor: pointer;">
-                    <span class="badge">Classic</span>
-                    <img src="images/mangalsutra-simple.jpg" alt="Panch Moti">
-                </div>
-                <h3>Panch Moti</h3>
-                <p class="desc">Five lustrous pearls on a transparent base.</p>
-                <div class="price-row">
-                    <span class="price">₹59</span>
-                    <button class="btn-buy" onclick="buy('Panch Moti', '59')">Buy Now</button>
-                </div>
-            </div>
-
-            <div class="card filter-item mangalsutra">
-                <div class="card-image" onclick="openModal(this)" style="cursor: pointer;">
-                    <span class="badge">New</span>
-                    <img src="images/mangalsutra-teardrop.jpg" alt="Kamal Jhankar">
-                </div>
-                <h3>Kamal Jhankar</h3>
-                <p class="desc">Red lotus motif with soft jhungurus for rhythm.</p>
-                <div class="price-row">
-                    <span class="price">₹89</span>
-                    <button class="btn-buy" onclick="buy('Kamal Jhankar', '89')">Buy Now</button>
-                </div>
-            </div>
-
-            <div class="card filter-item coming-soon nath bugdi earcuffs">
-                <div class="card-image">
-                    <span class="badge" style="background-color: #888;">Coming Soon</span>
-                    <img src="images/logo.png" alt="Coming Soon" style="object-fit: contain; padding: 20px;">
-                </div>
-                <h3>Exclusive Collection</h3>
-                <p class="desc">New traditional designs are being crafted just for you.</p>
-                <div class="price-row">
-                    <span class="price">--</span>
-                    <button class="btn-buy"
-                        onclick="window.open('https://wa.me/919322148369?text=Hey%20Svarni!%20When%20are%20the%20Nath%20and%20Bugdi%20collections%20launching?', '_blank')">Notify
-                        Me</button>
-                </div>
-            </div>
-
+        <div class="product-grid" id="productGrid">
+            <p style="text-align: center; width: 100%; color: #888;">Loading beautiful jewelry...</p>
         </div>
     </section>
 
     <div id="productModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal()">&times;</span>
-            
             <div class="modal-image-container">
                 <img id="modalImg" src="" alt="Product Detail">
             </div>
-            
             <div class="modal-details">
                 <h2 id="modalTitle" class="modal-title">Product Name</h2>
                 <p id="modalPrice" class="modal-price">₹0</p>
                 <p id="modalDesc" class="modal-desc">Product description goes here.</p>
-                
                 <button id="modalBuyBtn" class="btn-buy" style="width: 100%; padding: 15px;">
                     Buy On WhatsApp
                 </button>
@@ -190,61 +103,101 @@
             window.open(url, '_blank');
         }
 
-        // --- DEBUG MODAL LOGIC ---
-        function openModal(element) {
-            // TEST 1: Check if click is working
-            console.log("Click detected on image!"); 
-
+        // --- NEW: FETCH PRODUCTS FROM DATABASE ---
+        async function loadDatabase() {
             try {
-                let card = element.closest('.card');
-                
-                // Get data
-                let imgSrc = card.querySelector('img').src;
-                let title = card.querySelector('h3').innerText;
-                let priceText = card.querySelector('.price').innerText;
-                let rawPrice = priceText.replace('₹', '').trim(); 
-                let desc = card.querySelector('.desc').innerText;
+                // Fetch the JSON file generated by the Admin Panel
+                let response = await fetch('data/products.json');
+                let grid = document.getElementById('productGrid');
+                grid.innerHTML = ''; // Clear loading text
 
-                // Set data
-                document.getElementById('modalImg').src = imgSrc;
-                document.getElementById('modalTitle').innerText = title;
-                document.getElementById('modalPrice').innerText = priceText;
-                document.getElementById('modalDesc').innerText = desc;
-                
-                // Set button
-                let modalBtn = document.getElementById('modalBuyBtn');
-                modalBtn.onclick = function() {
-                    buy(title, rawPrice);
-                };
+                if (response.ok) {
+                    let data = await response.json();
+                    let products = data.items || [];
+                    
+                    // Loop through the database and build HTML cards
+                    products.forEach(p => {
+                        let badgeHTML = p.badge ? `<span class="badge">${p.badge}</span>` : '';
+                        let imgPath = p.image.startsWith('/') ? p.image.substring(1) : p.image;
+                        
+                        let card = `
+                        <div class="card filter-item ${p.category}">
+                            <div class="card-image" onclick="openModal(this)" style="cursor: pointer;">
+                                ${badgeHTML}
+                                <img src="${imgPath}" alt="${p.title}">
+                            </div>
+                            <h3>${p.title}</h3>
+                            <p class="desc">${p.description}</p>
+                            <div class="price-row">
+                                <span class="price">₹${p.price}</span>
+                                <button class="btn-buy" onclick="buy('${p.title}', '${p.price}')">Buy Now</button>
+                            </div>
+                        </div>`;
+                        grid.innerHTML += card;
+                    });
+                } else {
+                    console.log("Database empty or not created yet.");
+                }
 
-                // Show Modal
-                let modal = document.getElementById('productModal');
-                modal.style.display = "flex"; // FORCE SHOW using inline style
-                setTimeout(() => {
-                    modal.classList.add('show');
-                }, 10);
-                
+                // Add the default "Coming Soon" card at the very end
+                grid.innerHTML += `
+                <div class="card filter-item coming-soon nath bugdi earcuffs">
+                    <div class="card-image">
+                        <span class="badge" style="background-color: #888;">Coming Soon</span>
+                        <img src="images/logo.png" alt="Coming Soon" style="object-fit: contain; padding: 20px;">
+                    </div>
+                    <h3>Exclusive Collection</h3>
+                    <p class="desc">New traditional designs are being crafted just for you.</p>
+                    <div class="price-row">
+                        <span class="price">--</span>
+                        <button class="btn-buy" onclick="window.open('https://wa.me/919322148369?text=Hey%20Svarni!%20When%20are%20the%20Nath%20and%20Bugdi%20collections%20launching?', '_blank')">Notify Me</button>
+                    </div>
+                </div>`;
+
+                // Re-trigger the category filter
+                filterSelection("all");
+
             } catch (error) {
-                alert("Error: " + error.message); // This will tell us if code is broken
+                console.error("Error loading products:", error);
             }
+        }
+
+        // Run this function as soon as the website loads!
+        document.addEventListener("DOMContentLoaded", loadDatabase);
+
+        // --- MODAL & FILTER LOGIC (Unchanged) ---
+        function openModal(element) {
+            let card = element.closest('.card');
+            let imgSrc = card.querySelector('img').src;
+            let title = card.querySelector('h3').innerText;
+            let priceText = card.querySelector('.price').innerText;
+            let rawPrice = priceText.replace('₹', '').trim(); 
+            let desc = card.querySelector('.desc').innerText;
+
+            document.getElementById('modalImg').src = imgSrc;
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalPrice').innerText = priceText;
+            document.getElementById('modalDesc').innerText = desc;
+            
+            let modalBtn = document.getElementById('modalBuyBtn');
+            modalBtn.onclick = function() { buy(title, rawPrice); };
+
+            let modal = document.getElementById('productModal');
+            modal.style.display = "flex"; 
+            setTimeout(() => { modal.classList.add('show'); }, 10);
         }
 
         function closeModal() {
             let modal = document.getElementById('productModal');
             modal.classList.remove('show');
-            setTimeout(() => {
-                modal.style.display = "none";
-            }, 300); // Wait for fade out
+            setTimeout(() => { modal.style.display = "none"; }, 300);
         }
 
         window.onclick = function(event) {
             let modal = document.getElementById('productModal');
-            if (event.target == modal) {
-                closeModal();
-            }
+            if (event.target == modal) { closeModal(); }
         }
 
-        // Filter Function (Keep as is)
         function filterSelection(c) {
             var x, i;
             x = document.getElementsByClassName("filter-item");
@@ -263,8 +216,17 @@
                 }
             }
         }
-        filterSelection("all");
-    </script>
 
+        // Admin Redirect Script
+        if (window.netlifyIdentity) {
+            window.netlifyIdentity.on("init", user => {
+                if (!user) {
+                    window.netlifyIdentity.on("login", () => {
+                        document.location.href = "/admin/";
+                    });
+                }
+            });
+        }
+    </script>
 </body>
 </html>

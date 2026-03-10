@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Svarni | Culture Worn With Pride</title>
+    <link rel="icon" type="image/png" href="images/logo.png">
     <link rel="stylesheet" href="style.css">
     <link
         href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@400;700&family=Poppins:wght@400;500&display=swap"
@@ -25,8 +26,12 @@
             <li><a href="#story">Our Story</a></li>
         </ul>
         <div class="icons">
-            <i class="fas fa-search"></i>
-            <i class="fas fa-shopping-bag"></i>
+            <div class="cart-icon-container" id="openCartBtn"
+                style="position: relative; display: inline-block; cursor: pointer;">
+                <i class="fas fa-shopping-bag"></i>
+                <span id="cartBadge"
+                    style="position: absolute; top: -8px; right: -10px; background: red; color: white; border-radius: 50%; padding: 2px 6px; font-size: 12px; display: none;">0</span>
+            </div>
         </div>
     </nav>
 
@@ -87,9 +92,100 @@
                 <p id="modalPrice" class="modal-price">₹0</p>
                 <p id="modalDesc" class="modal-desc">Product description goes here.</p>
                 <button id="modalBuyBtn" class="btn-buy" style="width: 100%; padding: 15px;">
-                    Buy On WhatsApp
+                    Add to Cart
                 </button>
             </div>
+        </div>
+    </div>
+
+    <div id="cartModal" class="modal">
+        <div class="modal-content" style="max-width: 500px;">
+            <span class="close-btn" id="closeCartBtn">&times;</span>
+            <h2>Your Shopping Cart <i class="fas fa-shopping-cart"></i></h2>
+
+            <hr>
+
+            <div id="cartItemsContainer"
+                style="max-height: 300px; overflow-y: auto; text-align: left; margin-bottom: 15px;">
+                <p style="text-align: center; color: #888;">Your cart is empty.</p>
+            </div>
+
+            <hr>
+
+            <div class="cart-total"
+                style="display: flex; justify-content: space-between; font-size: 18px; font-weight: bold; margin-bottom: 20px;">
+                <span>Grand Total:</span>
+                <span>₹<span id="cartTotalAmount">0</span></span>
+            </div>
+
+            <button id="proceedToCheckoutBtn"
+                style="background-color: #4a3728; color: white; padding: 15px; border: none; border-radius: 8px; cursor: pointer; width: 100%; font-size: 16px; font-weight: bold;">
+                Proceed to Checkout
+            </button>
+        </div>
+    </div>
+
+    <div id="checkoutModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="closeCheckoutBtn">&times;</span>
+            <h2>Complete Your Order</h2>
+
+            <div class="order-summary" style="background: #f1f1f1; padding: 10px; border-radius: 8px;">
+                <p style="margin: 5px 0;"><strong>Total Items:</strong> <span id="checkoutItemCount">0</span></p>
+                <p style="margin: 5px 0; font-size: 18px;"><strong>Amount to Pay:</strong> ₹<span
+                        id="checkoutProductPrice">0</span></p>
+            </div>
+
+            <hr>
+
+            <div class="payment-section">
+                <h3>Step 1: Scan & Pay (0% Fee)</h3>
+                <img src="images/qr-code.png" alt="UPI QR Code" id="qrImage"
+                    style="max-width: 100%; border-radius: 10px; margin: 10px 0;">
+            </div>
+
+            <hr>
+
+            <div class="shipping-section" style="text-align: left;">
+                <h3>Step 2: Delivery Details</h3>
+                <input type="text" id="customerName" placeholder="Full Name" required
+                    style="width: 100%; padding: 12px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box;">
+                <input type="tel" id="customerPhone" placeholder="Mobile Number" required
+                    style="width: 100%; padding: 12px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box;">
+                <input type="text" id="customerHouse" placeholder="House / Flat No." required
+                    style="width: 100%; padding: 12px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box;">
+                <input type="text" id="customerArea" placeholder="Area / Street Name" required
+                    style="width: 100%; padding: 12px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box;">
+                <input type="text" id="customerLandmark" placeholder="Landmark (if any)"
+                    style="width: 100%; padding: 12px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box;">
+
+                <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+                    <input type="text" id="customerCity" placeholder="City" required
+                        style="width: 50%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box;">
+                    <input type="text" id="customerState" placeholder="State" required
+                        style="width: 50%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box;">
+                </div>
+
+                <input type="text" id="customerPincode" placeholder="Pincode" required
+                    style="width: 100%; padding: 12px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box;">
+
+                <div
+                    style="background-color: #e8f5e9; padding: 12px; border-radius: 6px; margin: 5px 0 15px 0; font-size: 14px; color: #2e7d32; border: 1px solid #c8e6c9;">
+                    <strong>📸 Important:</strong> Once the payment is completed, please share the payment screenshot
+                    for confirmation 🤍 Your order will be dispatched immediately after payment confirmation, and we
+                    will share the tracking details with you.
+                </div>
+            </div>
+            <div
+                style="background-color: #fff3e0; padding: 12px; border-radius: 6px; margin: 0 0 15px 0; font-size: 14px; color: #e65100; border: 1px solid #ffe0b2;">
+                <strong>🚚 Delivery Update:</strong> Due to high demand, please allow <strong>4 to 5 working
+                    days</strong> for your beautiful jewelry to be delivered. Thank you for your patience and support!
+                🤍
+            </div>
+
+            <button id="sendWhatsAppBtn"
+                style="background-color: #25D366; color: white; padding: 15px; border: none; border-radius: 8px; cursor: pointer; width: 100%; font-size: 16px; font-weight: bold;">Confirm
+                & Send on WhatsApp</button>
         </div>
     </div>
 
@@ -98,20 +194,17 @@
     </footer>
 
     <script>
-        // WhatsApp Function
-        function buy(productName, price) {
-            let phoneNumber = "919322148369";
-            let message = `Hello Svarni! ✨\n\nI saw this on your website and would like to order:\n*${productName}*\nPrice: ₹${price}\n\nIs this available?`;
-            let url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-            window.open(url, '_blank');
-        }
+        // =========================================
+        // FULL SHOPPING CART & CHECKOUT LOGIC
+        // =========================================
+        let cart = []; // This empty array is our brain! It holds the products.
 
-        // --- FETCH PRODUCTS FROM DATABASE (No Coming Soon Card) ---
+        // --- FETCH PRODUCTS FROM DATABASE ---
         async function loadDatabase() {
             try {
                 let response = await fetch('data/products.json');
                 let grid = document.getElementById('productGrid');
-                grid.innerHTML = ''; // Clear loading text
+                grid.innerHTML = '';
 
                 if (response.ok) {
                     let data = await response.json();
@@ -119,14 +212,15 @@
 
                     products.forEach(p => {
                         let badgeHTML = p.badge ? `<span class="badge">${p.badge}</span>` : '';
-                        let imgPath = "images/logo.png"; // Default fallback
+                        let imgPath = "images/logo.png";
                         if (p.image) {
                             imgPath = p.image.startsWith('/') ? p.image.substring(1) : p.image;
-                            // Fix the path if the admin panel forgets the 'images/' folder
                             if (!imgPath.startsWith('images/') && !imgPath.startsWith('http')) {
                                 imgPath = 'images/' + imgPath;
                             }
                         }
+
+                        // Buttons now say "Add to Cart" and call the addToCart function!
                         let card = `
                         <div class="card filter-item ${p.category}">
                             <div class="card-image" onclick="openModal(this)" style="cursor: pointer;">
@@ -137,23 +231,79 @@
                             <p class="desc">${p.description}</p>
                             <div class="price-row">
                                 <span class="price">₹${p.price}</span>
-                                <button class="btn-buy" onclick="buy('${p.title}', '${p.price}')">Buy Now</button>
+                                <button class="btn-buy" onclick="addToCart('${p.title}', ${p.price}, '${imgPath}')">Add to Cart</button>
                             </div>
                         </div>`;
                         grid.innerHTML += card;
                     });
                 }
-
                 filterSelection("all");
-
             } catch (error) {
                 console.error("Error loading products:", error);
             }
         }
-
         document.addEventListener("DOMContentLoaded", loadDatabase);
 
-        // --- MODAL LOGIC ---
+        // --- CART FUNCTIONS ---
+        function addToCart(name, price, image) {
+            cart.push({ name: name, price: parseInt(price), image: image });
+            updateCartUI();
+            openCart(); // Automatically open cart when they add an item
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1); // Remove item from array
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            // Update the red badge number
+            const badge = document.getElementById('cartBadge');
+            if (cart.length > 0) {
+                badge.innerText = cart.length;
+                badge.style.display = 'block';
+            } else {
+                badge.style.display = 'none';
+            }
+
+            // Update the cart contents
+            const container = document.getElementById('cartItemsContainer');
+            const totalEl = document.getElementById('cartTotalAmount');
+
+            if (cart.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: #888;">Your cart is empty.</p>';
+                totalEl.innerText = '0';
+                return;
+            }
+
+            let html = '';
+            let total = 0;
+
+            cart.forEach((item, index) => {
+                total += item.price;
+                html += `
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #eee;">
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <img src="${item.image}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 5px;">
+                        <div>
+                            <p style="margin: 0; font-size: 14px; font-weight: 500;">${item.name}</p>
+                            <p style="margin: 0; font-size: 14px; color: #888;">₹${item.price}</p>
+                        </div>
+                    </div>
+                    <button onclick="removeFromCart(${index})" style="color: #ff4d4d; background: none; border: none; cursor: pointer; font-size: 18px; font-weight: bold;">&times;</button>
+                </div>`;
+            });
+
+            container.innerHTML = html;
+            totalEl.innerText = total;
+        }
+
+        // --- MODAL OPEN/CLOSE LOGIC ---
+        const productModal = document.getElementById('productModal');
+        const cartModal = document.getElementById('cartModal');
+        const checkoutModal = document.getElementById('checkoutModal');
+
+        // Product Quick View Modal
         function openModal(element) {
             let card = element.closest('.card');
             let imgSrc = card.querySelector('img').src;
@@ -168,41 +318,140 @@
             document.getElementById('modalDesc').innerText = desc;
 
             let modalBtn = document.getElementById('modalBuyBtn');
-            modalBtn.onclick = function () { buy(title, rawPrice); };
+            modalBtn.onclick = function () {
+                addToCart(title, rawPrice, imgSrc);
+            };
 
-            let modal = document.getElementById('productModal');
-            modal.style.display = "flex";
-            setTimeout(() => { modal.classList.add('show'); }, 10);
+            productModal.style.display = "flex";
+            setTimeout(() => { productModal.classList.add('show'); }, 10);
         }
 
         function closeModal() {
-            let modal = document.getElementById('productModal');
-            modal.classList.remove('show');
-            setTimeout(() => { modal.style.display = "none"; }, 300);
+            productModal.classList.remove('show');
+            setTimeout(() => { productModal.style.display = "none"; }, 300);
         }
 
+        // Cart Modal
+        document.getElementById('openCartBtn').onclick = openCart;
+        document.getElementById('closeCartBtn').onclick = closeCart;
+
+        function openCart() {
+            closeModal(); // Close product modal if open
+            cartModal.style.display = 'flex';
+            setTimeout(() => { cartModal.classList.add('show'); }, 10);
+        }
+        function closeCart() {
+            cartModal.classList.remove('show');
+            setTimeout(() => { cartModal.style.display = 'none'; }, 300);
+        }
+
+        // Checkout Modal
+        document.getElementById('closeCheckoutBtn').onclick = closeCheckout;
+
+        function closeCheckout() {
+            checkoutModal.classList.remove('show');
+            setTimeout(() => { checkoutModal.style.display = 'none'; }, 300);
+        }
+
+        document.getElementById('proceedToCheckoutBtn').onclick = function () {
+            if (cart.length === 0) {
+                alert("Your cart is empty!");
+                return;
+            }
+            // Close cart, open checkout
+            closeCart();
+
+            // Set Checkout Summary data
+            document.getElementById('checkoutItemCount').innerText = cart.length;
+            document.getElementById('checkoutProductPrice').innerText = document.getElementById('cartTotalAmount').innerText;
+
+            checkoutModal.style.display = 'flex';
+            setTimeout(() => { checkoutModal.classList.add('show'); }, 10);
+        };
+
+        // Window Click outside modal closer
         window.onclick = function (event) {
-            let modal = document.getElementById('productModal');
-            if (event.target == modal) { closeModal(); }
+            if (event.target == productModal) { closeModal(); }
+            if (event.target == cartModal) { closeCart(); }
+            if (event.target == checkoutModal) { closeCheckout(); }
+        }
+
+        // --- WHATSAPP MESSAGE FORMATTER ---
+        document.getElementById("sendWhatsAppBtn").onclick = function () {
+            // Collect all the new input fields
+            const name = document.getElementById("customerName").value;
+            const phone = document.getElementById("customerPhone").value;
+            const house = document.getElementById("customerHouse").value;
+            const area = document.getElementById("customerArea").value;
+            const landmark = document.getElementById("customerLandmark").value;
+            const city = document.getElementById("customerCity").value;
+            const state = document.getElementById("customerState").value;
+            const pincode = document.getElementById("customerPincode").value;
+
+            // Check if required fields are empty
+            if (name === "" || phone === "" || house === "" || area === "" || city === "" || state === "" || pincode === "") {
+                alert("Please fill in all the required delivery details!");
+                return;
+            }
+
+            // Build the multi-item WhatsApp message using her exact template
+            let message = `Thank you so much for your order 🪷\n\n`;
+
+            message += `*🛒 Order Details:*\n`;
+            cart.forEach((item, index) => {
+                message += `${index + 1}. ${item.name} (₹${item.price})\n`;
+            });
+            const finalTotal = document.getElementById('cartTotalAmount').innerText;
+            message += `*💰 Total Paid:* ₹${finalTotal}\n\n`;
+
+            message += `*📍 Delivery Details:*\n`;
+            message += `Full Name: ${name}\n`;
+            message += `Mobile Number: ${phone}\n`;
+            message += `House / Flat No.: ${house}\n`;
+            message += `Area / Street Name: ${area}\n`;
+            if (landmark.trim() !== "") {
+                message += `Landmark (if any): ${landmark}\n`;
+            }
+            message += `City: ${city}\n`;
+            message += `State: ${state}\n`;
+            message += `Pincode: ${pincode}\n\n`;
+
+            message += `_Here is my payment screenshot for confirmation_ 🤍`;
+
+            const phoneNumber = "919322148369";
+            const whatsappLink = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+
+            window.open(whatsappLink, "_blank");
+
+            // Empty cart and reset forms after successful order
+            cart = [];
+            updateCartUI();
+            closeCheckout();
+
+            // Clear all fields
+            document.getElementById("customerName").value = "";
+            document.getElementById("customerPhone").value = "";
+            document.getElementById("customerHouse").value = "";
+            document.getElementById("customerArea").value = "";
+            document.getElementById("customerLandmark").value = "";
+            document.getElementById("customerCity").value = "";
+            document.getElementById("customerState").value = "";
+            document.getElementById("customerPincode").value = "";
         }
 
         // --- SIMPLE FILTER LOGIC ---
         function filterSelection(c) {
             var x = document.getElementsByClassName("filter-item");
-
             if (typeof event !== 'undefined' && event && event.target && event.target.classList.contains('cat-btn')) {
                 var btns = document.getElementsByClassName("cat-btn");
                 for (var j = 0; j < btns.length; j++) { btns[j].classList.remove("active"); }
                 event.target.classList.add("active");
             }
-
             if (c == "all") c = "";
-
             for (var i = 0; i < x.length; i++) {
-                x[i].style.display = "none"; // Hide everything
-
+                x[i].style.display = "none";
                 if (c == "" || x[i].className.indexOf(c) > -1) {
-                    x[i].style.display = "block"; // Show matched real products
+                    x[i].style.display = "block";
                 }
             }
         }

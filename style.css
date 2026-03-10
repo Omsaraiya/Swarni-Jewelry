@@ -544,3 +544,96 @@ footer {
         font-size: 1.5rem;
     }
 }
+/* =========================================
+   SMART CHECKOUT MODAL STYLES (FIXED)
+========================================= */
+#checkoutModal .modal-content {
+  display: block !important; /* This stops the side-by-side squishing! */
+  background-color: #fff;
+  margin: 5% auto;
+  padding: 25px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 450px;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  overflow-y: auto;
+  max-height: 85vh;
+}
+
+#checkoutModal .close-btn {
+  color: #888;
+  float: right;
+  font-size: 28px;
+  line-height: 0.5;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#checkoutModal hr {
+  border: none;
+  border-top: 1px solid #eee;
+  margin: 20px 0;
+}
+
+#checkoutModal .payment-section,
+#checkoutModal .shipping-section {
+  text-align: left;
+}
+
+#checkoutModal .shipping-section input, 
+#checkoutModal .shipping-section textarea {
+  width: 100%;
+  box-sizing: border-box; /* Keeps boxes from spilling out */
+  margin-bottom: 12px;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-family: inherit;
+}
+
+#sendWhatsAppBtn {
+  background-color: #25D366;
+  color: white;
+  padding: 15px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+#sendWhatsAppBtn:hover {
+  background-color: #1ebe5d;
+}
+/* =========================================
+   SHOPPING CART MODAL FIX
+========================================= */
+#cartModal .modal-content {
+    display: block !important; /* This forces it to stack top-to-bottom! */
+    background-color: #fff;
+    margin: 5% auto;
+    padding: 25px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 500px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+#cartModal .close-btn {
+    color: #888;
+    float: right;
+    font-size: 28px;
+    line-height: 0.5;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#cartModal hr {
+    border: none;
+    border-top: 1px solid #eee;
+    margin: 15px 0;
+}

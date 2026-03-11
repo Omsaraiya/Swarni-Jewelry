@@ -1,11 +1,32 @@
 {
   "items": [
     {
-      "title": "mangalsutra-diamond",
-      "price": 111,
+      "title": "Manalsutra",
+      "price": 169,
       "category": "invisible",
-      "description": "A graceful Mangalsutra-Diamond necklace crafted with a sleek gold-tone wire, classic black beads, and a shimmering diamond-style round centerpiece. Designed to blend tradition with modern minimal elegance.",
-      "image": "images/mangalsutra-diamond.png"
+      "description": "A delicate invisible mangalsutra with a thin thread, featuring a diamond-studded circular pendant and traditional gold and black beads, blending modern elegance with timeless tradition.",
+      "image": "images/new-i-m-1.jpeg"
+    },
+    {
+      "title": "Manalsutra",
+      "price": 169,
+      "category": "invisible",
+      "description": "A delicate invisible mangalsutra with a thin thread, featuring a drop-shaped diamond pendant and traditional gold and black beads, beautifully blending modern elegance with timeless tradition",
+      "image": "images/new-i-m-2.jpeg"
+    },
+    {
+      "title": "Manalsutra",
+      "price": 169,
+      "category": "invisible",
+      "description": "A delicate invisible mangalsutra with a thin thread, featuring a diamond-studded circular pendant with a light pink center stone, paired with traditional gold and black beads for a perfect blend of modern elegance and timeless tradition.",
+      "image": "images/new-i-m-3.jpeg"
+    },
+    {
+      "title": "Manalsutra",
+      "price": 169,
+      "category": "invisible",
+      "description": "A delicate invisible mangalsutra with a thin thread, featuring a diamond-studded circular pendant with a soft ivory (skin-tone) center stone, paired with traditional gold and black beads for a graceful blend of modern elegance and timeless tradition.",
+      "image": "images/new-i-m-4.jpeg"
     }
   ]
 }

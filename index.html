@@ -47,7 +47,8 @@
 
     <section id="story" class="brand-story">
         <h2 class="section-heading">The Svarni Story</h2>
-        <p style="font-weight: 500; color: #4a3728; margin-bottom: 20px; font-family: 'Poppins', sans-serif; font-style: normal;">
+        <p
+            style="font-weight: 500; color: #4a3728; margin-bottom: 20px; font-family: 'Poppins', sans-serif; font-style: normal;">
             "स्वर्णी ही केवळ दागिन्यांची ओळख नाही, तर आपल्या परंपरेचा सन्मान आहे.
             बहिणींच्या प्रेमातून आणि महाराष्ट्रीयन संस्कृतीच्या प्रेरणेतून जन्मलेली स्वर्णी,
             आपली मुळे जपत आधुनिक सौंदर्य मांडते. प्रत्येक दागिना आपल्या परंपरेची
@@ -102,25 +103,60 @@
         <div class="modal-content" style="max-width: 500px;">
             <span class="close-btn" id="closeCartBtn">&times;</span>
             <h2>Your Shopping Cart <i class="fas fa-shopping-cart"></i></h2>
-            
+
             <hr>
 
-            <div id="cartItemsContainer" style="max-height: 300px; overflow-y: auto; text-align: left; margin-bottom: 15px;">
+            <div id="cartItemsContainer"
+                style="max-height: 250px; overflow-y: auto; text-align: left; margin-bottom: 15px;">
                 <p style="text-align: center; color: #888;">Your cart is empty.</p>
             </div>
 
-            <div style="background-color: #f1f8e9; color: #33691e; padding: 10px; border-radius: 6px; font-size: 13px; margin-bottom: 15px; text-align: center; border: 1px solid #c5e1a5;">
-                <strong>🚚 Delivery Note:</strong> Free delivery within Mumbai. Delivery charges applicable if outside Mumbai.
+            <div style="text-align: left; margin-bottom: 15px;">
+                <label style="font-weight: bold; font-size: 14px; display: block; margin-bottom: 8px;">Select Delivery
+                    Region:</label>
+                <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+                    <label id="lblMumbai"
+                        style="flex: 1; border: 2px solid #ddd; padding: 10px; border-radius: 6px; cursor: pointer; text-align: center; font-size: 13px; transition: 0.3s;">
+                        <input type="radio" name="deliveryRegion" value="mumbai" onchange="calculateTotal()"
+                            style="margin-bottom: 5px;">
+                        <br><strong>Within Mumbai</strong><br><span style="color: #2e7d32; font-weight: bold;">Free
+                            Delivery</span>
+                    </label>
+                    <label id="lblOutside"
+                        style="flex: 1; border: 2px solid #ddd; padding: 10px; border-radius: 6px; cursor: pointer; text-align: center; font-size: 13px; transition: 0.3s;">
+                        <input type="radio" name="deliveryRegion" value="outside" onchange="calculateTotal()"
+                            style="margin-bottom: 5px;">
+                        <br><strong>Outside Mumbai</strong><br>₹99 Charge
+                    </label>
+                </div>
+
+                <div
+                    style="background-color: #fff3e0; padding: 10px; border-radius: 6px; border: 1px solid #ffe0b2; font-size: 12px; color: #e65100;">
+                    <label style="display: flex; align-items: flex-start; gap: 8px; cursor: pointer;">
+                        <input type="checkbox" id="fraudCheck" style="margin-top: 2px; cursor: pointer;">
+                        <span><strong>Verification:</strong> I confirm my delivery address matches the region selected
+                            above. (Incorrect selection will cause order cancellation).</span>
+                    </label>
+                </div>
             </div>
 
             <hr>
 
-            <div class="cart-total" style="display: flex; justify-content: space-between; font-size: 18px; font-weight: bold; margin-bottom: 20px;">
-                <span>Grand Total:</span>
-                <span>₹<span id="cartTotalAmount">0</span></span>
+            <div class="cart-total" style="font-size: 15px; margin-bottom: 20px; text-align: left;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 5px; color: #666;">
+                    <span>Items Total:</span><span>₹<span id="cartItemsTotal">0</span></span>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 10px; color: #666;">
+                    <span>Delivery Charge:</span><span>₹<span id="cartDeliveryCharge">0</span></span>
+                </div>
+                <div
+                    style="display: flex; justify-content: space-between; font-size: 18px; font-weight: bold; color: #000; border-top: 1px solid #ddd; padding-top: 10px;">
+                    <span>Grand Total:</span><span>₹<span id="cartTotalAmount">0</span></span>
+                </div>
             </div>
 
-            <button id="proceedToCheckoutBtn" style="background-color: #4a3728; color: white; padding: 15px; border: none; border-radius: 8px; cursor: pointer; width: 100%; font-size: 16px; font-weight: bold;">
+            <button id="proceedToCheckoutBtn"
+                style="background-color: #4a3728; color: white; padding: 15px; border: none; border-radius: 8px; cursor: pointer; width: 100%; font-size: 16px; font-weight: bold;">
                 Proceed to Checkout
             </button>
         </div>
@@ -195,10 +231,34 @@
     </footer>
 
     <script>
-        // =========================================
-        // FULL SHOPPING CART & CHECKOUT LOGIC
-        // =========================================
-        let cart = []; // This empty array is our brain! It holds the products.
+        let cart = [];
+        let selectedRegion = "";
+        let deliveryCharge = 0;
+
+        // --- MATH & DELIVERY LOGIC ---
+        function calculateTotal() {
+            const regionRadios = document.getElementsByName('deliveryRegion');
+            for (let radio of regionRadios) {
+                if (radio.checked) { selectedRegion = radio.value; }
+            }
+
+            // Highlight the selected box
+            document.getElementById('lblMumbai').style.borderColor = selectedRegion === 'mumbai' ? '#4a3728' : '#ddd';
+            document.getElementById('lblMumbai').style.backgroundColor = selectedRegion === 'mumbai' ? '#f5f0ed' : 'transparent';
+            document.getElementById('lblOutside').style.borderColor = selectedRegion === 'outside' ? '#4a3728' : '#ddd';
+            document.getElementById('lblOutside').style.backgroundColor = selectedRegion === 'outside' ? '#f5f0ed' : 'transparent';
+
+            // Apply delivery charges
+            deliveryCharge = (selectedRegion === 'outside') ? 99 : 0;
+
+            let itemsTotal = 0;
+            cart.forEach(item => itemsTotal += item.price);
+            let grandTotal = itemsTotal + deliveryCharge;
+
+            document.getElementById('cartItemsTotal').innerText = itemsTotal;
+            document.getElementById('cartDeliveryCharge').innerText = deliveryCharge;
+            document.getElementById('cartTotalAmount').innerText = grandTotal;
+        }
 
         // --- FETCH PRODUCTS FROM DATABASE ---
         async function loadDatabase() {
@@ -221,7 +281,6 @@
                             }
                         }
 
-                        // Buttons now say "Add to Cart" and call the addToCart function!
                         let card = `
                         <div class="card filter-item ${p.category}">
                             <div class="card-image" onclick="openModal(this)" style="cursor: pointer;">
@@ -249,16 +308,15 @@
         function addToCart(name, price, image) {
             cart.push({ name: name, price: parseInt(price), image: image });
             updateCartUI();
-            openCart(); // Automatically open cart when they add an item
+            openCart();
         }
 
         function removeFromCart(index) {
-            cart.splice(index, 1); // Remove item from array
+            cart.splice(index, 1);
             updateCartUI();
         }
 
         function updateCartUI() {
-            // Update the red badge number
             const badge = document.getElementById('cartBadge');
             if (cart.length > 0) {
                 badge.innerText = cart.length;
@@ -267,36 +325,27 @@
                 badge.style.display = 'none';
             }
 
-            // Update the cart contents
             const container = document.getElementById('cartItemsContainer');
-            const totalEl = document.getElementById('cartTotalAmount');
-
             if (cart.length === 0) {
                 container.innerHTML = '<p style="text-align: center; color: #888;">Your cart is empty.</p>';
-                totalEl.innerText = '0';
-                return;
-            }
-
-            let html = '';
-            let total = 0;
-
-            cart.forEach((item, index) => {
-                total += item.price;
-                html += `
-                <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #eee;">
-                    <div style="display: flex; align-items: center; gap: 15px;">
-                        <img src="${item.image}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 5px;">
-                        <div>
-                            <p style="margin: 0; font-size: 14px; font-weight: 500;">${item.name}</p>
-                            <p style="margin: 0; font-size: 14px; color: #888;">₹${item.price}</p>
+            } else {
+                let html = '';
+                cart.forEach((item, index) => {
+                    html += `
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #eee;">
+                        <div style="display: flex; align-items: center; gap: 15px;">
+                            <img src="${item.image}" style="width: 50px; height: 50px; object-fit: contain; background: #fafafa; border-radius: 5px;">
+                            <div>
+                                <p style="margin: 0; font-size: 14px; font-weight: 500;">${item.name}</p>
+                                <p style="margin: 0; font-size: 14px; color: #888;">₹${item.price}</p>
+                            </div>
                         </div>
-                    </div>
-                    <button onclick="removeFromCart(${index})" style="color: #ff4d4d; background: none; border: none; cursor: pointer; font-size: 18px; font-weight: bold;">&times;</button>
-                </div>`;
-            });
-
-            container.innerHTML = html;
-            totalEl.innerText = total;
+                        <button onclick="removeFromCart(${index})" style="color: #ff4d4d; background: none; border: none; cursor: pointer; font-size: 18px; font-weight: bold;">&times;</button>
+                    </div>`;
+                });
+                container.innerHTML = html;
+            }
+            calculateTotal(); // Update totals when items change
         }
 
         // --- MODAL OPEN/CLOSE LOGIC ---
@@ -304,7 +353,6 @@
         const cartModal = document.getElementById('cartModal');
         const checkoutModal = document.getElementById('checkoutModal');
 
-        // Product Quick View Modal
         function openModal(element) {
             let card = element.closest('.card');
             let imgSrc = card.querySelector('img').src;
@@ -332,12 +380,11 @@
             setTimeout(() => { productModal.style.display = "none"; }, 300);
         }
 
-        // Cart Modal
         document.getElementById('openCartBtn').onclick = openCart;
         document.getElementById('closeCartBtn').onclick = closeCart;
 
         function openCart() {
-            closeModal(); // Close product modal if open
+            closeModal();
             cartModal.style.display = 'flex';
             setTimeout(() => { cartModal.classList.add('show'); }, 10);
         }
@@ -346,7 +393,6 @@
             setTimeout(() => { cartModal.style.display = 'none'; }, 300);
         }
 
-        // Checkout Modal
         document.getElementById('closeCheckoutBtn').onclick = closeCheckout;
 
         function closeCheckout() {
@@ -354,15 +400,22 @@
             setTimeout(() => { checkoutModal.style.display = 'none'; }, 300);
         }
 
+        // --- FRAUD PREVENTION LOGIC ---
         document.getElementById('proceedToCheckoutBtn').onclick = function () {
             if (cart.length === 0) {
                 alert("Your cart is empty!");
                 return;
             }
-            // Close cart, open checkout
-            closeCart();
+            if (!selectedRegion) {
+                alert("Please select a Delivery Region (Within Mumbai or Outside Mumbai).");
+                return;
+            }
+            if (!document.getElementById('fraudCheck').checked) {
+                alert("Please check the Verification box to confirm your delivery location.");
+                return;
+            }
 
-            // Set Checkout Summary data
+            closeCart();
             document.getElementById('checkoutItemCount').innerText = cart.length;
             document.getElementById('checkoutProductPrice').innerText = document.getElementById('cartTotalAmount').innerText;
 
@@ -370,7 +423,6 @@
             setTimeout(() => { checkoutModal.classList.add('show'); }, 10);
         };
 
-        // Window Click outside modal closer
         window.onclick = function (event) {
             if (event.target == productModal) { closeModal(); }
             if (event.target == cartModal) { closeCart(); }
@@ -379,7 +431,6 @@
 
         // --- WHATSAPP MESSAGE FORMATTER ---
         document.getElementById("sendWhatsAppBtn").onclick = function () {
-            // Collect all the new input fields
             const name = document.getElementById("customerName").value;
             const phone = document.getElementById("customerPhone").value;
             const house = document.getElementById("customerHouse").value;
@@ -389,23 +440,30 @@
             const state = document.getElementById("customerState").value;
             const pincode = document.getElementById("customerPincode").value;
 
-            // Check if required fields are empty
             if (name === "" || phone === "" || house === "" || area === "" || city === "" || state === "" || pincode === "") {
                 alert("Please fill in all the required delivery details!");
                 return;
             }
 
-            // Build the multi-item WhatsApp message using her exact template
+            const finalItemsTotal = document.getElementById('cartItemsTotal').innerText;
+            const finalDelivery = document.getElementById('cartDeliveryCharge').innerText;
+            const finalTotal = document.getElementById('cartTotalAmount').innerText;
+            const regionName = (selectedRegion === 'mumbai') ? 'Within Mumbai' : 'Outside Mumbai';
+
             let message = `Thank you so much for your order 🪷\n\n`;
 
             message += `*🛒 Order Details:*\n`;
             cart.forEach((item, index) => {
                 message += `${index + 1}. ${item.name} (₹${item.price})\n`;
             });
-            const finalTotal = document.getElementById('cartTotalAmount').innerText;
-            message += `*💰 Total Paid:* ₹${finalTotal}\n\n`;
+
+            message += `\n*🧾 Bill Summary:*\n`;
+            message += `Items Total: ₹${finalItemsTotal}\n`;
+            message += `Delivery (${regionName}): ₹${finalDelivery}\n`;
+            message += `*💰 Grand Total Paid:* ₹${finalTotal}\n\n`;
 
             message += `*📍 Delivery Details:*\n`;
+            message += `Region Selected: ${regionName}\n`;
             message += `Full Name: ${name}\n`;
             message += `Mobile Number: ${phone}\n`;
             message += `House / Flat No.: ${house}\n`;
@@ -424,12 +482,10 @@
 
             window.open(whatsappLink, "_blank");
 
-            // Empty cart and reset forms after successful order
             cart = [];
             updateCartUI();
             closeCheckout();
 
-            // Clear all fields
             document.getElementById("customerName").value = "";
             document.getElementById("customerPhone").value = "";
             document.getElementById("customerHouse").value = "";
@@ -457,7 +513,6 @@
             }
         }
 
-        // --- Admin Redirect Script ---
         if (window.netlifyIdentity) {
             window.netlifyIdentity.on("init", user => {
                 if (!user) {

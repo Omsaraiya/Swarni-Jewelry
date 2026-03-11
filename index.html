@@ -47,14 +47,14 @@
 
     <section id="story" class="brand-story">
         <h2 class="section-heading">The Svarni Story</h2>
-        <p style="font-weight: 500; color: #4a3728; margin-bottom: 20px; font-family: 'Poppins', sans-serif;">
+        <p style="font-weight: 500; color: #4a3728; margin-bottom: 20px; font-family: 'Poppins', sans-serif; font-style: normal;">
             "स्वर्णी ही केवळ दागिन्यांची ओळख नाही, तर आपल्या परंपरेचा सन्मान आहे.
             बहिणींच्या प्रेमातून आणि महाराष्ट्रीयन संस्कृतीच्या प्रेरणेतून जन्मलेली स्वर्णी,
             आपली मुळे जपत आधुनिक सौंदर्य मांडते. प्रत्येक दागिना आपल्या परंपरेची
             कथा सांगतो अभिमानाने, सौंदर्याने आणि आत्म्याने."
         </p>
         <div style="font-size: 1.5rem; color: #bcaaa4; margin: 15px 0;">❖</div>
-        <p>
+        <p style="font-style: normal;">
             "Svarni is a tribute to golden roots and timeless grace. Born from the love of sisters
             and inspired by Maharashtrian heritage, our jewellery reflects tradition, culture,
             and quiet luxury. Each piece is thoughtfully crafted to preserve the beauty of our
@@ -102,24 +102,25 @@
         <div class="modal-content" style="max-width: 500px;">
             <span class="close-btn" id="closeCartBtn">&times;</span>
             <h2>Your Shopping Cart <i class="fas fa-shopping-cart"></i></h2>
-
+            
             <hr>
 
-            <div id="cartItemsContainer"
-                style="max-height: 300px; overflow-y: auto; text-align: left; margin-bottom: 15px;">
+            <div id="cartItemsContainer" style="max-height: 300px; overflow-y: auto; text-align: left; margin-bottom: 15px;">
                 <p style="text-align: center; color: #888;">Your cart is empty.</p>
+            </div>
+
+            <div style="background-color: #f1f8e9; color: #33691e; padding: 10px; border-radius: 6px; font-size: 13px; margin-bottom: 15px; text-align: center; border: 1px solid #c5e1a5;">
+                <strong>🚚 Delivery Note:</strong> Free delivery within Mumbai. Delivery charges applicable if outside Mumbai.
             </div>
 
             <hr>
 
-            <div class="cart-total"
-                style="display: flex; justify-content: space-between; font-size: 18px; font-weight: bold; margin-bottom: 20px;">
+            <div class="cart-total" style="display: flex; justify-content: space-between; font-size: 18px; font-weight: bold; margin-bottom: 20px;">
                 <span>Grand Total:</span>
                 <span>₹<span id="cartTotalAmount">0</span></span>
             </div>
 
-            <button id="proceedToCheckoutBtn"
-                style="background-color: #4a3728; color: white; padding: 15px; border: none; border-radius: 8px; cursor: pointer; width: 100%; font-size: 16px; font-weight: bold;">
+            <button id="proceedToCheckoutBtn" style="background-color: #4a3728; color: white; padding: 15px; border: none; border-radius: 8px; cursor: pointer; width: 100%; font-size: 16px; font-weight: bold;">
                 Proceed to Checkout
             </button>
         </div>

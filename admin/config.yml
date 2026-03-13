@@ -5,9 +5,10 @@ backend:
 media_folder: "images"
 public_folder: "images"
 
-site_url: https://svarni-jewelry.netlify.app
-display_url: https://svarni-jewelry.netlify.app
-logo_url: https://svarni-jewelry.netlify.app/images/logo.png
+# FIXED: Pointing to your actual working website!
+site_url: https://svarni-official.netlify.app
+display_url: https://svarni-official.netlify.app
+logo_url: https://svarni-official.netlify.app/images/logo.png
 
 collections:
   - name: "database"
@@ -15,7 +16,7 @@ collections:
     files:
       - label: "Product List"
         name: "products"
-        file: "data/products.json" # Saves everything in ONE master list!
+        file: "data/products.json" 
         fields:
           - label: "All Products"
             name: "items"
@@ -23,7 +24,12 @@ collections:
             fields:
               - {label: "Product Name", name: "title", widget: "string"}
               - {label: "Price (₹)", name: "price", widget: "number"}
-              - {label: "Category", name: "category", widget: "select", options: ["mangalsutra", "invisible", "earcuffs", "nath", "bugdi"]}
+              
+              # UPDATED: Her exact new categories for the dropdown
+              - {label: "Category", name: "category", widget: "select", options: ["necklace", "mangalsutra", "earcuff", "nath", "bugadi", "painjan", "braclet", "sets", "hamper"]}
+              
               - {label: "Description", name: "description", widget: "text"}
               - {label: "Product Image", name: "image", widget: "image"}
-              - {label: "Badge (Optional)", name: "badge", widget: "string", required: false, hint: "e.g. Bestseller, New"}
+              
+              # UPDATED: Changed the hint so you remember to type Best Seller or Trending
+              - {label: "Badge (Optional)", name: "badge", widget: "string", required: false, hint: "e.g. Best Seller, Trending"}

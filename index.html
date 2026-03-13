@@ -70,11 +70,15 @@
 
         <div class="category-container">
             <button class="cat-btn active" onclick="filterSelection('all')">All</button>
-            <button class="cat-btn" onclick="filterSelection('invisible')">Invisible Necklace</button>
+            <button class="cat-btn" onclick="filterSelection('necklace')">Necklace</button>
             <button class="cat-btn" onclick="filterSelection('mangalsutra')">Mangalsutra</button>
-            <button class="cat-btn" onclick="filterSelection('earcuffs')">Earcuffs</button>
+            <button class="cat-btn" onclick="filterSelection('earcuff')">Earcuff</button>
             <button class="cat-btn" onclick="filterSelection('nath')">Nath</button>
-            <button class="cat-btn" onclick="filterSelection('bugdi')">Bugdi</button>
+            <button class="cat-btn" onclick="filterSelection('bugadi')">Bugadi</button>
+            <button class="cat-btn" onclick="filterSelection('painjan')">Painjan</button>
+            <button class="cat-btn" onclick="filterSelection('braclet')">Bracelet</button>
+            <button class="cat-btn" onclick="filterSelection('sets')">Sets</button>
+            <button class="cat-btn" onclick="filterSelection('hamper')">Hamper</button>
         </div>
 
         <div class="product-grid" id="productGrid">
@@ -214,10 +218,16 @@
                 </div>
             </div>
             <div
-                style="background-color: #fff3e0; padding: 12px; border-radius: 6px; margin: 0 0 15px 0; font-size: 14px; color: #e65100; border: 1px solid #ffe0b2;">
-                <strong>🚚 Delivery Update:</strong> Due to high demand, please allow <strong>4 to 5 working
-                    days</strong> for your beautiful jewelry to be delivered. Thank you for your patience and support!
-                🤍
+                style="background-color: #fff3e0; padding: 12px; border-radius: 6px; margin: 0 0 10px 0; font-size: 14px; color: #e65100; border: 1px solid #ffe0b2;">
+                <strong>🚚 Delivery Update:</strong> Due to high demand, please allow <strong>7 or more working
+                    days</strong> for your beautiful jewelry to be delivered. We will share your order updates and
+                tracking details as soon as possible! 🤍
+            </div>
+
+            <div
+                style="background-color: #ffebee; padding: 12px; border-radius: 6px; margin: 0 0 15px 0; font-size: 13px; color: #c62828; border: 1px solid #ffcdd2;">
+                <strong>⚠️ Store Policy:</strong> Please note that we strictly do not offer returns, exchanges, or
+                refunds on any purchased products. By proceeding, you agree to these terms.
             </div>
 
             <button id="sendWhatsAppBtn"
@@ -226,8 +236,19 @@
         </div>
     </div>
 
-    <footer>
-        <p>&copy; 2026 Svarni. Made with <i class="fas fa-heart" style="color: #bcaaa4;"></i> in India.</p>
+    <footer
+        style="text-align: center; padding: 30px 20px; background-color: #f9f9f9; border-top: 1px solid #eee; line-height: 1.8;">
+        <p style="color: #4a3728; font-size: 16px;"><strong>📍 Proudly based in Mumbai</strong></p>
+        <p style="color: #666; font-size: 14px;">Contact us: svarni21@gmail.com</p>
+
+        <div
+            style="margin: 15px auto; padding: 10px; max-width: 400px; background-color: #ffebee; color: #c62828; border-radius: 6px; font-size: 12px; border: 1px solid #ffcdd2;">
+            <strong>Store Policy:</strong> Please note that we strictly do not offer returns, exchanges, or refunds on
+            any purchased products.
+        </div>
+
+        <p style="font-size: 13px; color: #888; margin-top: 20px;">&copy; 2026 Svarni. Made with <i class="fas fa-heart"
+                style="color: #bcaaa4;"></i> in India.</p>
     </footer>
 
     <script>
@@ -429,8 +450,11 @@
             if (event.target == checkoutModal) { closeCheckout(); }
         }
 
-        // --- WHATSAPP MESSAGE FORMATTER ---
-        document.getElementById("sendWhatsAppBtn").onclick = function () {
+        // --- WHATSAPP & GOOGLE SHEETS BACKEND FORMATTER ---
+        document.getElementById("sendWhatsAppBtn").onclick = async function () {
+            const btn = document.getElementById("sendWhatsAppBtn");
+            const originalBtnText = btn.innerHTML;
+
             const name = document.getElementById("customerName").value;
             const phone = document.getElementById("customerPhone").value;
             const house = document.getElementById("customerHouse").value;
@@ -445,55 +469,96 @@
                 return;
             }
 
+            // Change button to show it is processing
+            btn.innerHTML = 'Processing Order... <i class="fas fa-spinner fa-spin"></i>';
+            btn.disabled = true;
+
             const finalItemsTotal = document.getElementById('cartItemsTotal').innerText;
             const finalDelivery = document.getElementById('cartDeliveryCharge').innerText;
             const finalTotal = document.getElementById('cartTotalAmount').innerText;
             const regionName = (selectedRegion === 'mumbai') ? 'Within Mumbai' : 'Outside Mumbai';
 
-            let message = `Thank you so much for your order 🪷\n\n`;
+            let fullAddress = `${house}, ${area}`;
+            if (landmark.trim() !== "") fullAddress += `, Landmark: ${landmark}`;
+            fullAddress += `, ${city}, ${state} - ${pincode}`;
 
-            message += `*🛒 Order Details:*\n`;
-            cart.forEach((item, index) => {
-                message += `${index + 1}. ${item.name} (₹${item.price})\n`;
-            });
+            // 1. Prepare data for the Google Sheet Backend
+            const orderData = {
+                name: name,
+                phone: phone,
+                fullAddress: fullAddress,
+                cart: cart,
+                total: finalTotal,
+                region: regionName
+            };
 
-            message += `\n*🧾 Bill Summary:*\n`;
-            message += `Items Total: ₹${finalItemsTotal}\n`;
-            message += `Delivery (${regionName}): ₹${finalDelivery}\n`;
-            message += `*💰 Grand Total Paid:* ₹${finalTotal}\n\n`;
+            // =========================================================
+            // PASTE YOUR GOOGLE SCRIPT URL HERE 👇 BETWEEN THE QUOTES
+            // =========================================================
+            const GOOGLE_SHEET_API = "https://script.google.com/macros/s/AKfycbzG1yMO7UCanYbp14IylHaAgYviSs9vZzsBN8rwccVUuxsWHV4g0At9cU9MTA9CL8o/exec";
 
-            message += `*📍 Delivery Details:*\n`;
-            message += `Region Selected: ${regionName}\n`;
-            message += `Full Name: ${name}\n`;
-            message += `Mobile Number: ${phone}\n`;
-            message += `House / Flat No.: ${house}\n`;
-            message += `Area / Street Name: ${area}\n`;
-            if (landmark.trim() !== "") {
-                message += `Landmark (if any): ${landmark}\n`;
+            try {
+                // 2. Send data to Database and wait for Official Order Number
+                let response = await fetch(GOOGLE_SHEET_API, {
+                    method: "POST",
+                    headers: { "Content-Type": "text/plain" },
+                    body: JSON.stringify(orderData)
+                });
+
+                let result = await response.json();
+                let officialOrderNumber = result.orderId; // This will return 1, 2, 3 etc!
+
+                // 3. Build EXACT WhatsApp Message with the Official Order Number
+                let message = `Thank you so much for your order 🪷\n\n\n`;
+
+                message += `*Order ID:* Order ${officialOrderNumber}\n\n\n`;
+
+                message += `*🛒 Order Details:*\n`;
+                cart.forEach((item, index) => {
+                    message += `${index + 1}. ${item.name} (₹${item.price})\n\n`;
+                });
+
+                message += `\n*🧾 Bill Summary:*\n`;
+                message += `Items Total: ₹${finalItemsTotal}\n`;
+                message += `Delivery (${regionName}): ₹${finalDelivery}\n`;
+                message += `*💰 Grand Total Paid:* ₹${finalTotal}\n\n\n`;
+
+                message += `*📍 Delivery Details:*\n\n`;
+                message += `Region Selected: ${regionName}\n\n`;
+                message += `Full Name: ${name}\n\n`;
+                message += `Mobile Number: ${phone}\n\n`;
+                message += `Full Address: ${fullAddress}\n\n\n`;
+
+                message += `Here is my payment screenshot for confirmation 🤍`;
+
+                // 4. Open WhatsApp using the Direct API (to protect emojis)
+                const phoneNumber = "919322148369";
+                const whatsappLink = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`;
+
+                window.open(whatsappLink, "_blank");
+
+                // Reset Cart
+                cart = [];
+                updateCartUI();
+                closeCheckout();
+
+                document.getElementById("customerName").value = "";
+                document.getElementById("customerPhone").value = "";
+                document.getElementById("customerHouse").value = "";
+                document.getElementById("customerArea").value = "";
+                document.getElementById("customerLandmark").value = "";
+                document.getElementById("customerCity").value = "";
+                document.getElementById("customerState").value = "";
+                document.getElementById("customerPincode").value = "";
+
+            } catch (error) {
+                alert("Please paste your Google Sheet Web App URL in the code first!");
+                console.error(error);
+            } finally {
+                // Restore button
+                btn.innerHTML = originalBtnText;
+                btn.disabled = false;
             }
-            message += `City: ${city}\n`;
-            message += `State: ${state}\n`;
-            message += `Pincode: ${pincode}\n\n`;
-
-            message += `_Here is my payment screenshot for confirmation_ 🤍`;
-
-            const phoneNumber = "919322148369";
-            const whatsappLink = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-
-            window.open(whatsappLink, "_blank");
-
-            cart = [];
-            updateCartUI();
-            closeCheckout();
-
-            document.getElementById("customerName").value = "";
-            document.getElementById("customerPhone").value = "";
-            document.getElementById("customerHouse").value = "";
-            document.getElementById("customerArea").value = "";
-            document.getElementById("customerLandmark").value = "";
-            document.getElementById("customerCity").value = "";
-            document.getElementById("customerState").value = "";
-            document.getElementById("customerPincode").value = "";
         }
 
         // --- SIMPLE FILTER LOGIC ---

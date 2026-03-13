@@ -115,33 +115,12 @@
                 <p style="text-align: center; color: #888;">Your cart is empty.</p>
             </div>
 
-            <div style="text-align: left; margin-bottom: 15px;">
-                <label style="font-weight: bold; font-size: 14px; display: block; margin-bottom: 8px;">Select Delivery
-                    Region:</label>
-                <div style="display: flex; gap: 10px; margin-bottom: 10px;">
-                    <label id="lblMumbai"
-                        style="flex: 1; border: 2px solid #ddd; padding: 10px; border-radius: 6px; cursor: pointer; text-align: center; font-size: 13px; transition: 0.3s;">
-                        <input type="radio" name="deliveryRegion" value="mumbai" onchange="calculateTotal()"
-                            style="margin-bottom: 5px;">
-                        <br><strong>Within Mumbai</strong><br><span style="color: #2e7d32; font-weight: bold;">Free
-                            Delivery</span>
-                    </label>
-                    <label id="lblOutside"
-                        style="flex: 1; border: 2px solid #ddd; padding: 10px; border-radius: 6px; cursor: pointer; text-align: center; font-size: 13px; transition: 0.3s;">
-                        <input type="radio" name="deliveryRegion" value="outside" onchange="calculateTotal()"
-                            style="margin-bottom: 5px;">
-                        <br><strong>Outside Mumbai</strong><br>₹99 Charge
-                    </label>
-                </div>
-
-                <div
-                    style="background-color: #fff3e0; padding: 10px; border-radius: 6px; border: 1px solid #ffe0b2; font-size: 12px; color: #e65100;">
-                    <label style="display: flex; align-items: flex-start; gap: 8px; cursor: pointer;">
-                        <input type="checkbox" id="fraudCheck" style="margin-top: 2px; cursor: pointer;">
-                        <span><strong>Verification:</strong> I confirm my delivery address matches the region selected
-                            above. (Incorrect selection will cause order cancellation).</span>
-                    </label>
-                </div>
+            <div
+                style="background-color: #f5f0ed; padding: 12px; border-radius: 6px; border: 1px solid #e0d4cc; text-align: center; margin-bottom: 15px;">
+                <p style="margin: 0; font-size: 14px; color: #4a3728;">
+                    <strong>🚚 Standard Shipping:</strong><br>
+                    A flat delivery & shipping charge of <strong>₹99</strong> applies to all orders.
+                </p>
             </div>
 
             <hr>
@@ -253,27 +232,16 @@
 
     <script>
         let cart = [];
-        let selectedRegion = "";
         let deliveryCharge = 0;
 
-        // --- MATH & DELIVERY LOGIC ---
+        // --- MATH & DELIVERY LOGIC (FLAT RATE) ---
         function calculateTotal() {
-            const regionRadios = document.getElementsByName('deliveryRegion');
-            for (let radio of regionRadios) {
-                if (radio.checked) { selectedRegion = radio.value; }
-            }
-
-            // Highlight the selected box
-            document.getElementById('lblMumbai').style.borderColor = selectedRegion === 'mumbai' ? '#4a3728' : '#ddd';
-            document.getElementById('lblMumbai').style.backgroundColor = selectedRegion === 'mumbai' ? '#f5f0ed' : 'transparent';
-            document.getElementById('lblOutside').style.borderColor = selectedRegion === 'outside' ? '#4a3728' : '#ddd';
-            document.getElementById('lblOutside').style.backgroundColor = selectedRegion === 'outside' ? '#f5f0ed' : 'transparent';
-
-            // Apply delivery charges
-            deliveryCharge = (selectedRegion === 'outside') ? 99 : 0;
-
             let itemsTotal = 0;
             cart.forEach(item => itemsTotal += item.price);
+
+            // Apply flat ₹99 delivery charge only if there are items in the cart
+            deliveryCharge = (cart.length > 0) ? 99 : 0;
+
             let grandTotal = itemsTotal + deliveryCharge;
 
             document.getElementById('cartItemsTotal').innerText = itemsTotal;
@@ -421,18 +389,10 @@
             setTimeout(() => { checkoutModal.style.display = 'none'; }, 300);
         }
 
-        // --- FRAUD PREVENTION LOGIC ---
+        // --- CHECKOUT VALIDATION LOGIC ---
         document.getElementById('proceedToCheckoutBtn').onclick = function () {
             if (cart.length === 0) {
                 alert("Your cart is empty!");
-                return;
-            }
-            if (!selectedRegion) {
-                alert("Please select a Delivery Region (Within Mumbai or Outside Mumbai).");
-                return;
-            }
-            if (!document.getElementById('fraudCheck').checked) {
-                alert("Please check the Verification box to confirm your delivery location.");
                 return;
             }
 
@@ -476,7 +436,6 @@
             const finalItemsTotal = document.getElementById('cartItemsTotal').innerText;
             const finalDelivery = document.getElementById('cartDeliveryCharge').innerText;
             const finalTotal = document.getElementById('cartTotalAmount').innerText;
-            const regionName = (selectedRegion === 'mumbai') ? 'Within Mumbai' : 'Outside Mumbai';
 
             let fullAddress = `${house}, ${area}`;
             if (landmark.trim() !== "") fullAddress += `, Landmark: ${landmark}`;
@@ -489,12 +448,9 @@
                 fullAddress: fullAddress,
                 cart: cart,
                 total: finalTotal,
-                region: regionName
+                region: "Standard Delivery (₹99)"
             };
 
-            // =========================================================
-            // PASTE YOUR GOOGLE SCRIPT URL HERE 👇 BETWEEN THE QUOTES
-            // =========================================================
             const GOOGLE_SHEET_API = "https://script.google.com/macros/s/AKfycbzG1yMO7UCanYbp14IylHaAgYviSs9vZzsBN8rwccVUuxsWHV4g0At9cU9MTA9CL8o/exec";
 
             try {
@@ -520,11 +476,10 @@
 
                 message += `\n*🧾 Bill Summary:*\n`;
                 message += `Items Total: ₹${finalItemsTotal}\n`;
-                message += `Delivery (${regionName}): ₹${finalDelivery}\n`;
+                message += `Delivery & Shipping: ₹${finalDelivery}\n`;
                 message += `*💰 Grand Total Paid:* ₹${finalTotal}\n\n\n`;
 
                 message += `*📍 Delivery Details:*\n\n`;
-                message += `Region Selected: ${regionName}\n\n`;
                 message += `Full Name: ${name}\n\n`;
                 message += `Mobile Number: ${phone}\n\n`;
                 message += `Full Address: ${fullAddress}\n\n\n`;

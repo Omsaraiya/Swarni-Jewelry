@@ -2,31 +2,118 @@
   "items": [
     {
       "title": "Invisible Mangalsutra",
-      "price": 169,
-      "category": "invisible",
+      "price": 199,
+      "category": "mangalsutra",
       "description": "A delicate invisible mangalsutra with a thin thread, featuring a diamond-studded circular pendant and traditional gold and black beads, blending modern elegance with timeless tradition.",
       "image": "images/new-i-m-1.jpeg"
     },
     {
       "title": "Invisible Mangalsutra",
-      "price": 169,
-      "category": "invisible",
+      "price": 199,
+      "category": "mangalsutra",
       "description": "A delicate invisible mangalsutra with a thin thread, featuring a drop-shaped diamond pendant and traditional gold and black beads, beautifully blending modern elegance with timeless tradition",
       "image": "images/new-i-m-2.jpeg"
     },
     {
       "title": "Invisible Mangalsutra",
-      "price": 169,
-      "category": "invisible",
+      "price": 199,
+      "category": "mangalsutra",
       "description": "A delicate invisible mangalsutra with a thin thread, featuring a diamond-studded circular pendant with a light pink center stone, paired with traditional gold and black beads for a perfect blend of modern elegance and timeless tradition.",
       "image": "images/new-i-m-3.jpeg"
     },
     {
       "title": "Invisible Mangalsutra",
-      "price": 169,
-      "category": "invisible",
+      "price": 199,
+      "category": "mangalsutra",
       "description": "A delicate invisible mangalsutra with a thin thread, featuring a diamond-studded circular pendant with a soft ivory (skin-tone) center stone, paired with traditional gold and black beads for a graceful blend of modern elegance and timeless tradition.",
       "image": "images/new-i-m-4.jpeg"
+    },
+    {
+      "image": "images/peacock-earcuff.jpeg",
+      "title": "Peacock Earcuff",
+      "price": 299,
+      "category": "earcuff",
+      "description": "Peacock ear cuff made with beautiful moti (pearls), featuring an elegant peacock design that adds a royal and traditional touch to any outfit. Perfect for festive and special occasions."
+    },
+    {
+      "title": "Mukhta Kamal Painjan ",
+      "price": 399,
+      "category": "painjan",
+      "description": "A beautiful anklet made with delicate moti chains and adorned with a white lotus in the center, symbolizing purity and elegance. Perfect for adding a graceful traditional touch to your look.",
+      "image": "images/mukhta-kamal-painjan-.jpeg",
+      "badge": "Best Seller , Trending"
+    },
+    {
+      "title": "Gulabi Kamal Sundari Painjan",
+      "price": 399,
+      "category": "painjan",
+      "description": "A graceful anklet crafted with delicate LoReals moti chains, featuring a beautiful pink lotus in the center that adds a soft, elegant, and traditional charm to your look. ",
+      "image": "images/gulabi-kamal-sundari-painjan.jpeg",
+      "badge": "Best Seller , Trending"
+    },
+    {
+      "title": "Moti Earcuff",
+      "price": 299,
+      "category": "earcuff",
+      "description": "A stylish ear cuff made with delicate pearls (moti), featuring three flower-like designs. Elegant and unique, it can be beautifully paired with western outfits.",
+      "image": "images/moti-earcuff.jpeg"
+    },
+    {
+      "title": "Panch Moti Invisible Necklace",
+      "price": 159,
+      "category": "necklace",
+      "description": "A simple and elegant invisible necklace featuring five delicate pearls, giving a minimal and graceful look perfect for both traditional and western outfits. ",
+      "image": "images/panch-moti-invisible-necklace.jpeg"
+    },
+    {
+      "title": "Chandrika Ghungroo Set",
+      "price": 359,
+      "category": "sets",
+      "description": "A beautiful ear cuff and necklace set featuring an elegant chandra (moon) design in red, adorned with delicate ghungroo details that add a graceful traditional charm. ",
+      "image": "images/chandrika-ghungroo-set.jpeg"
+    },
+    {
+      "title": "Motijhuluk Bugadi ",
+      "price": 199,
+      "category": "bugadi",
+      "description": "A simple and elegant bugadi beautifully adorned with delicate moti, giving a graceful and traditional look. ",
+      "image": "images/motijhuluk-bugadi-.jpeg",
+      "badge": "Best Seller , Trending"
+    },
+    {
+      "title": "Sundrika Nathful ",
+      "price": 199,
+      "category": "nath",
+      "description": "A delicate mini press nath designed like a beautiful flower, featuring a red stone in the center that adds a charming traditional touch.",
+      "image": "images/sundrika-nathful-.jpeg"
+    },
+    {
+      "title": "Noor Ear Cuff",
+      "price": 599,
+      "category": "earcuff",
+      "description": "A luxurious ear cuff adorned with sparkling diamonds, rich red stones, and delicate moti, giving an elegant and royal look.",
+      "image": "images/noor-ear-cuff.jpeg"
+    },
+    {
+      "title": "Asmani Motyachi Shaan",
+      "price": 359,
+      "description": "A rich light blue nath beautifully adorned with delicate moti, giving a graceful and elegant traditional look.",
+      "image": "images/asmani-motyachi-shaan.jpeg",
+      "category": "nath"
+    },
+    {
+      "title": "Manjari Invisible Necklace",
+      "price": 199,
+      "category": "necklace",
+      "description": "A delicate invisible necklace featuring three mini green lotus motifs with tiny ghungroo accents that add charm without making any sound. ",
+      "image": "images/manjari-invisible-necklace.jpeg"
+    },
+    {
+      "title": "Padma Naad Invisible Necklace",
+      "price": 259,
+      "category": "necklace",
+      "description": "A simple and elegant invisible necklace featuring three pink lotus motifs arranged in a line, beautifully finished with delicate ghungroo accents.",
+      "image": "images/padma-naad-invisible-necklace.jpeg"
     }
   ]
 }

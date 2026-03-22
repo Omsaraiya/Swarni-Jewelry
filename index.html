@@ -237,7 +237,8 @@
         // --- MATH & DELIVERY LOGIC (FLAT RATE) ---
         function calculateTotal() {
             let itemsTotal = 0;
-            cart.forEach(item => itemsTotal += item.price);
+            // Now multiplies price by quantity
+            cart.forEach(item => itemsTotal += (item.price * item.quantity));
 
             // Apply flat ₹99 delivery charge only if there are items in the cart
             deliveryCharge = (cart.length > 0) ? 99 : 0;
@@ -261,7 +262,16 @@
                     let products = data.items || [];
 
                     products.forEach(p => {
-                        let badgeHTML = p.badge ? `<span class="badge">${p.badge}</span>` : '';
+                        let badgeText = p.badge ? p.badge : '';
+                        let lowerBadge = badgeText.toLowerCase().trim();
+
+                        // Check if badge is an unavailable type
+                        let isUnavailable = lowerBadge === 'out of stock' || lowerBadge === 'currently unavailable' || lowerBadge === 'not available' || lowerBadge === 'coming soon';
+
+                        // Red badge for unavailable items
+                        let badgeStyle = isUnavailable ? 'style="background-color: #c62828; color: white;"' : '';
+                        let badgeHTML = badgeText ? `<span class="badge" ${badgeStyle}>${badgeText}</span>` : '';
+
                         let imgPath = "images/logo.png";
                         if (p.image) {
                             imgPath = p.image.startsWith('/') ? p.image.substring(1) : p.image;
@@ -269,6 +279,11 @@
                                 imgPath = 'images/' + imgPath;
                             }
                         }
+
+                        // Disable button dynamically based on badge text
+                        let buttonHTML = isUnavailable
+                            ? `<button class="btn-buy" disabled style="background-color: #ccc; color: #666; cursor: not-allowed;">${badgeText}</button>`
+                            : `<button class="btn-buy" onclick="addToCart('${p.title}', ${p.price}, '${imgPath}')">Add to Cart</button>`;
 
                         let card = `
                         <div class="card filter-item ${p.category}">
@@ -280,7 +295,7 @@
                             <p class="desc">${p.description}</p>
                             <div class="price-row">
                                 <span class="price">₹${p.price}</span>
-                                <button class="btn-buy" onclick="addToCart('${p.title}', ${p.price}, '${imgPath}')">Add to Cart</button>
+                                ${buttonHTML}
                             </div>
                         </div>`;
                         grid.innerHTML += card;
@@ -295,9 +310,27 @@
 
         // --- CART FUNCTIONS ---
         function addToCart(name, price, image) {
-            cart.push({ name: name, price: parseInt(price), image: image });
+            // Check if item already exists in cart
+            let existingItem = cart.find(item => item.name === name);
+
+            if (existingItem) {
+                existingItem.quantity += 1; // Increase quantity if already there
+            } else {
+                cart.push({ name: name, price: parseInt(price), image: image, quantity: 1 }); // Add new item with qty 1
+            }
+
             updateCartUI();
             openCart();
+        }
+
+        // New function to handle the + and - buttons
+        function changeQuantity(index, change) {
+            cart[index].quantity += change;
+            if (cart[index].quantity <= 0) {
+                removeFromCart(index); // Remove item completely if it hits 0
+            } else {
+                updateCartUI(); // Otherwise just update the numbers
+            }
         }
 
         function removeFromCart(index) {
@@ -307,8 +340,13 @@
 
         function updateCartUI() {
             const badge = document.getElementById('cartBadge');
-            if (cart.length > 0) {
-                badge.innerText = cart.length;
+
+            // Calculate total individual items for the red badge
+            let totalItems = 0;
+            cart.forEach(item => totalItems += item.quantity);
+
+            if (totalItems > 0) {
+                badge.innerText = totalItems;
                 badge.style.display = 'block';
             } else {
                 badge.style.display = 'none';
@@ -329,7 +367,11 @@
                                 <p style="margin: 0; font-size: 14px; color: #888;">₹${item.price}</p>
                             </div>
                         </div>
-                        <button onclick="removeFromCart(${index})" style="color: #ff4d4d; background: none; border: none; cursor: pointer; font-size: 18px; font-weight: bold;">&times;</button>
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <button onclick="changeQuantity(${index}, -1)" style="background: #f1f1f1; border: 1px solid #ddd; padding: 4px 10px; border-radius: 4px; cursor: pointer; font-weight: bold; color: #333;">-</button>
+                            <span style="font-size: 14px; font-weight: bold; width: 20px; text-align: center;">${item.quantity}</span>
+                            <button onclick="changeQuantity(${index}, 1)" style="background: #f1f1f1; border: 1px solid #ddd; padding: 4px 10px; border-radius: 4px; cursor: pointer; font-weight: bold; color: #333;">+</button>
+                        </div>
                     </div>`;
                 });
                 container.innerHTML = html;
@@ -350,15 +392,34 @@
             let rawPrice = priceText.replace('₹', '').trim();
             let desc = card.querySelector('.desc').innerText;
 
+            // Check if product is out of stock based on the card's button
+            let cardBtn = card.querySelector('.btn-buy');
+            let isUnavailable = cardBtn.disabled;
+
             document.getElementById('modalImg').src = imgSrc;
             document.getElementById('modalTitle').innerText = title;
             document.getElementById('modalPrice').innerText = priceText;
             document.getElementById('modalDesc').innerText = desc;
 
             let modalBtn = document.getElementById('modalBuyBtn');
-            modalBtn.onclick = function () {
-                addToCart(title, rawPrice, imgSrc);
-            };
+
+            if (isUnavailable) {
+                modalBtn.innerText = cardBtn.innerText; // Matches "Coming Soon" or "Out of Stock"
+                modalBtn.style.backgroundColor = "#ccc";
+                modalBtn.style.color = "#666";
+                modalBtn.style.cursor = "not-allowed";
+                modalBtn.disabled = true;
+                modalBtn.onclick = null;
+            } else {
+                modalBtn.innerText = "Add to Cart";
+                modalBtn.style.backgroundColor = "";
+                modalBtn.style.color = "";
+                modalBtn.style.cursor = "";
+                modalBtn.disabled = false;
+                modalBtn.onclick = function () {
+                    addToCart(title, rawPrice, imgSrc);
+                };
+            }
 
             productModal.style.display = "flex";
             setTimeout(() => { productModal.classList.add('show'); }, 10);
@@ -397,7 +458,12 @@
             }
 
             closeCart();
-            document.getElementById('checkoutItemCount').innerText = cart.length;
+
+            // Calculate total quantity for the checkout screen
+            let totalItemsCount = 0;
+            cart.forEach(item => totalItemsCount += item.quantity);
+            document.getElementById('checkoutItemCount').innerText = totalItemsCount;
+
             document.getElementById('checkoutProductPrice').innerText = document.getElementById('cartTotalAmount').innerText;
 
             checkoutModal.style.display = 'flex';
@@ -446,7 +512,7 @@
                 name: name,
                 phone: phone,
                 fullAddress: fullAddress,
-                cart: cart,
+                cart: cart, // The cart now successfully contains the quantity of each item!
                 total: finalTotal,
                 region: "Standard Delivery (₹99)"
             };
@@ -471,7 +537,8 @@
 
                 message += `*🛒 Order Details:*\n`;
                 cart.forEach((item, index) => {
-                    message += `${index + 1}. ${item.name} (₹${item.price})\n\n`;
+                    let itemTotal = item.price * item.quantity;
+                    message += `${index + 1}. ${item.name} (x${item.quantity}) - ₹${itemTotal}\n\n`;
                 });
 
                 message += `\n*🧾 Bill Summary:*\n`;

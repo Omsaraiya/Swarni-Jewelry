@@ -49,7 +49,7 @@
       "category": "painjan",
       "description": "A graceful anklet crafted with delicate LoReals moti chains, featuring a beautiful pink lotus in the center that adds a soft, elegant, and traditional charm to your look. ",
       "image": "images/gulabi-kamal-sundari-painjan.jpeg",
-      "badge": "Best Seller , Trending"
+      "badge": "Not Available"
     },
     {
       "title": "Moti Earcuff",
@@ -99,7 +99,8 @@
       "price": 359,
       "description": "A rich light blue nath beautifully adorned with delicate moti, giving a graceful and elegant traditional look.",
       "image": "images/asmani-motyachi-shaan.jpeg",
-      "category": "nath"
+      "category": "nath",
+      "badge": "Not Available"
     },
     {
       "title": "Manjari Invisible Necklace",
@@ -114,6 +115,85 @@
       "category": "necklace",
       "description": "A simple and elegant invisible necklace featuring three pink lotus motifs arranged in a line, beautifully finished with delicate ghungroo accents.",
       "image": "images/padma-naad-invisible-necklace.jpeg"
+    },
+    {
+      "title": "Jambli Saaj Painjan",
+      "price": 499,
+      "image": "images/jambli-saaj-painjan.jpeg",
+      "category": "painjan",
+      "description": "An elegant traditional anklet featuring a rich purple finish and delicate lotus-inspired design. Graceful and eye-catching, it adds a royal touch to festive and ethnic outfits, making it perfect for weddings and special occasions.",
+      "badge": " Best Seller"
+    },
+    {
+      "title": "Harit Saaj Painjan",
+      "image": "images/harit-saaj-painjan.jpeg",
+      "price": 499,
+      "category": "painjan",
+      "description": "A premium traditional anklet featuring elegant green lotus designs paired with a rich golden chain. Crafted for a graceful and luxurious look, it comes with a secure premium lock for comfortable wear. Perfect for weddings, festivals, and ethnic outfits, it adds a touch of royal charm and refined beauty to your style."
+    },
+    {
+      "title": "Peshwai Moti Bugadi",
+      "image": "images/peshwai-moti-bugadi.jpeg",
+      "price": 199,
+      "category": "bugadi",
+      "description": "A beautifully handcrafted traditional ear ornament featuring a red flower-shaped center design adorned with elegant pearl detailing. Its intricate workmanship and classic style make it perfect for weddings, festive occasions, and traditional attire, adding a graceful and royal touch to your look."
+    },
+    {
+      "title": "Fusion Ear Cuff",
+      "image": "images/fusion-ear-cufff.jpeg",
+      "price": 269,
+      "category": "earcuff",
+      "description": "A stylish ear accessory that combines an attached earring with a cuff design for a modern fusion look. Featuring elegant pink and mixed-color detailing, it offers a premium finish that adds a trendy and fashionable touch to party wear and special outfits."
+    },
+    {
+      "title": "Mayur Bugadi",
+      "image": "images/mayur-bugadi.jpeg",
+      "price": 299,
+      "category": "bugadi",
+      "description": "A premium traditional bugadi featuring an elegant peacock-inspired design highlighted with a delicate pearl border. Accented with a colorful decorative pin, it showcases fine craftsmanship and a rich ethnic look. Perfect for weddings and festive occasions, it adds a graceful and royal charm to traditional attire."
+    },
+    {
+      "title": "Rani Morni Ear Cuff",
+      "image": "images/rani-morni-ear-cuff.jpeg",
+      "price": 299,
+      "category": "earcuff",
+      "description": "A graceful ear cuff featuring a peacock-inspired design in a rich pink tone, finished with delicate pearl drops at the bottom. Elegant and eye-catching, it offers a premium fusion look that pairs beautifully with festive and traditional outfits."
+    },
+    {
+      "title": "Komal Pink Nath",
+      "price": 199,
+      "category": "nath",
+      "description": "A premium press-style nose nath crafted in an elegant pink finish for a graceful and sophisticated look. Designed for comfortable wear without piercing, it features fine detailing and a rich traditional appeal. Perfect for weddings, festive occasions, and ethnic outfits, it adds a delicate charm to your overall appearance.",
+      "image": "images/komal-pink-nath.jpeg"
+    },
+    {
+      "title": "Komal Shwet Nath",
+      "image": "images/komal-shwet-nath.jpeg",
+      "price": 199,
+      "category": "nath",
+      "description": "A premium press-style nose Nath crafted in an elegant pink finish for a graceful and sophisticated look. Designed for comfortable wear without piercing, it features fine detailing and a rich traditional appeal. Perfect for weddings, festive occasions, and ethnic outfits, it adds a delicate charm to your overall appearance."
+    },
+    {
+      "title": "Runjun Painjan",
+      "image": "images/runjun-painjan.jpeg",
+      "price": 469,
+      "category": "painjan",
+      "description": "A beautiful traditional anklet designed in a soft pink finish, featuring elegant lotus motifs paired with a delicate pearl chain. Its graceful design and charming details create a soothing jingling effect, making it perfect for festive wear, weddings, and ethnic outfits.",
+      "badge": "Not Available"
+    },
+    {
+      "title": "Prerna Haar",
+      "image": "images/prerna-haar.jpeg",
+      "description": "A graceful necklace featuring a delicate pearl chain adorned with a red handcrafted pendant intricately embellished with pearl detailing. The elegant combination of rich red tones and classic pearls creates a royal and timeless look, making it perfect for weddings, festive occasions, and traditional attire.\n",
+      "price": 499,
+      "category": "necklace"
+    },
+    {
+      "title": "Sundarika Nathfull",
+      "price": 199,
+      "category": "nath",
+      "image": "images/sundarika-nathfull.jpeg",
+      "description": "A delicate mini press nath designed like a beautiful flower, featuring a golden stone in the center that adds a charming traditional touch."
     }
   ]
 }

@@ -25,7 +25,13 @@
             <li><a href="#collection">Collection</a></li>
             <li><a href="#story">Our Story</a></li>
         </ul>
-        <div class="icons">
+        <div class="icons" style="display: flex; align-items: center; gap: 20px;">
+            <a href="https://instagram.com/svarni__" target="_blank"
+                style="color: #4a3728; font-size: 20px; text-decoration: none; transition: 0.3s;"
+                title="Follow us on Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+
             <div class="cart-icon-container" id="openCartBtn"
                 style="position: relative; display: inline-block; cursor: pointer;">
                 <i class="fas fa-shopping-bag"></i>
@@ -167,11 +173,28 @@
             <hr>
 
             <div class="shipping-section" style="text-align: left;">
-                <h3>Step 2: Delivery Details</h3>
+                <h3>Step 2: Delivery Details</h3><br>
+
+                <p
+                    style="background-color: #f8f9fa; padding: 10px; border-left: 4px solid #4a3728; font-size: 14px; color: #333; margin-bottom: 15px; border-radius: 4px;">
+                    <strong>📍 Note:</strong> Please provide a complete and accurate address to ensure smooth delivery.
+                </p>
+
                 <input type="text" id="customerName" placeholder="Full Name" required
                     style="width: 100%; padding: 12px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box;">
-                <input type="tel" id="customerPhone" placeholder="Mobile Number" required
+
+                <div
+                    style="display: flex; align-items: center; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 6px; overflow: hidden;">
+                    <span
+                        style="background-color: #f1f1f1; padding: 12px; color: #555; border-right: 1px solid #ddd; font-weight: bold;">+91</span>
+                    <input type="tel" id="customerPhone" placeholder="10-digit Mobile Number" required
+                        oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);"
+                        style="width: 100%; padding: 12px; border: none; outline: none; box-sizing: border-box;">
+                </div>
+
+                <input type="text" id="customerInsta" placeholder="Instagram ID" required
                     style="width: 100%; padding: 12px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box;">
+
                 <input type="text" id="customerHouse" placeholder="House / Flat No." required
                     style="width: 100%; padding: 12px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box;">
                 <input type="text" id="customerArea" placeholder="Area / Street Name" required
@@ -186,7 +209,8 @@
                         style="width: 50%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box;">
                 </div>
 
-                <input type="text" id="customerPincode" placeholder="Pincode" required
+                <input type="text" id="customerPincode" placeholder="6-digit Pincode" required
+                    oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 6);"
                     style="width: 100%; padding: 12px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box;">
 
                 <div
@@ -218,7 +242,14 @@
     <footer
         style="text-align: center; padding: 30px 20px; background-color: #f9f9f9; border-top: 1px solid #eee; line-height: 1.8;">
         <p style="color: #4a3728; font-size: 16px;"><strong>📍 Proudly based in Mumbai</strong></p>
-        <p style="color: #666; font-size: 14px;">Contact us: svarni21@gmail.com</p>
+
+        <p style="color: #666; font-size: 14px; margin-bottom: 5px;">
+            Contact us: svarni21@gmail.com |
+            <a href="https://instagram.com/svarni__" target="_blank"
+                style="color: #4a3728; text-decoration: none; font-weight: 600;">
+                <i class="fab fa-instagram"></i> @svarni__
+            </a>
+        </p>
 
         <div
             style="margin: 15px auto; padding: 10px; max-width: 400px; background-color: #ffebee; color: #c62828; border-radius: 6px; font-size: 12px; border: 1px solid #ffcdd2;">
@@ -234,15 +265,10 @@
         let cart = [];
         let deliveryCharge = 0;
 
-        // --- MATH & DELIVERY LOGIC (FLAT RATE) ---
         function calculateTotal() {
             let itemsTotal = 0;
-            // Now multiplies price by quantity
             cart.forEach(item => itemsTotal += (item.price * item.quantity));
-
-            // Apply flat ₹99 delivery charge only if there are items in the cart
             deliveryCharge = (cart.length > 0) ? 99 : 0;
-
             let grandTotal = itemsTotal + deliveryCharge;
 
             document.getElementById('cartItemsTotal').innerText = itemsTotal;
@@ -250,7 +276,6 @@
             document.getElementById('cartTotalAmount').innerText = grandTotal;
         }
 
-        // --- FETCH PRODUCTS FROM DATABASE ---
         async function loadDatabase() {
             try {
                 let response = await fetch('data/products.json');
@@ -264,11 +289,8 @@
                     products.forEach(p => {
                         let badgeText = p.badge ? p.badge : '';
                         let lowerBadge = badgeText.toLowerCase().trim();
-
-                        // Check if badge is an unavailable type
                         let isUnavailable = lowerBadge === 'out of stock' || lowerBadge === 'currently unavailable' || lowerBadge === 'not available' || lowerBadge === 'coming soon';
 
-                        // Red badge for unavailable items
                         let badgeStyle = isUnavailable ? 'style="background-color: #c62828; color: white;"' : '';
                         let badgeHTML = badgeText ? `<span class="badge" ${badgeStyle}>${badgeText}</span>` : '';
 
@@ -280,7 +302,6 @@
                             }
                         }
 
-                        // Disable button dynamically based on badge text
                         let buttonHTML = isUnavailable
                             ? `<button class="btn-buy" disabled style="background-color: #ccc; color: #666; cursor: not-allowed;">${badgeText}</button>`
                             : `<button class="btn-buy" onclick="addToCart('${p.title}', ${p.price}, '${imgPath}')">Add to Cart</button>`;
@@ -308,28 +329,23 @@
         }
         document.addEventListener("DOMContentLoaded", loadDatabase);
 
-        // --- CART FUNCTIONS ---
         function addToCart(name, price, image) {
-            // Check if item already exists in cart
             let existingItem = cart.find(item => item.name === name);
-
             if (existingItem) {
-                existingItem.quantity += 1; // Increase quantity if already there
+                existingItem.quantity += 1;
             } else {
-                cart.push({ name: name, price: parseInt(price), image: image, quantity: 1 }); // Add new item with qty 1
+                cart.push({ name: name, price: parseInt(price), image: image, quantity: 1 });
             }
-
             updateCartUI();
             openCart();
         }
 
-        // New function to handle the + and - buttons
         function changeQuantity(index, change) {
             cart[index].quantity += change;
             if (cart[index].quantity <= 0) {
-                removeFromCart(index); // Remove item completely if it hits 0
+                removeFromCart(index);
             } else {
-                updateCartUI(); // Otherwise just update the numbers
+                updateCartUI();
             }
         }
 
@@ -340,8 +356,6 @@
 
         function updateCartUI() {
             const badge = document.getElementById('cartBadge');
-
-            // Calculate total individual items for the red badge
             let totalItems = 0;
             cart.forEach(item => totalItems += item.quantity);
 
@@ -376,10 +390,9 @@
                 });
                 container.innerHTML = html;
             }
-            calculateTotal(); // Update totals when items change
+            calculateTotal();
         }
 
-        // --- MODAL OPEN/CLOSE LOGIC ---
         const productModal = document.getElementById('productModal');
         const cartModal = document.getElementById('cartModal');
         const checkoutModal = document.getElementById('checkoutModal');
@@ -392,7 +405,6 @@
             let rawPrice = priceText.replace('₹', '').trim();
             let desc = card.querySelector('.desc').innerText;
 
-            // Check if product is out of stock based on the card's button
             let cardBtn = card.querySelector('.btn-buy');
             let isUnavailable = cardBtn.disabled;
 
@@ -404,7 +416,7 @@
             let modalBtn = document.getElementById('modalBuyBtn');
 
             if (isUnavailable) {
-                modalBtn.innerText = cardBtn.innerText; // Matches "Coming Soon" or "Out of Stock"
+                modalBtn.innerText = cardBtn.innerText;
                 modalBtn.style.backgroundColor = "#ccc";
                 modalBtn.style.color = "#666";
                 modalBtn.style.cursor = "not-allowed";
@@ -450,22 +462,16 @@
             setTimeout(() => { checkoutModal.style.display = 'none'; }, 300);
         }
 
-        // --- CHECKOUT VALIDATION LOGIC ---
         document.getElementById('proceedToCheckoutBtn').onclick = function () {
             if (cart.length === 0) {
                 alert("Your cart is empty!");
                 return;
             }
-
             closeCart();
-
-            // Calculate total quantity for the checkout screen
             let totalItemsCount = 0;
             cart.forEach(item => totalItemsCount += item.quantity);
             document.getElementById('checkoutItemCount').innerText = totalItemsCount;
-
             document.getElementById('checkoutProductPrice').innerText = document.getElementById('cartTotalAmount').innerText;
-
             checkoutModal.style.display = 'flex';
             setTimeout(() => { checkoutModal.classList.add('show'); }, 10);
         };
@@ -483,6 +489,7 @@
 
             const name = document.getElementById("customerName").value;
             const phone = document.getElementById("customerPhone").value;
+            const insta = document.getElementById("customerInsta").value;
             const house = document.getElementById("customerHouse").value;
             const area = document.getElementById("customerArea").value;
             const landmark = document.getElementById("customerLandmark").value;
@@ -490,12 +497,21 @@
             const state = document.getElementById("customerState").value;
             const pincode = document.getElementById("customerPincode").value;
 
-            if (name === "" || phone === "" || house === "" || area === "" || city === "" || state === "" || pincode === "") {
-                alert("Please fill in all the required delivery details!");
+            if (name === "" || phone === "" || insta === "" || house === "" || area === "" || city === "" || state === "" || pincode === "") {
+                alert("Please fill in all the required delivery details, including your Instagram ID!");
                 return;
             }
 
-            // Change button to show it is processing
+            if (phone.length !== 10) {
+                alert("Please enter a valid 10-digit mobile number.");
+                return;
+            }
+
+            if (pincode.length !== 6) {
+                alert("Please enter a valid 6-digit Pincode.");
+                return;
+            }
+
             btn.innerHTML = 'Processing Order... <i class="fas fa-spinner fa-spin"></i>';
             btn.disabled = true;
 
@@ -507,20 +523,25 @@
             if (landmark.trim() !== "") fullAddress += `, Landmark: ${landmark}`;
             fullAddress += `, ${city}, ${state} - ${pincode}`;
 
-            // 1. Prepare data for the Google Sheet Backend
+            let nameWithInsta = `${name} (${insta})`;
+            let formattedPhone = "+91 " + phone;
+            let sheetPhone = "'+91 " + phone;
+
+            // This is completely fixed! It contains the cart data now!
             const orderData = {
-                name: name,
-                phone: phone,
+                name: nameWithInsta,
+                phone: sheetPhone,
                 fullAddress: fullAddress,
-                cart: cart, // The cart now successfully contains the quantity of each item!
+                cart: cart,
                 total: finalTotal,
                 region: "Standard Delivery (₹99)"
             };
 
+            // 🛑 STOP AND READ THIS LINE 🛑
+            // You MUST paste your real Google Sheet Web App URL inside the quotes below!
             const GOOGLE_SHEET_API = "https://script.google.com/macros/s/AKfycbzG1yMO7UCanYbp14IylHaAgYviSs9vZzsBN8rwccVUuxsWHV4g0At9cU9MTA9CL8o/exec";
 
             try {
-                // 2. Send data to Database and wait for Official Order Number
                 let response = await fetch(GOOGLE_SHEET_API, {
                     method: "POST",
                     headers: { "Content-Type": "text/plain" },
@@ -528,11 +549,16 @@
                 });
 
                 let result = await response.json();
-                let officialOrderNumber = result.orderId; // This will return 1, 2, 3 etc!
 
-                // 3. Build EXACT WhatsApp Message with the Official Order Number
+                if (result.error) {
+                    console.error("Backend Error:", result.error);
+                    alert("There was an error saving to the database. Please try again!");
+                    return;
+                }
+
+                let officialOrderNumber = result.orderId;
+
                 let message = `Thank you so much for your order 🪷\n\n\n`;
-
                 message += `*Order ID:* Order ${officialOrderNumber}\n\n\n`;
 
                 message += `*🛒 Order Details:*\n`;
@@ -548,24 +574,24 @@
 
                 message += `*📍 Delivery Details:*\n\n`;
                 message += `Full Name: ${name}\n\n`;
-                message += `Mobile Number: ${phone}\n\n`;
+                message += `Instagram ID: ${insta}\n\n`;
+                message += `Mobile Number: ${formattedPhone}\n\n`;
                 message += `Full Address: ${fullAddress}\n\n\n`;
 
                 message += `Here is my payment screenshot for confirmation 🤍`;
 
-                // 4. Open WhatsApp using the Direct API (to protect emojis)
                 const phoneNumber = "919322148369";
                 const whatsappLink = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`;
 
                 window.open(whatsappLink, "_blank");
 
-                // Reset Cart
                 cart = [];
                 updateCartUI();
                 closeCheckout();
 
                 document.getElementById("customerName").value = "";
                 document.getElementById("customerPhone").value = "";
+                document.getElementById("customerInsta").value = "";
                 document.getElementById("customerHouse").value = "";
                 document.getElementById("customerArea").value = "";
                 document.getElementById("customerLandmark").value = "";
@@ -574,16 +600,14 @@
                 document.getElementById("customerPincode").value = "";
 
             } catch (error) {
-                alert("Please paste your Google Sheet Web App URL in the code first!");
+                alert("Please make sure you pasted your Google Sheet API link in the code!");
                 console.error(error);
             } finally {
-                // Restore button
                 btn.innerHTML = originalBtnText;
                 btn.disabled = false;
             }
         }
 
-        // --- SIMPLE FILTER LOGIC ---
         function filterSelection(c) {
             var x = document.getElementsByClassName("filter-item");
             if (typeof event !== 'undefined' && event && event.target && event.target.classList.contains('cat-btn')) {

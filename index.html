@@ -166,8 +166,19 @@
 
             <div class="payment-section">
                 <h3>Step 1: Scan & Pay (0% Fee)</h3>
-                <img src="images/qr-code.png" alt="UPI QR Code" id="qrImage"
-                    style="max-width: 100%; border-radius: 10px; margin: 10px 0;">
+                
+                <div style="margin: 15px 0; text-align: center;">
+                    <a id="upiDynamicLink" href="#" style="display: inline-block; background-color: #673AB7; color: white; padding: 15px 20px; border-radius: 8px; font-weight: bold; text-decoration: none; width: 100%; box-sizing: border-box; font-size: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                        <i class="fas fa-bolt" style="color: #FFD700; margin-right: 5px;"></i> Pay ₹<span id="upiDisplayAmount">0</span> via UPI App
+                    </a>
+                    <p style="font-size: 13px; color: #666; margin-top: 8px; font-weight: 500;">(For Mobile Users: Tap to open GPay, PhonePe, etc.)</p>
+                </div>
+
+                <div style="text-align: center; margin: 15px 0;">
+                    <p style="font-size: 14px; color: #888; margin-bottom: 5px;">Or scan this QR code from another device:</p>
+                    <img src="images/qr-code.png" alt="UPI QR Code" id="qrImage"
+                        style="max-width: 200px; border-radius: 10px; border: 1px solid #ddd; padding: 5px;">
+                </div>
             </div>
 
             <hr>
@@ -211,28 +222,35 @@
 
                 <input type="text" id="customerPincode" placeholder="6-digit Pincode" required
                     oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 6);"
-                    style="width: 100%; padding: 12px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box;">
+                    style="width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box;">
 
                 <div
-                    style="background-color: #e8f5e9; padding: 12px; border-radius: 6px; margin: 5px 0 15px 0; font-size: 14px; color: #2e7d32; border: 1px solid #c8e6c9; line-height: 1.5;">
+                    style="background-color: #e8f5e9; padding: 12px; border-radius: 6px; margin: 5px 0 10px 0; font-size: 14px; color: #2e7d32; border: 1px solid #c8e6c9; line-height: 1.5;">
                     <strong>💳 Important Payment Rules:</strong> Please note that we strictly do not offer Cash on
                     Delivery (COD). Full advance payment is mandatory to place an order. Once paid, kindly share the
                     payment screenshot on WhatsApp for confirmation, as your order will only be processed and dispatched
                     after the payment is successfully received. 🤍
                 </div>
+                
+                <div
+                    style="background-color: #fff3e0; padding: 12px; border-radius: 6px; margin: 0 0 10px 0; font-size: 13px; color: #e65100; border: 1px solid #ffe0b2; line-height: 1.5;">
+                    <strong>🚚 Delivery Update:</strong> Due to high demand, please allow <strong>7 or more working
+                        days</strong> for your beautiful jewelry to be delivered. We will share your order updates and
+                    tracking details as soon as possible! 🤍
+                </div>
+
+                <div
+                    style="background-color: #ffebee; padding: 12px; border-radius: 6px; margin: 0 0 20px 0; font-size: 13px; color: #c62828; border: 1px solid #ffcdd2; line-height: 1.5;">
+                    <strong>⚠️ Store Policy:</strong> Please note that we strictly do not offer returns, exchanges, or
+                    refunds on any purchased products. By proceeding, you agree to these terms.
+                </div>
             </div>
 
-            <div
-                style="background-color: #fff3e0; padding: 12px; border-radius: 6px; margin: 0 0 10px 0; font-size: 14px; color: #e65100; border: 1px solid #ffe0b2;">
-                <strong>🚚 Delivery Update:</strong> Due to high demand, please allow <strong>7 or more working
-                    days</strong> for your beautiful jewelry to be delivered. We will share your order updates and
-                tracking details as soon as possible! 🤍
-            </div>
-
-            <div
-                style="background-color: #ffebee; padding: 12px; border-radius: 6px; margin: 0 0 15px 0; font-size: 13px; color: #c62828; border: 1px solid #ffcdd2;">
-                <strong>⚠️ Store Policy:</strong> Please note that we strictly do not offer returns, exchanges, or
-                refunds on any purchased products. By proceeding, you agree to these terms.
+            <div style="margin-bottom: 20px; display: flex; align-items: flex-start; gap: 12px; background-color: #fafafa; padding: 15px; border-radius: 8px; border: 1px solid #ddd;">
+                <input type="checkbox" id="paymentConfirmCheck" style="margin-top: 3px; width: 20px; height: 20px; cursor: pointer;">
+                <label for="paymentConfirmCheck" style="font-size: 14px; color: #333; line-height: 1.5; cursor: pointer;">
+                    I confirm that I have <strong>completed the full payment</strong> via UPI and I have the screenshot ready to share with Svarni.
+                </label>
             </div>
 
             <button id="sendWhatsAppBtn"
@@ -241,15 +259,13 @@
         </div>
     </div>
 
-    <div
-        style="position: fixed; bottom: 25px; right: 25px; z-index: 1000; display: flex; align-items: center; gap: 12px;">
-        <span
-            style="background-color: white; color: #4a3728; padding: 8px 14px; border-radius: 20px; font-size: 13px; font-weight: bold; box-shadow: 0px 4px 10px rgba(0,0,0,0.15); font-family: 'Poppins', sans-serif;">Need
-            Help?</span>
+    <div style="position: fixed; bottom: 25px; right: 25px; z-index: 1000; display: flex; align-items: center; gap: 12px;">
+        <span style="background-color: white; color: #4a3728; padding: 8px 14px; border-radius: 20px; font-size: 13px; font-weight: bold; box-shadow: 0px 4px 10px rgba(0,0,0,0.15); font-family: 'Poppins', sans-serif;">Need Help?</span>
         <a href="https://api.whatsapp.com/send?phone=919322148369&text=Hi%20Svarni,%20I%20need%20some%20help%20with%20a%20product%20on%20your%20website!"
-            target="_blank"
-            style="background-color: #25D366; color: white; border-radius: 50%; width: 55px; height: 55px; display: flex; justify-content: center; align-items: center; font-size: 28px; box-shadow: 0px 4px 12px rgba(0,0,0,0.2); text-decoration: none; transition: transform 0.3s;"
-            onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+           target="_blank"
+           style="background-color: #25D366; color: white; border-radius: 50%; width: 55px; height: 55px; display: flex; justify-content: center; align-items: center; font-size: 28px; box-shadow: 0px 4px 12px rgba(0,0,0,0.2); text-decoration: none; transition: transform 0.3s;"
+           onmouseover="this.style.transform='scale(1.1)'"
+           onmouseout="this.style.transform='scale(1)'">
             <i class="fab fa-whatsapp"></i>
         </a>
     </div>
@@ -260,10 +276,10 @@
     </div>
 
     <footer
-        style="text-align: center; padding: 30px 20px; background-color: #f9f9f9; border-top: 1px solid #eee; line-height: 1.8;">
-        <p style="color: #4a3728; font-size: 16px;"><strong>📍 Proudly based in Mumbai</strong></p>
+        style="text-align: center; padding: 40px 20px; background-color: #f9f9f9; border-top: 1px solid #eee; line-height: 1.8;">
+        <p style="color: #4a3728; font-size: 16px; margin-bottom: 5px;"><strong>📍 Proudly based in Mumbai</strong></p>
 
-        <p style="color: #666; font-size: 14px; margin-bottom: 5px;">
+        <p style="color: #666; font-size: 14px; margin-bottom: 25px;">
             Contact us: svarni21@gmail.com |
             <a href="https://instagram.com/svarni__" target="_blank"
                 style="color: #4a3728; text-decoration: none; font-weight: 600;">
@@ -271,13 +287,21 @@
             </a>
         </p>
 
-        <div
-            style="margin: 15px auto; padding: 10px; max-width: 400px; background-color: #ffebee; color: #c62828; border-radius: 6px; font-size: 12px; border: 1px solid #ffcdd2;">
-            <strong>Store Policy:</strong> Please note that we strictly do not offer returns, exchanges, or refunds on
-            any purchased products.
+        <div style="max-width: 500px; margin: 0 auto; text-align: left; background-color: white; padding: 20px; border-radius: 10px; border: 1px solid #e0d4cc; box-shadow: 0 4px 10px rgba(0,0,0,0.03);">
+            <h4 style="color: #4a3728; margin-top: 0; margin-bottom: 15px; font-family: 'Playfair Display', serif; font-size: 18px; text-align: center;">Important Information</h4>
+            
+            <div style="margin-bottom: 12px; font-size: 13px; color: #e65100; display: flex; align-items: flex-start; gap: 10px;">
+                <i class="fas fa-truck" style="margin-top: 3px;"></i>
+                <span><strong>Delivery Update:</strong> Please allow 7 or more working days for your beautiful jewelry to be delivered. Tracking details will be shared once dispatched.</span>
+            </div>
+            
+            <div style="font-size: 13px; color: #c62828; display: flex; align-items: flex-start; gap: 10px;">
+                <i class="fas fa-exclamation-triangle" style="margin-top: 3px;"></i>
+                <span><strong>Store Policy:</strong> We strictly do not offer returns, exchanges, or refunds on any purchased products.</span>
+            </div>
         </div>
 
-        <p style="font-size: 13px; color: #888; margin-top: 20px;">&copy; 2026 Svarni. Made with <i class="fas fa-heart"
+        <p style="font-size: 13px; color: #888; margin-top: 30px;">&copy; 2026 Svarni. Made with <i class="fas fa-heart"
                 style="color: #bcaaa4;"></i> in India.</p>
     </footer>
 
@@ -285,7 +309,6 @@
         let cart = [];
         let deliveryCharge = 0;
 
-        // --- NEW: Cart Memory Functions ---
         function loadCartFromMemory() {
             let savedCart = localStorage.getItem("svarni_cart");
             if (savedCart) {
@@ -361,13 +384,11 @@
             }
         }
 
-        // Load database AND Cart Memory when page starts
         document.addEventListener("DOMContentLoaded", () => {
             loadDatabase();
             loadCartFromMemory();
         });
 
-        // --- NEW: Toast Animation Logic ---
         function showToast() {
             const toast = document.getElementById("toastNotification");
             const badge = document.getElementById("cartBadge");
@@ -384,7 +405,6 @@
             }, 2500);
         }
 
-        // --- UPDATED: Add to Cart (No more forced popups!) ---
         function addToCart(name, price, image) {
             let existingItem = cart.find(item => item.name === name);
             if (existingItem) {
@@ -393,12 +413,12 @@
                 cart.push({ name: name, price: parseInt(price), image: image, quantity: 1 });
             }
             updateCartUI();
-            saveCartToMemory(); // Save to phone memory
+            saveCartToMemory(); 
 
             if (productModal.classList.contains('show')) {
                 closeModal();
             }
-            showToast(); // Show smooth notification instead of cart
+            showToast(); 
         }
 
         function changeQuantity(index, change) {
@@ -407,14 +427,14 @@
                 removeFromCart(index);
             } else {
                 updateCartUI();
-                saveCartToMemory(); // Save to phone memory
+                saveCartToMemory(); 
             }
         }
 
         function removeFromCart(index) {
             cart.splice(index, 1);
             updateCartUI();
-            saveCartToMemory(); // Save to phone memory
+            saveCartToMemory(); 
         }
 
         function updateCartUI() {
@@ -534,7 +554,19 @@
             let totalItemsCount = 0;
             cart.forEach(item => totalItemsCount += item.quantity);
             document.getElementById('checkoutItemCount').innerText = totalItemsCount;
-            document.getElementById('checkoutProductPrice').innerText = document.getElementById('cartTotalAmount').innerText;
+            
+            let finalAmount = document.getElementById('cartTotalAmount').innerText;
+            document.getElementById('checkoutProductPrice').innerText = finalAmount;
+            
+            let upiId = "sheetalmudgal49@okaxis";
+            let upiName = "Svarni";
+            let upiLink = `upi://pay?pa=${upiId}&pn=${upiName}&am=${finalAmount}&cu=INR`;
+            
+            document.getElementById('upiDisplayAmount').innerText = finalAmount;
+            document.getElementById('upiDynamicLink').href = upiLink;
+
+            document.getElementById('paymentConfirmCheck').checked = false;
+
             checkoutModal.style.display = 'flex';
             setTimeout(() => { checkoutModal.classList.add('show'); }, 10);
         };
@@ -547,6 +579,13 @@
 
         // --- WHATSAPP & GOOGLE SHEETS BACKEND FORMATTER ---
         document.getElementById("sendWhatsAppBtn").onclick = async function () {
+            
+            const isConfirmed = document.getElementById("paymentConfirmCheck").checked;
+            if (!isConfirmed) {
+                alert("⚠️ Please check the box confirming that you have made the payment before submitting your order.");
+                return;
+            }
+
             const btn = document.getElementById("sendWhatsAppBtn");
             const originalBtnText = btn.innerHTML;
 
@@ -638,16 +677,15 @@
                 message += `Mobile Number: ${formattedPhone}\n\n`;
                 message += `Full Address: ${fullAddress}\n\n\n`;
 
-                message += `Here is my payment screenshot for confirmation 🤍`;
+                message += `✅ *Customer Confirmation:* I confirm I have made the payment and here is my screenshot for proof 🤍`;
 
                 const phoneNumber = "919322148369";
                 const whatsappLink = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`;
 
                 window.open(whatsappLink, "_blank");
 
-                // --- UPDATED: Clear Memory on Success ---
                 cart = [];
-                saveCartToMemory(); // Wipes the memory clean because the order is placed!
+                saveCartToMemory(); 
                 updateCartUI();
                 closeCheckout();
 

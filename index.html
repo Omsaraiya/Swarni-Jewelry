@@ -121,6 +121,22 @@
                 <p style="text-align: center; color: #888;">Your cart is empty.</p>
             </div>
 
+            <div style="background-color: #fdfbf7; padding: 15px; border-radius: 8px; border: 1px dashed #d7ccc8; margin-bottom: 15px; text-align: left;">
+                <div style="display: flex; align-items: flex-start; gap: 10px;">
+                    <input type="checkbox" id="giftWrapCheck" onchange="calculateTotal()" style="margin-top: 4px; width: 18px; height: 18px; cursor: pointer;">
+                    <label for="giftWrapCheck" style="font-size: 14px; color: #4a3728; cursor: pointer; line-height: 1.4;">
+                        <strong>🎁 Make it a Gift! (+ ₹50)</strong><br>
+                        Add premium packaging and a custom handwritten note.
+                    </label>
+                </div>
+                <div id="giftNoteContainer" style="display: none; margin-top: 10px; padding-left: 28px;">
+                    <textarea id="giftNoteText" placeholder="Type your beautiful message here..." style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; font-family: inherit; font-size: 13px; resize: vertical; min-height: 60px; box-sizing: border-box;"></textarea>
+                    <p style="font-size: 11px; color: #e65100; margin-top: 5px; line-height: 1.4; background: #fff3e0; padding: 5px; border-radius: 4px;">
+                        <i class="fas fa-camera"></i> Want to send a photo or PDF? Just share it directly on our WhatsApp after placing your order!
+                    </p>
+                </div>
+            </div>
+
             <div
                 style="background-color: #f5f0ed; padding: 12px; border-radius: 6px; border: 1px solid #e0d4cc; text-align: center; margin-bottom: 15px;">
                 <p style="margin: 0; font-size: 14px; color: #4a3728;">
@@ -135,9 +151,14 @@
                 <div style="display: flex; justify-content: space-between; margin-bottom: 5px; color: #666;">
                     <span>Items Total:</span><span>₹<span id="cartItemsTotal">0</span></span>
                 </div>
-                <div style="display: flex; justify-content: space-between; margin-bottom: 10px; color: #666;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 5px; color: #666;">
                     <span>Delivery Charge:</span><span>₹<span id="cartDeliveryCharge">0</span></span>
                 </div>
+                
+                <div id="giftChargeRow" style="display: none; justify-content: space-between; margin-bottom: 10px; color: #d84315;">
+                    <span>🎁 Premium Gift Wrap:</span><span>₹<span id="cartGiftCharge">0</span></span>
+                </div>
+
                 <div
                     style="display: flex; justify-content: space-between; font-size: 18px; font-weight: bold; color: #000; border-top: 1px solid #ddd; padding-top: 10px;">
                     <span>Grand Total:</span><span>₹<span id="cartTotalAmount">0</span></span>
@@ -275,6 +296,27 @@
         <i class="fas fa-check-circle" style="color: #4caf50; margin-right: 8px;"></i> Item Added to Cart! 🤍
     </div>
 
+    <section class="care-guide" style="padding: 50px 20px; background-color: #fdfbf7; text-align: center; border-top: 1px solid #eee;">
+        <h2 style="font-family: 'Playfair Display', serif; color: #4a3728; margin-bottom: 30px; font-size: 28px;">Jewelry Care Guide ✨</h2>
+        <div style="display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; max-width: 900px; margin: 0 auto;">
+            <div style="flex: 1; min-width: 220px; padding: 20px; background: white; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
+                <i class="fas fa-spray-can" style="font-size: 28px; color: #bcaaa4; margin-bottom: 15px;"></i>
+                <h4 style="color: #4a3728; margin-bottom: 10px; font-family: 'Poppins', sans-serif;">Avoid Perfume</h4>
+                <p style="font-size: 14px; color: #666; line-height: 1.6;">Keep your jewelry away from perfumes, hairsprays, and harsh chemicals to maintain its beautiful shine.</p>
+            </div>
+            <div style="flex: 1; min-width: 220px; padding: 20px; background: white; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
+                <i class="fas fa-tint-slash" style="font-size: 28px; color: #bcaaa4; margin-bottom: 15px;"></i>
+                <h4 style="color: #4a3728; margin-bottom: 10px; font-family: 'Poppins', sans-serif;">Keep it Dry</h4>
+                <p style="font-size: 14px; color: #666; line-height: 1.6;">Please remove your jewelry before washing hands, swimming, or showering to prevent tarnishing.</p>
+            </div>
+            <div style="flex: 1; min-width: 220px; padding: 20px; background: white; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
+                <i class="fas fa-box-open" style="font-size: 28px; color: #bcaaa4; margin-bottom: 15px;"></i>
+                <h4 style="color: #4a3728; margin-bottom: 10px; font-family: 'Poppins', sans-serif;">Store Safely</h4>
+                <p style="font-size: 14px; color: #666; line-height: 1.6;">Store your pieces in a cool, dry place, preferably in an airtight zip-lock pouch or jewelry box.</p>
+            </div>
+        </div>
+    </section>
+
     <footer
         style="text-align: center; padding: 40px 20px; background-color: #f9f9f9; border-top: 1px solid #eee; line-height: 1.8;">
         <p style="color: #4a3728; font-size: 16px; margin-bottom: 5px;"><strong>📍 Proudly based in Mumbai</strong></p>
@@ -325,7 +367,29 @@
             let itemsTotal = 0;
             cart.forEach(item => itemsTotal += (item.price * item.quantity));
             deliveryCharge = (cart.length > 0) ? 99 : 0;
-            let grandTotal = itemsTotal + deliveryCharge;
+            
+            // GIFT WRAP CHECK
+            let giftWrapEl = document.getElementById('giftWrapCheck');
+            let isGiftWrap = giftWrapEl ? giftWrapEl.checked : false;
+
+            // NEW: Empty Cart Validation Alert!
+            if (isGiftWrap && cart.length === 0) {
+                alert("⚠️ Please add at least one beautiful piece of jewelry to your cart before adding gift wrap!");
+                giftWrapEl.checked = false;
+                isGiftWrap = false;
+            }
+
+            let giftCharge = isGiftWrap ? 50 : 0;
+            
+            let noteContainer = document.getElementById('giftNoteContainer');
+            let giftChargeRow = document.getElementById('giftChargeRow');
+            let cartGiftCharge = document.getElementById('cartGiftCharge');
+
+            if(noteContainer) noteContainer.style.display = isGiftWrap ? 'block' : 'none';
+            if(giftChargeRow) giftChargeRow.style.display = isGiftWrap ? 'flex' : 'none';
+            if(cartGiftCharge) cartGiftCharge.innerText = giftCharge;
+
+            let grandTotal = itemsTotal + deliveryCharge + giftCharge;
 
             document.getElementById('cartItemsTotal').innerText = itemsTotal;
             document.getElementById('cartDeliveryCharge').innerText = deliveryCharge;
@@ -452,6 +516,11 @@
             const container = document.getElementById('cartItemsContainer');
             if (cart.length === 0) {
                 container.innerHTML = '<p style="text-align: center; color: #888;">Your cart is empty.</p>';
+                // If cart is empty, uncheck gift wrap automatically
+                let giftWrapEl = document.getElementById('giftWrapCheck');
+                if (giftWrapEl && giftWrapEl.checked) {
+                    giftWrapEl.checked = false;
+                }
             } else {
                 let html = '';
                 cart.forEach((item, index) => {
@@ -599,6 +668,12 @@
             const state = document.getElementById("customerState").value;
             const pincode = document.getElementById("customerPincode").value;
 
+            // CAPTURE GIFT WRAP DATA
+            const giftWrapEl = document.getElementById("giftWrapCheck");
+            const isGiftWrap = giftWrapEl ? giftWrapEl.checked : false;
+            const giftNoteEl = document.getElementById("giftNoteText");
+            const giftNote = giftNoteEl ? giftNoteEl.value.trim() : "";
+
             if (name === "" || phone === "" || insta === "" || house === "" || area === "" || city === "" || state === "" || pincode === "") {
                 alert("Please fill in all the required delivery details, including your Instagram ID!");
                 return;
@@ -619,6 +694,7 @@
 
             const finalItemsTotal = document.getElementById('cartItemsTotal').innerText;
             const finalDelivery = document.getElementById('cartDeliveryCharge').innerText;
+            const finalGiftCharge = document.getElementById('cartGiftCharge') ? document.getElementById('cartGiftCharge').innerText : "0";
             const finalTotal = document.getElementById('cartTotalAmount').innerText;
 
             let fullAddress = `${house}, ${area}`;
@@ -666,9 +742,20 @@
                     message += `${index + 1}. ${item.name} (x${item.quantity}) - ₹${itemTotal}\n\n`;
                 });
 
+                if(isGiftWrap) {
+                    message += `🎁 *Premium Gift Wrap:* +₹50\n`;
+                    if(giftNote !== "") {
+                        message += `📝 *Custom Note:* "${giftNote}"\n`;
+                    }
+                    message += `\n`;
+                }
+
                 message += `\n*🧾 Bill Summary:*\n`;
                 message += `Items Total: ₹${finalItemsTotal}\n`;
                 message += `Delivery & Shipping: ₹${finalDelivery}\n`;
+                if(isGiftWrap) {
+                    message += `Gift Wrap: ₹${finalGiftCharge}\n`;
+                }
                 message += `*💰 Grand Total Paid:* ₹${finalTotal}\n\n\n`;
 
                 message += `*📍 Delivery Details:*\n\n`;
@@ -685,6 +772,11 @@
                 window.open(whatsappLink, "_blank");
 
                 cart = [];
+                let giftCheckReset = document.getElementById('giftWrapCheck');
+                if(giftCheckReset) giftCheckReset.checked = false;
+                let giftNoteReset = document.getElementById('giftNoteText');
+                if(giftNoteReset) giftNoteReset.value = "";
+                
                 saveCartToMemory(); 
                 updateCartUI();
                 closeCheckout();

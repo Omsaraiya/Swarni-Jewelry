@@ -26,7 +26,10 @@ collections:
               - {label: "Price (₹)", name: "price", widget: "number"}
               
               # UPDATED: Her exact new categories for the dropdown
-              - {label: "Category", name: "category", widget: "select", options: ["necklace", "mangalsutra", "earcuff", "nath", "bugadi", "painjan", "braclet", "sets", "hamper"]}
+              - label: "Category (Type any category here!)"
+                name: "category"
+                widget: "string"
+                hint: "Type your category exactly as you want it (e.g., necklace, rings, anklets)"        
               
               - {label: "Description", name: "description", widget: "text"}
               - {label: "Product Image", name: "image", widget: "image"}
